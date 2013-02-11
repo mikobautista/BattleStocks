@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  manager_id: 1
+  winner_id: 1
+  name: MyString
+  start_date: 2013-02-11 16:06:07
+  end_date: 2013-02-11 16:06:07
+  budget: 1
+  is_terminated: false
+
+two:
+  manager_id: 1
+  winner_id: 1
+  name: MyString
+  start_date: 2013-02-11 16:06:07
+  end_date: 2013-02-11 16:06:07
+  budget: 1
+  is_terminated: false

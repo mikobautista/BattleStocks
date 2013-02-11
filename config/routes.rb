@@ -1,4 +1,22 @@
 BattleStocks::Application.routes.draw do
+  resources :invitations
+
+
+  resources :games
+
+
+  resources :transactions
+
+
+  resources :purchased_stocks
+
+
+  resources :user_games
+
+
+  resources :users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

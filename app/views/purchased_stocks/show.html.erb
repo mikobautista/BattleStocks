@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User game:</b>
+  <%= @purchased_stock.user_game_id %>
+</p>
+
+<p>
+  <b>Stock code:</b>
+  <%= @purchased_stock.stock_code %>
+</p>
+
+<p>
+  <b>Total qty:</b>
+  <%= @purchased_stock.total_qty %>
+</p>
+
+<p>
+  <b>Money spent:</b>
+  <%= @purchased_stock.money_spent %>
+</p>
+
+<p>
+  <b>Money earned:</b>
+  <%= @purchased_stock.money_earned %>
+</p>
+
+<p>
+  <b>Value in stocks:</b>
+  <%= @purchased_stock.value_in_stocks %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchased_stock_path(@purchased_stock) %> |
+<%= link_to 'Back', purchased_stocks_path %>

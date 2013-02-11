@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_game.user_id %>
+</p>
+
+<p>
+  <b>Game:</b>
+  <%= @user_game.game_id %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @user_game.balance %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%= @user_game.points %>
+</p>
+
+<p>
+  <b>Total value in stocks:</b>
+  <%= @user_game.total_value_in_stocks %>
+</p>
+
+<p>
+  <b>Is active:</b>
+  <%= @user_game.is_active %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_game_path(@user_game) %> |
+<%= link_to 'Back', user_games_path %>

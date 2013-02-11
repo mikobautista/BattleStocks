@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  game_id: 1
+  balance: 1
+  points: 1
+  total_value_in_stocks: 1
+  is_active: false
+
+two:
+  user_id: 1
+  game_id: 1
+  balance: 1
+  points: 1
+  total_value_in_stocks: 1
+  is_active: false

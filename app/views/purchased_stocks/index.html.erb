@@ -1,0 +1,33 @@
+<h1>Listing purchased_stocks</h1>
+
+<table>
+  <tr>
+    <th>User game</th>
+    <th>Stock code</th>
+    <th>Total qty</th>
+    <th>Money spent</th>
+    <th>Money earned</th>
+    <th>Value in stocks</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchased_stocks.each do |purchased_stock| %>
+  <tr>
+    <td><%= purchased_stock.user_game_id %></td>
+    <td><%= purchased_stock.stock_code %></td>
+    <td><%= purchased_stock.total_qty %></td>
+    <td><%= purchased_stock.money_spent %></td>
+    <td><%= purchased_stock.money_earned %></td>
+    <td><%= purchased_stock.value_in_stocks %></td>
+    <td><%= link_to 'Show', purchased_stock %></td>
+    <td><%= link_to 'Edit', edit_purchased_stock_path(purchased_stock) %></td>
+    <td><%= link_to 'Destroy', purchased_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchased stock', new_purchased_stock_path %>

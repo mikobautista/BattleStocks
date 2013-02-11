@@ -1,0 +1,33 @@
+<h1>Listing user_games</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Game</th>
+    <th>Balance</th>
+    <th>Points</th>
+    <th>Total value in stocks</th>
+    <th>Is active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_games.each do |user_game| %>
+  <tr>
+    <td><%= user_game.user_id %></td>
+    <td><%= user_game.game_id %></td>
+    <td><%= user_game.balance %></td>
+    <td><%= user_game.points %></td>
+    <td><%= user_game.total_value_in_stocks %></td>
+    <td><%= user_game.is_active %></td>
+    <td><%= link_to 'Show', user_game %></td>
+    <td><%= link_to 'Edit', edit_user_game_path(user_game) %></td>
+    <td><%= link_to 'Destroy', user_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User game', new_user_game_path %>

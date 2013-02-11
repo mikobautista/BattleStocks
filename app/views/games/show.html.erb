@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Manager:</b>
+  <%= @game.manager_id %>
+</p>
+
+<p>
+  <b>Winner:</b>
+  <%= @game.winner_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @game.name %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @game.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @game.end_date %>
+</p>
+
+<p>
+  <b>Budget:</b>
+  <%= @game.budget %>
+</p>
+
+<p>
+  <b>Is terminated:</b>
+  <%= @game.is_terminated %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

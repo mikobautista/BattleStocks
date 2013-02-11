@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  purchased_stock_in: 1
+  date: 2013-02-11 16:05:30
+  qty: 1
+  value_per_stock: 1
+  is_buy: false
+
+two:
+  purchased_stock_in: 1
+  date: 2013-02-11 16:05:30
+  qty: 1
+  value_per_stock: 1
+  is_buy: false

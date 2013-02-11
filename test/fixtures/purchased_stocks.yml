@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_game_id: 1
+  stock_code: MyString
+  total_qty: 1
+  money_spent: 1
+  money_earned: 1
+  value_in_stocks: 1
+
+two:
+  user_game_id: 1
+  stock_code: MyString
+  total_qty: 1
+  money_spent: 1
+  money_earned: 1
+  value_in_stocks: 1
