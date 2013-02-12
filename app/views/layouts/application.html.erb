@@ -3,12 +3,12 @@
 <head>
   <title>BattleStocks</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery-1.9.1.min", "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<!-- NAV BAR HERE -->
+<!-- Nav Bar Header -->
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 	    <div class="container">
@@ -41,10 +41,7 @@
   	</div>
 </div>
 
-
-
-
-<!-- Actual Page Content -->
+<!-- Home Page Content -->
 <div class="container">
   <div class="row">
     <div class="span9">
@@ -53,11 +50,28 @@
     <!-- Right Sidebar -->
     <div class="span3">
       <h2>About Us</h2>
+      Our Company
+        To say Starbucks purchases and roasts high-quality whole bean coffees is very true. That’s the essence of what we do – but it hardly tells the whole story ..<br>
+        Our coffeehouses have become a beacon for coffee lovers everywhere. Why do they insist on Starbucks? Because they know they can count on genuine service, an inviting atmosphere and a superb cup of expertly roasted and richly brewed coffee every time.<br>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
+    </div>
+  </div>
+</div>
 
+<!-- Footer -->
+<div class="navbar navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container">
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="#" id="about">About</a></li>
+            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "Team", team_path %></li>
+            <li><%= link_to "Help", help_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+            <li><%= link_to "Feedback", feedback_path %></li>
+          </ul>
+      </div>
     </div>
   </div>
 </div>

@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+$(function () {
+  $('#about').click(function () {
+
+    alert('Hello, world!');
+    return false;
+  })
+});
+
