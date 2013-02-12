@@ -1,33 +1,44 @@
-<h1>Listing purchased_stocks</h1>
-
-<table>
-  <tr>
-    <th>User game</th>
-    <th>Stock code</th>
-    <th>Total qty</th>
-    <th>Money spent</th>
-    <th>Money earned</th>
-    <th>Value in stocks</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @purchased_stocks.each do |purchased_stock| %>
-  <tr>
-    <td><%= purchased_stock.user_game_id %></td>
-    <td><%= purchased_stock.stock_code %></td>
-    <td><%= purchased_stock.total_qty %></td>
-    <td><%= purchased_stock.money_spent %></td>
-    <td><%= purchased_stock.money_earned %></td>
-    <td><%= purchased_stock.value_in_stocks %></td>
-    <td><%= link_to 'Show', purchased_stock %></td>
-    <td><%= link_to 'Edit', edit_purchased_stock_path(purchased_stock) %></td>
-    <td><%= link_to 'Destroy', purchased_stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = PurchasedStock.new.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_game_id) %></th>
+      <th><%= model_class.human_attribute_name(:stock_code) %></th>
+      <th><%= model_class.human_attribute_name(:total_qty) %></th>
+      <th><%= model_class.human_attribute_name(:money_spent) %></th>
+      <th><%= model_class.human_attribute_name(:money_earned) %></th>
+      <th><%= model_class.human_attribute_name(:value_in_stocks) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @purchased_stocks.each do |purchased_stock| %>
+      <tr>
+        <td><%= link_to purchased_stock.id, purchased_stock_path(purchased_stock) %></td>
+        <td><%= purchased_stock.user_game_id %></td>
+        <td><%= purchased_stock.stock_code %></td>
+        <td><%= purchased_stock.total_qty %></td>
+        <td><%= purchased_stock.money_spent %></td>
+        <td><%= purchased_stock.money_earned %></td>
+        <td><%= purchased_stock.value_in_stocks %></td>
+        <td><%=l purchased_stock.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_purchased_stock_path(purchased_stock), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      purchased_stock_path(purchased_stock),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Purchased stock', new_purchased_stock_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_purchased_stock_path,
+            :class => 'btn btn-primary' %>

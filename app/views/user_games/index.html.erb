@@ -1,33 +1,44 @@
-<h1>Listing user_games</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Game</th>
-    <th>Balance</th>
-    <th>Points</th>
-    <th>Total value in stocks</th>
-    <th>Is active</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @user_games.each do |user_game| %>
-  <tr>
-    <td><%= user_game.user_id %></td>
-    <td><%= user_game.game_id %></td>
-    <td><%= user_game.balance %></td>
-    <td><%= user_game.points %></td>
-    <td><%= user_game.total_value_in_stocks %></td>
-    <td><%= user_game.is_active %></td>
-    <td><%= link_to 'Show', user_game %></td>
-    <td><%= link_to 'Edit', edit_user_game_path(user_game) %></td>
-    <td><%= link_to 'Destroy', user_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = UserGame.new.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:game_id) %></th>
+      <th><%= model_class.human_attribute_name(:balance) %></th>
+      <th><%= model_class.human_attribute_name(:points) %></th>
+      <th><%= model_class.human_attribute_name(:total_value_in_stocks) %></th>
+      <th><%= model_class.human_attribute_name(:is_active) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_games.each do |user_game| %>
+      <tr>
+        <td><%= link_to user_game.id, user_game_path(user_game) %></td>
+        <td><%= user_game.user_id %></td>
+        <td><%= user_game.game_id %></td>
+        <td><%= user_game.balance %></td>
+        <td><%= user_game.points %></td>
+        <td><%= user_game.total_value_in_stocks %></td>
+        <td><%= user_game.is_active %></td>
+        <td><%=l user_game.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_game_path(user_game), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      user_game_path(user_game),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New User game', new_user_game_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_user_game_path,
+            :class => 'btn btn-primary' %>

@@ -1,37 +1,38 @@
-<%= form_for(@transaction) do |f| %>
-  <% if @transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
-      <ul>
-      <% @transaction.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :purchased_stock_in, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :purchased_stock_in, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :date, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :qty, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :qty, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :value_per_stock, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :value_per_stock, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :is_buy, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_buy, :class => 'check_box' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :purchased_stock_in %><br />
-    <%= f.number_field :purchased_stock_in %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.datetime_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :qty %><br />
-    <%= f.number_field :qty %>
-  </div>
-  <div class="field">
-    <%= f.label :value_per_stock %><br />
-    <%= f.number_field :value_per_stock %>
-  </div>
-  <div class="field">
-    <%= f.label :is_buy %><br />
-    <%= f.check_box :is_buy %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                transactions_path, :class => 'btn' %>
   </div>
 <% end %>

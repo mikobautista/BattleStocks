@@ -1,35 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @user_game.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
-<p>
-  <b>User:</b>
-  <%= @user_game.user_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @user_game.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:game_id) %>:</strong></dt>
+  <dd><%= @user_game.game_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:balance) %>:</strong></dt>
+  <dd><%= @user_game.balance %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:points) %>:</strong></dt>
+  <dd><%= @user_game.points %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
+  <dd><%= @user_game.total_value_in_stocks %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
+  <dd><%= @user_game.is_active %></dd>
+</dl>
 
-<p>
-  <b>Game:</b>
-  <%= @user_game.game_id %>
-</p>
-
-<p>
-  <b>Balance:</b>
-  <%= @user_game.balance %>
-</p>
-
-<p>
-  <b>Points:</b>
-  <%= @user_game.points %>
-</p>
-
-<p>
-  <b>Total value in stocks:</b>
-  <%= @user_game.total_value_in_stocks %>
-</p>
-
-<p>
-  <b>Is active:</b>
-  <%= @user_game.is_active %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_game_path(@user_game) %> |
-<%= link_to 'Back', user_games_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              user_games_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_user_game_path(@user_game), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              user_game_path(@user_game),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

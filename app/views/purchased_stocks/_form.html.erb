@@ -1,41 +1,44 @@
-<%= form_for(@purchased_stock) do |f| %>
-  <% if @purchased_stock.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@purchased_stock.errors.count, "error") %> prohibited this purchased_stock from being saved:</h2>
-
-      <ul>
-      <% @purchased_stock.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @purchased_stock, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :user_game_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :user_game_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :stock_code, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :stock_code, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :total_qty, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :total_qty, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :money_spent, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :money_spent, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :money_earned, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :money_earned, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :value_in_stocks, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :value_in_stocks, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :user_game_id %><br />
-    <%= f.number_field :user_game_id %>
-  </div>
-  <div class="field">
-    <%= f.label :stock_code %><br />
-    <%= f.text_field :stock_code %>
-  </div>
-  <div class="field">
-    <%= f.label :total_qty %><br />
-    <%= f.number_field :total_qty %>
-  </div>
-  <div class="field">
-    <%= f.label :money_spent %><br />
-    <%= f.number_field :money_spent %>
-  </div>
-  <div class="field">
-    <%= f.label :money_earned %><br />
-    <%= f.number_field :money_earned %>
-  </div>
-  <div class="field">
-    <%= f.label :value_in_stocks %><br />
-    <%= f.number_field :value_in_stocks %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                purchased_stocks_path, :class => 'btn' %>
   </div>
 <% end %>

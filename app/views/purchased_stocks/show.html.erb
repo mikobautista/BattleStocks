@@ -1,35 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @purchased_stock.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
-<p>
-  <b>User game:</b>
-  <%= @purchased_stock.user_game_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_game_id) %>:</strong></dt>
+  <dd><%= @purchased_stock.user_game_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:stock_code) %>:</strong></dt>
+  <dd><%= @purchased_stock.stock_code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_qty) %>:</strong></dt>
+  <dd><%= @purchased_stock.total_qty %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:money_spent) %>:</strong></dt>
+  <dd><%= @purchased_stock.money_spent %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:money_earned) %>:</strong></dt>
+  <dd><%= @purchased_stock.money_earned %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value_in_stocks) %>:</strong></dt>
+  <dd><%= @purchased_stock.value_in_stocks %></dd>
+</dl>
 
-<p>
-  <b>Stock code:</b>
-  <%= @purchased_stock.stock_code %>
-</p>
-
-<p>
-  <b>Total qty:</b>
-  <%= @purchased_stock.total_qty %>
-</p>
-
-<p>
-  <b>Money spent:</b>
-  <%= @purchased_stock.money_spent %>
-</p>
-
-<p>
-  <b>Money earned:</b>
-  <%= @purchased_stock.money_earned %>
-</p>
-
-<p>
-  <b>Value in stocks:</b>
-  <%= @purchased_stock.value_in_stocks %>
-</p>
-
-
-<%= link_to 'Edit', edit_purchased_stock_path(@purchased_stock) %> |
-<%= link_to 'Back', purchased_stocks_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              purchased_stocks_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_purchased_stock_path(@purchased_stock), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              purchased_stock_path(@purchased_stock),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>
