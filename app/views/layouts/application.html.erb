@@ -8,7 +8,51 @@
 </head>
 <body>
 
-<%= yield %>
+<!-- NAV BAR HERE -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+	    <div class="container">
+	    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	    		<span class="icon-bar"></span>
+	    		<span class="icon-bar"></span>
+	    		<span class="icon-bar"></span>
+	    	</a>
+	    	<a class="brand" href="#">BattleStocks</a>
+	    	<div class="nav-collapse">
+	    		<% 
+=begin %>
+	    		<ul class="nav">
+	    			<li><%= link_to "About Us", about_path %></li>
+					<li><%= link_to "Contact Us", contact_path %></li>
+	    			<li><%= link_to "Privacy Policy", privacy_path %></li>
+	    		</ul>
+	    		<ul class="nav pull-right">
+	    			<% if logged_in? %>
+						<li><%= link_to 'Logout', logout_path %></li>
+					<% else %>
+						<li><%= link_to 'Login', login_path %></li>
+					<% end %>
+<% 
+=end %>
+				</ul>
+			</div>
+		</div>
+  	</div>
+</div>
+
+<!-- Actual Page Content -->
+<div class="container">
+  <div class="row">
+    <div class="span9">
+    	<%= yield %>
+    </div>
+    <!-- Right Sidebar -->
+    <div class="span3">
+      <h2>About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>        
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
