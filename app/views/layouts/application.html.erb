@@ -17,7 +17,7 @@
 	    		<span class="icon-bar"></span>
 	    		<span class="icon-bar"></span>
 	    	</a>
-	    	<a class="brand" href="#">BattleStocks</a>
+	    	<a class="brand" href="/">BattleStocks</a>
 	    	<div class="nav-collapse">
 	    		<% 
 =begin %>
@@ -30,10 +30,10 @@
 =end %>
 	    		<ul class="nav pull-right">
     				<% if current_user %>
-    					Signed in as <strong><%= current_user.first_name %></strong>!
-    					<%= link_to "Sign out", signout_path, id: "sign_out" %>
+    					<li><%= link_to "Logout", log_out_path %></li>
   					<% else %>
-    					<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+              <li><%= link_to "Sign up", sign_up_path %></li>
+    					<li><%= link_to "Login", log_in_path %></li>
   					<% end %>
 				</ul>
 			</div>
@@ -48,15 +48,16 @@
 <div class="container">
   <div class="row">
     <div class="span9">
-      <% if current_user %>
-        <%= image_tag("https://graph.facebook.com/"+current_user.nickname+"/picture")%>
-      <% end %>
     	<%= yield %>
     </div>
     <!-- Right Sidebar -->
     <div class="span3">
       <h2>About Us</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>        
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+
     </div>
   </div>
 </div>

@@ -1,21 +1,32 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :first_name, :is_active, :is_admin, :last_name, :nickname, :oauth_expires_at, :oauth_token, :provider, :total_points, :uid
+  attr_accessible :email, :password, :password_confirmation, :username, :total_points, :is_admin, :is_active
+  
+  attr_accessor :password
+  before_save :encrypt_password
 
   # Relationships
   has_many :user_games
   has_many :games, :through => :user_games
-
-
-	def self.from_omniauth(auth)
-		where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-			user.provider = auth.provider
-			user.uid = auth.uid
-			user.first_name = auth.info.first_name
-			user.last_name = auth.info.last_name
-			user.nickname = auth.info.nickname
-			user.oauth_token = auth.credentials.token
-			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-			user.save!
-		end
-	end
+  
+  # Validations
+  validates_confirmation_of :password
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
+  
+  def self.authenticate(email, password)
+    user = find_by_email(email)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+      user
+    else
+      nil
+    end
+  end
+  
+  def encrypt_password
+    if password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+    end
+  end
 end

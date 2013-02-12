@@ -18,7 +18,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email: @user.email, first_name: @user.first_name, is_active: @user.is_active, is_admin: @user.is_admin, last_name: @user.last_name, nickname: @user.nickname, oauth_expires_at: @user.oauth_expires_at, oauth_token: @user.oauth_token, provider: @user.provider, total_points: @user.total_points, uid: @user.uid }
+      post :create, user: { email: @user.email, is_active: @user.is_active, is_admin: @user.is_admin, password_hash: @user.password_hash, password_salt: @user.password_salt, total_points: @user.total_points, username: @user.username }
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    put :update, id: @user, user: { email: @user.email, first_name: @user.first_name, is_active: @user.is_active, is_admin: @user.is_admin, last_name: @user.last_name, nickname: @user.nickname, oauth_expires_at: @user.oauth_expires_at, oauth_token: @user.oauth_token, provider: @user.provider, total_points: @user.total_points, uid: @user.uid }
+    put :update, id: @user, user: { email: @user.email, is_active: @user.is_active, is_admin: @user.is_admin, password_hash: @user.password_hash, password_salt: @user.password_salt, total_points: @user.total_points, username: @user.username }
     assert_redirected_to user_path(assigns(:user))
   end
 

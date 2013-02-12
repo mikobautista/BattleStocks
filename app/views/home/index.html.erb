@@ -1,2 +1,7 @@
-<h1>Home</h1>
+<!-- logged in homepage -->
+<% if current_user %>
+	<h1>Welcome <strong><%= current_user.username %></strong>!
+<% end %>
+
+
 <p>Find me in app/views/home/index.html.erb</p>

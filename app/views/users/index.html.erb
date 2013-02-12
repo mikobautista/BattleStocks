@@ -4,17 +4,11 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:username) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:is_active) %></th>
-      <th><%= model_class.human_attribute_name(:is_admin) %></th>
-      <th><%= model_class.human_attribute_name(:first_name) %></th>
-      <th><%= model_class.human_attribute_name(:last_name) %></th>
-      <th><%= model_class.human_attribute_name(:nickname) %></th>
-      <th><%= model_class.human_attribute_name(:oauth_expires_at) %></th>
-      <th><%= model_class.human_attribute_name(:oauth_token) %></th>
-      <th><%= model_class.human_attribute_name(:provider) %></th>
       <th><%= model_class.human_attribute_name(:total_points) %></th>
-      <th><%= model_class.human_attribute_name(:uid) %></th>
+      <th><%= model_class.human_attribute_name(:is_admin) %></th>
+      <th><%= model_class.human_attribute_name(:is_active) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -23,17 +17,11 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
+        <td><%= user.username %></td>
         <td><%= user.email %></td>
-        <td><%= user.is_active %></td>
-        <td><%= user.is_admin %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.nickname %></td>
-        <td><%= user.oauth_expires_at %></td>
-        <td><%= user.oauth_token %></td>
-        <td><%= user.provider %></td>
         <td><%= user.total_points %></td>
-        <td><%= user.uid %></td>
+        <td><%= user.is_admin %></td>
+        <td><%= user.is_active %></td>
         <td><%=l user.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

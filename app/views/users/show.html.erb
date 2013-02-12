@@ -2,28 +2,20 @@
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
 <dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
+  <dd><%= @user.username %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:password_hash) %>:</strong></dt>
+  <dd><%= @user.password_hash %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:password_salt) %>:</strong></dt>
+  <dd><%= @user.password_salt %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
   <dd><%= @user.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
-  <dd><%= @user.is_active %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_admin) %>:</strong></dt>
-  <dd><%= @user.is_admin %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
-  <dd><%= @user.first_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
-  <dd><%= @user.last_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:nickname) %>:</strong></dt>
-  <dd><%= @user.nickname %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:oauth_expires_at) %>:</strong></dt>
-  <dd><%= @user.oauth_expires_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:oauth_token) %>:</strong></dt>
-  <dd><%= @user.oauth_token %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:provider) %>:</strong></dt>
-  <dd><%= @user.provider %></dd>
   <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
   <dd><%= @user.total_points %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:uid) %>:</strong></dt>
-  <dd><%= @user.uid %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_admin) %>:</strong></dt>
+  <dd><%= @user.is_admin %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
+  <dd><%= @user.is_active %></dd>
 </dl>
 
 <div class="form-actions">

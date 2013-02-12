@@ -1,27 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  username: MyString
+  password_hash: MyString
+  password_salt: MyString
   email: MyString
-  is_active: false
-  is_admin: false
-  first_name: MyString
-  last_name: MyString
-  nickname: MyString
-  oauth_expires_at: MyString
-  oauth_token: MyString
-  provider: MyString
   total_points: 1
-  uid: MyString
+  is_admin: false
+  is_active: false
 
 two:
+  username: MyString
+  password_hash: MyString
+  password_salt: MyString
   email: MyString
-  is_active: false
-  is_admin: false
-  first_name: MyString
-  last_name: MyString
-  nickname: MyString
-  oauth_expires_at: MyString
-  oauth_token: MyString
-  provider: MyString
   total_points: 1
-  uid: MyString
+  is_admin: false
+  is_active: false

@@ -1,56 +1,26 @@
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
+    <%= f.label :username, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :username, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :password_hash, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :password_hash, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :password_salt, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :password_salt, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_active, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :is_active, :class => 'check_box' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_admin, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :is_admin, :class => 'check_box' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :first_name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :first_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :last_name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :last_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :nickname, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :nickname, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :oauth_expires_at, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :oauth_expires_at, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :oauth_token, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :oauth_token, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :provider, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :provider, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -60,9 +30,15 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :uid, :class => 'control-label' %>
+    <%= f.label :is_admin, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :uid, :class => 'text_field' %>
+      <%= f.check_box :is_admin, :class => 'check_box' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :is_active, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :is_active, :class => 'check_box' %>
     </div>
   </div>
 
