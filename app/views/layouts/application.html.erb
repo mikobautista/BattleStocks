@@ -30,7 +30,7 @@
 =end %>
 	    		<ul class="nav pull-right">
     				<% if current_user %>
-    					Signed in as <strong><%= current_user.name %></strong>!
+    					Signed in as <strong><%= current_user.first_name %></strong>!
     					<%= link_to "Sign out", signout_path, id: "sign_out" %>
   					<% else %>
     					<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
@@ -48,6 +48,9 @@
 <div class="container">
   <div class="row">
     <div class="span9">
+      <% if current_user %>
+        <%= image_tag("https://graph.facebook.com/"+current_user.nickname+"/picture")%>
+      <% end %>
     	<%= yield %>
     </div>
     <!-- Right Sidebar -->

@@ -2,15 +2,17 @@
 
 <table>
   <tr>
-    <th>Provider</th>
-    <th>Uid</th>
-    <th>Name</th>
-    <th>Oauth token</th>
-    <th>Oauth expires at</th>
     <th>Email</th>
-    <th>Is admin</th>
     <th>Is active</th>
+    <th>Is admin</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Nickname</th>
+    <th>Oauth expires at</th>
+    <th>Oauth token</th>
+    <th>Provider</th>
     <th>Total points</th>
+    <th>Uid</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,15 +20,17 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.provider %></td>
-    <td><%= user.uid %></td>
-    <td><%= user.name %></td>
-    <td><%= user.oauth_token %></td>
-    <td><%= user.oauth_expires_at %></td>
     <td><%= user.email %></td>
-    <td><%= user.is_admin %></td>
     <td><%= user.is_active %></td>
+    <td><%= user.is_admin %></td>
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.nickname %></td>
+    <td><%= user.oauth_expires_at %></td>
+    <td><%= user.oauth_token %></td>
+    <td><%= user.provider %></td>
     <td><%= user.total_points %></td>
+    <td><%= user.uid %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
