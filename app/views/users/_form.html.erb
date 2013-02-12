@@ -12,20 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+    <%= f.label :provider %><br />
+    <%= f.text_field :provider %>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.label :uid %><br />
+    <%= f.text_field :uid %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :oauth_token %><br />
+    <%= f.text_field :oauth_token %>
+  </div>
+  <div class="field">
+    <%= f.label :oauth_expires_at %><br />
+    <%= f.datetime_select :oauth_expires_at %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :total_points %><br />
-    <%= f.number_field :total_points %>
   </div>
   <div class="field">
     <%= f.label :is_admin %><br />
@@ -34,6 +42,10 @@
   <div class="field">
     <%= f.label :is_active %><br />
     <%= f.check_box :is_active %>
+  </div>
+  <div class="field">
+    <%= f.label :total_points %><br />
+    <%= f.number_field :total_points %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,23 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Username:</b>
-  <%= @user.username %>
+  <b>Provider:</b>
+  <%= @user.provider %>
 </p>
 
 <p>
-  <b>Password:</b>
-  <%= @user.password %>
+  <b>Uid:</b>
+  <%= @user.uid %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Oauth token:</b>
+  <%= @user.oauth_token %>
+</p>
+
+<p>
+  <b>Oauth expires at:</b>
+  <%= @user.oauth_expires_at %>
 </p>
 
 <p>
   <b>Email:</b>
   <%= @user.email %>
-</p>
-
-<p>
-  <b>Total points:</b>
-  <%= @user.total_points %>
 </p>
 
 <p>
@@ -28,6 +38,11 @@
 <p>
   <b>Is active:</b>
   <%= @user.is_active %>
+</p>
+
+<p>
+  <b>Total points:</b>
+  <%= @user.total_points %>
 </p>
 
 

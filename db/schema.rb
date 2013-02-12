@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211210621) do
+ActiveRecord::Schema.define(:version => 20130212060611) do
 
   create_table "games", :force => true do |t|
     t.integer  "manager_id"
@@ -65,14 +65,17 @@ ActiveRecord::Schema.define(:version => 20130211210621) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "password"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
     t.string   "email"
-    t.integer  "total_points"
     t.boolean  "is_admin"
     t.boolean  "is_active"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "total_points"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end

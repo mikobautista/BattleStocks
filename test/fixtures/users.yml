@@ -1,17 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  username: MyString
-  password: MyString
+  provider: MyString
+  uid: MyString
+  name: MyString
+  oauth_token: MyString
+  oauth_expires_at: 2013-02-12 01:06:11
   email: MyString
-  total_points: 1
   is_admin: false
   is_active: false
+  total_points: 1
 
 two:
-  username: MyString
-  password: MyString
+  provider: MyString
+  uid: MyString
+  name: MyString
+  oauth_token: MyString
+  oauth_expires_at: 2013-02-12 01:06:11
   email: MyString
-  total_points: 1
   is_admin: false
   is_active: false
+  total_points: 1
