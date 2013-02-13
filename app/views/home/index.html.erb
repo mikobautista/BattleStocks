@@ -1,7 +1,42 @@
-<!-- logged in homepage -->
-<% if current_user %>
-	<h1>Welcome <strong><%= current_user.username %></strong>!
-<% end %>
+<style type="text/css" media="screen">
+            .slides_container {
+                width:570px;
+                height:270px;
+            }
+            .slides_container div {
+                width:570px;
+                height:270px;
+                display:block;
+            }
+        </style>
 
+<div class="container">
+  <div class="row">
+  		<div class="span7">
 
-<p>Find me in app/views/home/index.html.erb</p>
+			<div id="myCarousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item">
+                        <img src="http://placehold.it/570x270">
+                    </div>
+                    <div class="item">
+                        <img src="http://placehold.it/570x270">
+                    </div>
+                    <div class="item">
+                        <img src="http://placehold.it/570x270">
+                    </div>
+                </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+  		</div>
+
+	    <div class="span5">
+		<h3>Your virtual stock market competition using real-time data.
+		  Create a game, invite your friends, and win by earning the most money.
+	      Get started and  <%= link_to 'Sign up!', sign_up_path, :class => 'btn btn'%></h3>
+		</div>
+	</div>
+</div>

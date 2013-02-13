@@ -16,10 +16,10 @@
 //= require_tree .
 
 $(function () {
-  $('#about').click(function () {
 
-    alert('Hello, world!');
+  $('#about').click(function () {
+    alert("HI IM MIKO");
     return false;
-  })
+  });
 });
 
