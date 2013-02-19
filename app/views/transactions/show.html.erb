@@ -2,8 +2,8 @@
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:purchased_stock_in) %>:</strong></dt>
-  <dd><%= @transaction.purchased_stock_in %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:purchased_stock_id) %>:</strong></dt>
+  <dd><%= @transaction.purchased_stock_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
   <dd><%= @transaction.date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:qty) %>:</strong></dt>

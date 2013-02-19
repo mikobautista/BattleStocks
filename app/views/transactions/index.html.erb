@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:purchased_stock_in) %></th>
+      <th><%= model_class.human_attribute_name(:purchased_stock_id) %></th>
       <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:qty) %></th>
       <th><%= model_class.human_attribute_name(:value_per_stock) %></th>
@@ -17,7 +17,7 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction) %></td>
-        <td><%= transaction.purchased_stock_in %></td>
+        <td><%= transaction.purchased_stock_id %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.qty %></td>
         <td><%= transaction.value_per_stock %></td>

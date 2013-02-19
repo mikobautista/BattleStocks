@@ -42,6 +42,10 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(params[:game])
 
+    # set default values
+    @game.winner_id = nil
+    @game.is_terminated = false
+
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }

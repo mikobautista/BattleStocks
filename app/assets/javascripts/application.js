@@ -17,7 +17,7 @@
 
 $(function () {
 
-  $('#about').click(function () {
+  $('#randomjs').click(function () {
     alert("HI IM MIKO");
     return false;
   });

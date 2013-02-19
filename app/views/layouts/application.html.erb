@@ -19,15 +19,6 @@
 	    	</a>
 	    	<a class="brand" href="/">BattleStocks</a>
 	    	<div class="nav-collapse">
-	    		<% 
-=begin %>
-	    		<ul class="nav">
-	    			<li><%= link_to "About Us", about_path %></li>
-					<li><%= link_to "Contact Us", contact_path %></li>
-	    			<li><%= link_to "Privacy Policy", privacy_path %></li>
-	    		</ul>
-<% 
-=end %>
 	    		<ul class="nav pull-right">
     				<% if current_user %>
               <li><%= link_to current_user.username, user_path(current_user) %></li>
@@ -54,7 +45,7 @@
     <div class="container">
         <div class="nav-collapse">
           <ul class="nav">
-            <li><a href="#" id="about">About</a></li>
+            <li><a href="#" id="randomjs">RandomJS</a></li>
             <li><%= link_to "About", about_path %></li>
             <li><%= link_to "Team", team_path %></li>
             <li><%= link_to "Help", help_path %></li>

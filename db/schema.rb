@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.integer  "purchased_stock_in"
+    t.integer  "purchased_stock_id"
     t.datetime "date"
     t.integer  "qty"
     t.integer  "value_per_stock"
