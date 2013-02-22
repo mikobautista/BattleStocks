@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = Game.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @games }
@@ -16,6 +16,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @user_game = current_user.user_games.find_by_game_id(@game.id)
     @transaction = Transaction.new
+    @manager = User.find_by_id(@game.manager_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,6 +44,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(params[:game])
+    @game.manager_id = current_user.id
 
     respond_to do |format|
       if @game.save

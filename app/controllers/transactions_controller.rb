@@ -14,7 +14,8 @@ class TransactionsController < ApplicationController
   # GET /transactions/1.json
   def show
     @transaction = Transaction.find(params[:id])
-
+    @user = @transaction.purchased_stock.user_game.user
+    @game = @transaction.purchased_stock.user_game.game
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @transaction }

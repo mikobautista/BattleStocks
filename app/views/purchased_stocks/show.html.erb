@@ -1,19 +1,22 @@
 <%- model_class = @purchased_stock.class -%>
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
+
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_game_id) %>:</strong></dt>
-  <dd><%= @purchased_stock.user_game_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:stock_code) %>:</strong></dt>
+  <dt><strong>Username:</strong></dt>
+  <dd><%= @purchased_stock.user_game.user.username %></dd>
+  <dt><strong>Game:</strong></dt>
+  <dd><%= @purchased_stock.user_game.game.name %></dd>
+  <dt><strong>Stock Code:</strong></dt>
   <dd><%= @purchased_stock.stock_code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:total_qty) %>:</strong></dt>
+  <dt><strong>Money Spent:</strong></dt>
+  <dd>$<%= @purchased_stock.money_spent.to_f/100 %></dd>
+  <dt><strong>Money Earned:</strong></dt>
+  <dd>$<%= @purchased_stock.money_earned.to_f/100 %></dd>
+  <dt><strong>Total Quantity:</strong></dt>
   <dd><%= @purchased_stock.total_qty %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:money_spent) %>:</strong></dt>
-  <dd><%= @purchased_stock.money_spent %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:money_earned) %>:</strong></dt>
-  <dd><%= @purchased_stock.money_earned %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:value_in_stocks) %>:</strong></dt>
-  <dd><%= @purchased_stock.value_in_stocks %></dd>
+  <dt><strong>Total Value:</strong></dt>
+  <dd>$<%= @purchased_stock.value_in_stocks.to_f/100 %></dd>
 </dl>
 
 <div class="form-actions">

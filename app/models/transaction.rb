@@ -3,25 +3,32 @@ class Transaction < ActiveRecord::Base
   attr_accessor :stock_code, :game_id
 
   # Relationships
-   belongs_to :purchased_stock
+  belongs_to :purchased_stock
 
   # Callbacks
-  before_create :get_price_and_update_purchased_stock
+  before_create :get_price_and_update_purchased_stock_and_user_game
 
-  def get_price_and_update_purchased_stock
+  def get_price_and_update_purchased_stock_and_user_game
   	require 'yahoo_stock'
-    @purchase = PurchasedStock.find(self.purchased_stock_id)
+    @purchase = self.purchased_stock
+    @user_game = self.purchased_stock.user_game
   	self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    money_involved = self.qty * self.value_per_stock
     if self.is_buy
       @purchase.total_qty += self.qty
-      @purchase.money_spent += self.qty * self.value_per_stock
-      @purchase.value_in_stocks += @purchase.money_spent
+      @purchase.money_spent += money_involved
+      @purchase.value_in_stocks += money_involved
+      @user_game.balance -= money_involved
+      @user_game.total_value_in_stocks += money_involved
     else
       @purchase.total_qty -= self.qty
-      @purchase.money_earned += self.qty * self.value_per_stock
-      @purchase.value_in_stocks -= @purchase.money_earned
+      @purchase.money_earned += money_involved
+      @purchase.value_in_stocks -= money_involved
+      @user_game.balance += money_involved
+      @user_game.total_value_in_stocks -= money_involved
     end
     @purchase.save!
+    @user_game.save!
   end
 
 end

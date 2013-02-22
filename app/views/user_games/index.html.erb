@@ -10,7 +10,6 @@
       <th><%= model_class.human_attribute_name(:points) %></th>
       <th><%= model_class.human_attribute_name(:total_value_in_stocks) %></th>
       <th><%= model_class.human_attribute_name(:is_active) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
         <td><%= user_game.points %></td>
         <td><%= user_game.total_value_in_stocks %></td>
         <td><%= user_game.is_active %></td>
-        <td><%=l user_game.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_game_path(user_game), :class => 'btn btn-mini' %>
