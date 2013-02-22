@@ -3,10 +3,10 @@ class CreateUserGames < ActiveRecord::Migration
     create_table :user_games do |t|
       t.integer :user_id
       t.integer :game_id
-      t.integer :balance
-      t.integer :points
-      t.integer :total_value_in_stocks
-      t.boolean :is_active
+      t.integer :balance, :default => 0
+      t.integer :points, :default => 0
+      t.integer :total_value_in_stocks, :default => 0
+      t.boolean :is_active, :default => true
 
       t.timestamps
     end

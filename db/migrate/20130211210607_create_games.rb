@@ -7,7 +7,7 @@ class CreateGames < ActiveRecord::Migration
       t.datetime :start_date
       t.datetime :end_date
       t.integer :budget
-      t.boolean :is_terminated
+      t.boolean :is_terminated, :default => false
 
       t.timestamps
     end

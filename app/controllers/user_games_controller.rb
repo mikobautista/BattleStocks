@@ -42,11 +42,6 @@ class UserGamesController < ApplicationController
   def create
     @user_game = UserGame.new(params[:user_game])
 
-    # set default values
-    @user_game.points = 0
-    @usergame.total_value_in_stocks = 0
-    @usergame.is_active = true
-
     respond_to do |format|
       if @user_game.save
         format.html { redirect_to @user_game, notice: 'User game was successfully created.' }

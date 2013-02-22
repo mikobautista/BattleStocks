@@ -14,6 +14,8 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+    @user_game = current_user.user_games.find_by_game_id(@game.id)
+    @transaction = Transaction.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,10 +43,6 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(params[:game])
-
-    # set default values
-    @game.winner_id = nil
-    @game.is_terminated = false
 
     respond_to do |format|
       if @game.save

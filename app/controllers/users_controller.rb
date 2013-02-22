@@ -9,11 +9,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    # set default values
-    @user.total_points = 0
-    @user.is_admin = false
-    @user.is_active = true
-    
     if @user.save
       redirect_to root_url, :notice => "Signed up!"
     else

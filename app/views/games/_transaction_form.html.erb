@@ -1,8 +1,8 @@
 <%= form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :purchased_stock_id, :class => 'control-label' %>
+    <%= f.label :stock_code, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :purchased_stock_id, :class => 'number_field' %>
+      <%= f.text_field :stock_code, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -15,12 +15,6 @@
     <%= f.label :qty, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :qty, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :value_per_stock, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :value_per_stock, :class => 'number_field' %>
     </div>
   </div>
   <div class="control-group">

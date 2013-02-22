@@ -40,16 +40,22 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    # between 9:30am and 4:00pm
-    if 10 <= DateTime.now.hour or (9 <= DateTime.now.hour and DateTime.now.minute >= 30) and DateTime.now.hour <= 16
-      @transaction = Transaction.new(params[:transaction])
+    # within time bounds
+    if true#10 <= DateTime.now.hour or (9 <= DateTime.now.hour and DateTime.now.minute >= 30) and DateTime.now.hour <= 16
+      
+      # create purchased_stock
+      @user_game = current_user.user_games.find_by_game_id(params[:transaction][:game_id])
+      @purchase = @user_game.purchased_stocks.find_or_create_by_stock_code!(params[:transaction][:stock_code])
+      @purchase.save!
 
-      # set default values
+      # create transaction & link to purchased_stock
+      @transaction = Transaction.new(params[:transaction])
+      @transaction.purchased_stock = @purchase
       @transaction.date = DateTime.now
 
       respond_to do |format|
         if @transaction.save
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.html { redirect_to @user_game.game, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
           format.html { render action: "new" }
@@ -58,10 +64,8 @@ class TransactionsController < ApplicationController
       end
     # not within time bounds
     else
-      # change this later
       redirect_to root_url
     end
-
 
   end
 

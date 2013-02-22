@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "budget"
-    t.boolean  "is_terminated"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.boolean  "is_terminated", :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "invitations", :force => true do |t|
@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
   create_table "purchased_stocks", :force => true do |t|
     t.integer  "user_game_id"
     t.string   "stock_code"
-    t.integer  "total_qty"
-    t.integer  "money_spent"
-    t.integer  "money_earned"
-    t.integer  "value_in_stocks"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "total_qty",       :default => 0
+    t.integer  "money_spent",     :default => 0
+    t.integer  "money_earned",    :default => 0
+    t.integer  "value_in_stocks", :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "transactions", :force => true do |t|
@@ -56,12 +56,12 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
   create_table "user_games", :force => true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
-    t.integer  "balance"
-    t.integer  "points"
-    t.integer  "total_value_in_stocks"
-    t.boolean  "is_active"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer  "balance",               :default => 0
+    t.integer  "points",                :default => 0
+    t.integer  "total_value_in_stocks", :default => 0
+    t.boolean  "is_active",             :default => true
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -69,11 +69,11 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "email"
-    t.integer  "total_points"
-    t.boolean  "is_admin"
-    t.boolean  "is_active"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "total_points",  :default => 0
+    t.boolean  "is_admin",      :default => false
+    t.boolean  "is_active",     :default => true
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
 end

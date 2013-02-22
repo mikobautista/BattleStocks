@@ -5,9 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_hash
       t.string :password_salt
       t.string :email
-      t.integer :total_points
-      t.boolean :is_admin
-      t.boolean :is_active
+      t.integer :total_points, :default => 0
+      t.boolean :is_admin, :default => false
+      t.boolean :is_active, :default => true
 
       t.timestamps
     end

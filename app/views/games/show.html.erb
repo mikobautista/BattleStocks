@@ -4,8 +4,6 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
   <dd><%= @game.manager_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:winner_id) %>:</strong></dt>
-  <dd><%= @game.winner_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @game.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
@@ -17,6 +15,10 @@
   <dt><strong><%= model_class.human_attribute_name(:is_terminated) %>:</strong></dt>
   <dd><%= @game.is_terminated %></dd>
 </dl>
+
+<!-- Form for transaction -->
+<%= render :partial => 'transaction_form' %>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
