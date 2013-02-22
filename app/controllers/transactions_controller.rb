@@ -40,20 +40,29 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(params[:transaction])
+    # between 9:30am and 4:00pm
+    if 10 <= DateTime.now.hour or (9 <= DateTime.now.hour and DateTime.now.minute >= 30) and DateTime.now.hour <= 16
+      @transaction = Transaction.new(params[:transaction])
 
-    # set default values
-    @transaction.date = Time.now
+      # set default values
+      @transaction.date = DateTime.now
 
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render json: @transaction, status: :created, location: @transaction }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @transaction.save
+          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.json { render json: @transaction, status: :created, location: @transaction }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        end
       end
+    # not within time bounds
+    else
+      # change this later
+      redirect_to root_url
     end
+
+
   end
 
   # PUT /transactions/1
