@@ -8,9 +8,9 @@
   <div class="control-group">
     <%= f.label :date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.datetime_select :date, :class => 'datetime_select' %>
+      <%= f.text_field :date, 'data-behaviour' => 'datepicker' %>
     </div>
-  </div>
+  </div> 
   <div class="control-group">
     <%= f.label :qty, :class => 'control-label' %>
     <div class="controls">

@@ -6,18 +6,21 @@
       <%= f.text_field :name, :class => 'text_field' %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :start_date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.datetime_select :start_date, :class => 'datetime_select' %>
+      <%= f.text_field :start_date, 'data-behaviour' => 'datepicker' %>
     </div>
-  </div>
+  </div> 
+
   <div class="control-group">
     <%= f.label :end_date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.datetime_select :end_date, :class => 'datetime_select' %>
+      <%= f.text_field :end_date, 'data-behaviour' => 'datepicker' %>
     </div>
-  </div>
+  </div>   
+
   <div class="control-group">
     <%= f.label :budget, :class => 'control-label' %>
     <div class="controls">

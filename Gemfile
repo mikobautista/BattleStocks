@@ -41,3 +41,5 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 # gem 'debugger'
 
 gem 'nas-yahoo_stock'
+
+gem 'bootstrap-datepicker-rails'
