@@ -41,6 +41,8 @@ class UserGamesController < ApplicationController
   # POST /user_games.json
   def create
     @user_game = UserGame.new(params[:user_game])
+    @user_game.game_id = params[:user_game][:game_id]
+    @user_game.balance = params[:user_game][:balance]
 
     respond_to do |format|
       if @user_game.save

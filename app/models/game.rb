@@ -6,4 +6,12 @@ class Game < ActiveRecord::Base
   has_many :user_games
   has_many :users, :through => :user_games
 
+  # Callbacks
+  # -----------------------------
+  before_create :dollars_to_cents
+
+def dollars_to_cents
+	self.budget *= 100
+end
+
 end

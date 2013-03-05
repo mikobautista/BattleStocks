@@ -14,7 +14,9 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
-    @user_game = current_user.user_games.find_by_game_id(@game.id)
+    #@user_game = current_user.user_games.find_by_game_id(@game.id)
+    @user_game = UserGame.new
+
     @transaction = Transaction.new
     @manager = User.find_by_id(@game.manager_id)
 
@@ -46,8 +48,14 @@ class GamesController < ApplicationController
     @game = Game.new(params[:game])
     @game.manager_id = current_user.id
 
+    @usergame = UserGame.new
+    @usergame.user_id = current_user.id
+
     respond_to do |format|
       if @game.save
+        @usergame.game_id = @game.id
+        @usergame.balance = @game.budget
+        @usergame.save!
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render json: @game, status: :created, location: @game }
       else

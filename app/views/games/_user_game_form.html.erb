@@ -1,0 +1,11 @@
+<%= simple_form_for @user_game do |f| %>
+  <%= f.input :user_id, :label => "User", :collection => User.active.all(order: 'username'), :prompt => "Select User" %>
+
+  <%= f.hidden_field :game_id, :value => @game.id %>
+  <%= f.hidden_field :balance, :value => @game.budget %>
+
+  <div class="form-actions">
+    <%= f.submit "Add User", :class => 'btn btn-primary' %>
+
+  </div>
+<% end %>

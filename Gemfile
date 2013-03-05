@@ -43,3 +43,5 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'nas-yahoo_stock'
 
 gem 'bootstrap-datepicker-rails'
+
+gem 'simple_form'

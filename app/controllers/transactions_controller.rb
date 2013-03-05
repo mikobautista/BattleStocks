@@ -59,6 +59,7 @@ class TransactionsController < ApplicationController
           format.html { redirect_to @user_game.game, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
+          @purchase.destroy!
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end

@@ -14,21 +14,29 @@ class Transaction < ActiveRecord::Base
     @user_game = self.purchased_stock.user_game
   	self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
     money_involved = self.qty * self.value_per_stock
-    if self.is_buy
+    # can't buy if not enough money
+    if self.is_buy and @user_game.balance <= money_involved
       @purchase.total_qty += self.qty
       @purchase.money_spent += money_involved
       @purchase.value_in_stocks += money_involved
       @user_game.balance -= money_involved
       @user_game.total_value_in_stocks += money_involved
-    else
+      @purchase.save!
+      @user_game.save!
+    # can't sell more than you currently have
+    elsif (!self.is_buy) and @purchase.total_qty <= self.qty
       @purchase.total_qty -= self.qty
       @purchase.money_earned += money_involved
       @purchase.value_in_stocks -= money_involved
       @user_game.balance += money_involved
       @user_game.total_value_in_stocks -= money_involved
+      @purchase.save!
+      @user_game.save!
+    # illegal buy/sell
+    else
+      self.destroy!
     end
-    @purchase.save!
-    @user_game.save!
+    
   end
 
 end

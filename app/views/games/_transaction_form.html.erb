@@ -20,7 +20,6 @@
   <%= f.hidden_field :game_id, :value => @game.id %>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                transactions_path, :class => 'btn' %>
+
   </div>
 <% end %>
