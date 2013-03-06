@@ -2,17 +2,17 @@
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @user_game.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:game_id) %>:</strong></dt>
-  <dd><%= @user_game.game_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:balance) %>:</strong></dt>
-  <dd><%= @user_game.balance %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:points) %>:</strong></dt>
+  <dt><strong>User:</strong></dt>
+  <dd><%= @user_game.user.username %></dd>
+  <dt><strong>Game:</strong></dt>
+  <dd><%= @user_game.game.name %></dd>
+  <dt><strong>Balance:</strong></dt>
+  <dd>$<%= @user_game.balance.to_f/100 %></dd>
+  <dt><strong>Points:</strong></dt>
   <dd><%= @user_game.points %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
-  <dd><%= @user_game.total_value_in_stocks %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
+  <dt><strong>Stock Value:</strong></dt>
+  <dd>$<%= @user_game.total_value_in_stocks.to_f/10 %></dd>
+  <dt><strong>Is Active:</strong></dt>
   <dd><%= @user_game.is_active %></dd>
 </dl>
 

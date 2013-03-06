@@ -2,7 +2,11 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    if current_user.is_admin
+      @games = Game.all
+    else
+      @games = Game.for_user(current_user)
+    end
     
     respond_to do |format|
       format.html # index.html.erb
@@ -14,8 +18,15 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
-    #@user_game = current_user.user_games.find_by_game_id(@game.id)
+
+    # all users that haven't already been added to the game
+    @users_not_added = User.all - User.in_game(@game.id)
+
+    # new user_game for adding more
     @user_game = UserGame.new
+
+    # current_user's data in this game
+    @current_user_game = UserGame.find_by_user_id_and_game_id(current_user.id, @game.id)
 
     @transaction = Transaction.new
     @manager = User.find_by_id(@game.manager_id)

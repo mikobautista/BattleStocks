@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   # -----------------------------
   scope :alphabetical, order('username')
   scope :active, where('is_active = ?', true)
+  scope :in_game, lambda { |x| joins(:user_games).where("game_id = ?", x) }
   
   # Authentication Functions
   # -----------------------------

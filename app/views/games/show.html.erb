@@ -7,15 +7,22 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @game.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
-  <dd><%= @game.start_date %></dd>
+  <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
-  <dd><%= @game.end_date %></dd>
+  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:budget) %>:</strong></dt>
-  <dd><%= @game.budget %></dd>
+  <dd>$<%= @game.budget.to_f/100 %></dd>
   <dt><strong><%= model_class.human_attribute_name(:is_terminated) %>:</strong></dt>
   <dd><%= @game.is_terminated %></dd>
 </dl>
 
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:balance) %>:</strong></dt>
+  <dd>$<%= @current_user_game.balance.to_f/100 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
+  <dd>$<%= @current_user_game.total_value_in_stocks.to_f/100 %></dd>
+</dl>
+<br>
 <!-- Form for transaction -->
 <%= render :partial => 'transaction_form' %>
 <%= render :partial => 'user_game_form' %>
