@@ -18,10 +18,29 @@
 
 $(function () {
 
+  $('.transaction_partial').hide();
+  $('.user_game_partial').hide();
+
+  $('#transaction_button').click(function(){
+  	$('.transaction_partial').show();
+  	$('.user_game_partial').hide();
+  });
+
+  $('#user_game_button').click(function(){
+  	$('.transaction_partial').hide();
+  	$('.user_game_partial').show();
+  });
+
+  $('#hide_button').click(function(){
+  	$('.transaction_partial').hide();
+  	$('.user_game_partial').hide();
+  });
+
   $('#randomjs').click(function () {
     alert("HI IM MIKO");
     return false;
   });
+
 });
 
 $(document).on("focus", "[data-behaviour~='datepicker']", function(e){

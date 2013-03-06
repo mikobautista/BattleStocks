@@ -23,9 +23,22 @@
   <dd>$<%= @current_user_game.total_value_in_stocks.to_f/100 %></dd>
 </dl>
 <br>
-<!-- Form for transaction -->
-<%= render :partial => 'transaction_form' %>
-<%= render :partial => 'user_game_form' %>
+
+<div class="btn-group">
+  <button class="btn" id="transaction_button">Create Transaction</button>
+  <button class="btn" id="user_game_button">Add Users</button>
+  <button class="btn" id="hide_button">Hide</button>
+</div>
+
+<br></br>
+
+<!-- Form for transaction and user_game -->
+<div class="transaction_partial">
+  <%= render :partial => 'transaction_form' %>
+</div>
+<div class="user_game_partial">
+  <%= render :partial => 'user_game_form' %>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
