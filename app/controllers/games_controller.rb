@@ -2,11 +2,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    if current_user.is_admin
-      @games = Game.all
-    else
-      @games = Game.for_user(current_user)
-    end
+    @games = Game.for_user(current_user)
     
     respond_to do |format|
       format.html # index.html.erb

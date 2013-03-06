@@ -10,6 +10,10 @@ class Game < ActiveRecord::Base
   # -----------------------------
   before_create :dollars_to_cents
 
+  # Scope
+  # -----------------------------
+  scope :for_user, lambda { |x| joins(:user_games).where("user_id = ?", x) }
+
 def dollars_to_cents
 	self.budget *= 100
 end

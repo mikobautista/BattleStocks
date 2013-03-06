@@ -1,25 +1,13 @@
-<%= form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :stock_code, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :stock_code, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :qty, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :qty, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_buy, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :is_buy, :class => 'check_box' %>
-    </div>
-  </div>
+<%= simple_form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :stock_code, :label => "Stock Code" %>
+  <%= f.input :qty, :label => "Quantity" %>
+  <%= f.input :is_buy, :collection => [['Buy', true], ['Sell', false]], :as => :radio_buttons,
+    :label => "Purchase Type" %>
   <%= f.hidden_field :game_id, :value => @game.id %>
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
 
+
+  <div class="form-actions">
+    <%= f.submit "Create Transaction", :class => 'btn btn-primary' %>
   </div>
+  
 <% end %>

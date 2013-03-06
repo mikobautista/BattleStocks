@@ -1,6 +1,6 @@
-<%= simple_form_for @user_game do |f| %>
+<%= simple_form_for @user_game, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :user_id, :label => "User", :collection => @users_not_added,
-    :prompt => "Select User" %>
+    :prompt => "Select User", :label_method => :username %>
 
   <%= f.hidden_field :game_id, :value => @game.id %>
   <%= f.hidden_field :balance, :value => @game.budget %>
