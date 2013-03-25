@@ -1,3 +1,4 @@
+<% if !@games.empty? %>
 <table class="table table-striped">
           <thead>
             <tr>
@@ -36,6 +37,5 @@
           <% end %>
         </tbody>
       </table>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_game_path,
-            :class => 'btn btn-primary' %>
+<% end %>
+<%= link_to "Create New Game", new_game_path, :class => 'btn btn-primary' %>

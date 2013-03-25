@@ -53,7 +53,8 @@ class Game < ActiveRecord::Base
         count = UserGame.for_game(game.id).size - 1
         for user_game in UserGame.for_game(game.id).by_balance
           user_game.points = count
-          user_game.user.total_points += count
+          user = User.find_by_id(user_game.user_id)
+          user.total_points += count
           count -= 1
           user_game.save!
           user.save!
