@@ -6,4 +6,9 @@ class UserGame < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
 
+  #Scopes
+  # -----------------------------
+  scope :by_balance, order('balance DESC')
+  scope :for_game, lambda { |x| where("game_id = ?", x) }
+
 end

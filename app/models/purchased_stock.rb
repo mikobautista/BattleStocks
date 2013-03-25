@@ -5,4 +5,8 @@ class PurchasedStock < ActiveRecord::Base
   has_many :transactions
   belongs_to :user_game
 
+  # Scope
+  # -----------------------------
+  scope :for_game, lambda { |x| joins(:user_game).where("game_id = ?", x) }
+
 end
