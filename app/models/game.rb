@@ -49,12 +49,14 @@ class Game < ActiveRecord::Base
         # update winner_id
         game.winner_id = UserGame.for_game(game.id).by_balance.first.user_id
 
-        # update points all user_game's points
+        # update points all user_game's points and user's total_points
         count = UserGame.for_game(game.id).size - 1
         for user_game in UserGame.for_game(game.id).by_balance
           user_game.points = count
+          user_game.user.total_points += count
           count -= 1
           user_game.save!
+          user.save!
         end
 
       game.save!
