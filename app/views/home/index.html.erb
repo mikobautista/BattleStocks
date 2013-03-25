@@ -34,9 +34,14 @@
   		</div>
 
 	    <div class="span5">
-		<h3>Your virtual stock market competition using real-time data.
-		  Create a game, invite your friends, and win by earning the most money.
+        <% if !current_user %>
+		    <h3>Your virtual stock market competition using real-time data.
+		    Create a game, invite your friends, and win by earning the most money.
 	      Get started and  <%= link_to 'Sign up!', sign_up_path, :class => 'btn btn'%></h3>
-		</div>
+        <% else %>
+          <%= render :partial => 'game_show' %>
+        <% end %>
+
+		  </div>
 	</div>
 </div>

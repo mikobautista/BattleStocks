@@ -25,9 +25,18 @@
 <br>
 
 <div class="btn-group">
-  <button class="btn" id="transaction_button">Create Transaction</button>
-  <button class="btn" id="user_game_button">Add Users</button>
-  <button class="btn" id="hide_button">Hide</button>
+  <% if @game.start_date > DateTime.now %>
+    <% if @game.manager_id == current_user.id %>
+      <button class="btn" id="user_game_button">Add Users</button>
+      <button class="btn" id="hide_button">Hide</button>
+    <% end %>
+  <% elsif @game.is_terminated == false %>
+    <%= render :partial => 'purchased_stock_index' %>
+    <button class="btn" id="transaction_button">Create Transaction</button>
+    <button class="btn" id="hide_button">Hide</button>
+  <% else %>
+    game ended
+  <% end %>
 </div>
 
 <br></br>
@@ -41,13 +50,5 @@
 </div>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              games_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_game_path(@game), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              game_path(@game),
-              :method => 'delete',
-              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-              :class => 'btn btn-danger' %>
+  <%= link_to "Back", root_url, :class => 'btn'  %>
 </div>

@@ -14,6 +14,7 @@ class Game < ActiveRecord::Base
   # Scope
   # -----------------------------
   scope :for_user, lambda { |x| joins(:user_games).where("user_id = ?", x) }
+  scope :ongoing, where('is_terminated = ?', false)
 
   def dollars_to_cents
   	self.budget *= 100

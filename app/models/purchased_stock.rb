@@ -7,6 +7,7 @@ class PurchasedStock < ActiveRecord::Base
 
   # Scope
   # -----------------------------
+  scope :for_user_game, lambda { |x| where("user_game_id = ?", x) }
   scope :for_game, lambda { |x| joins(:user_game).where("game_id = ?", x) }
 
 end
