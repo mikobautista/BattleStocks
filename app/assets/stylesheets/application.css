@@ -12,6 +12,10 @@
  *= require bootstrap-datepicker
  *= require_tree .
  */
+
+ body {
+  padding: 80px 0;
+ }
  
 .simple_form label.radio{
   float: left;
