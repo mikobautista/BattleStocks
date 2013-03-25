@@ -53,8 +53,8 @@ gem 'simple_form'
 # Testing gems
 #gem 'shoulda'
 #gem 'shoulda-matchers'
-gem 'factory_girl_rails'
+#gem 'factory_girl_rails'
 #gem "mocha"
-gem 'simplecov'
+#gem 'simplecov'
 
 
