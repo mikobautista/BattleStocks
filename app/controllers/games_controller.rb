@@ -77,7 +77,7 @@ class GamesController < ApplicationController
         @usergame.game_id = @game.id
         @usergame.balance = @game.budget
         @usergame.save!
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to game_path(@game), notice: 'Game was successfully created.' }
         format.json { render json: @game, status: :created, location: @game }
       else
         format.html { render action: "new" }
