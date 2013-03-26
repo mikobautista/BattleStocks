@@ -1,41 +1,47 @@
 <% if !@games.empty? %>
-<table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Manager</th>
-              <th>Winner</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Budget</th>
-              <th>Ongoing?</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @games.each do |game| %>
-            <tr>
-              <td><%= link_to game.name, game_path(game) %></td>
-              <td><%= link_to User.find_by_id(game.manager_id).username, user_path(game.manager_id) %></td>
-              <td>
-                <% if game.winner_id.nil? %>
-                N/A
-                <% else %>
-                <%= link_to User.find_by_id(game.winner_id).username, user_path(game.winner_id) %>
-                <% end %>
-              </td>
-              <td><%= game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></td>
-              <td><%= game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></td>
-              <td>$<%= game.budget.to_f/100 %></td>
-              <td>
-                <% if game.is_terminated %>
-                  No
-                <% else %>
-                  Yes
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-<% end %>
-<%= link_to "Create New Game", new_game_path, :class => 'btn btn-primary' %>
+<div class = "span4">
+  <h3>Stock Quotes</h3>
+</div>
+<div class = "span7">
+  <h3>Current Games </h3>
+  <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Manager</th>
+                <th>Winner</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+                <th>Ongoing?</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @games.each do |game| %>
+              <tr>
+                <td><%= link_to game.name, game_path(game) %></td>
+                <td><%= link_to User.find_by_id(game.manager_id).username, user_path(game.manager_id) %></td>
+                <td>
+                  <% if game.winner_id.nil? %>
+                  N/A
+                  <% else %>
+                  <%= link_to User.find_by_id(game.winner_id).username, user_path(game.winner_id) %>
+                  <% end %>
+                </td>
+                <td><%= game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></td>
+                <td><%= game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></td>
+                <td>$<%= game.budget.to_f/100 %></td>
+                <td>
+                  <% if game.is_terminated %>
+                    No
+                  <% else %>
+                    Yes
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+  <% end %>
+  <%= link_to "Create New Game", new_game_path, :class => 'btn btn-primary' %>
+</div>
