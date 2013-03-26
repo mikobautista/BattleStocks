@@ -1,47 +1,79 @@
-<style type="text/css" media="screen">
-            .slides_container {
-                width:570px;
-                height:270px;
-            }
-            .slides_container div {
-                width:570px;
-                height:270px;
-                display:block;
-            }
-        </style>
+<% if !current_user %>
+  <style type="text/css" media="screen">
+              .slides_container {
+                  width:570px;
+                  height:270px;
+              }
+              .slides_container div {
+                  width:570px;
+                  height:270px;
+                  display:block;
+              }
+          </style>
 
 <div class="container container_style">
   <div class="row">
   		<div class="span7">
+  <div class="container">
+    <div class="row">
+    		<div class="span6">
+  			<div id="myCarousel" class="carousel slide">
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                      <div class="active item">
+                          <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
+                      </div>
+                      <div class="item">
+                          <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
+                      </div>
+                      <div class="item">
+                          <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
+                      </div>
+                  </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+              </div>
+    		</div>
 
-			<div id="myCarousel" class="carousel slide">
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-                    <div class="active item">
-                        <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
-                    </div>
-                    <div class="item">
-                        <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
-                    </div>
-                    <div class="item">
-                        <img src="http://waggeneredstrom.com/wp-content/blogs.dir/1/files/2012/11/dark-social-correlation2-670x270.jpg">
-                    </div>
-                </div>
-              <!-- Carousel nav -->
-              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  	    <div class="span6">
+          <div class="well well-small">
+            <h2>Your virtual stock market competition using real-time data.</h2>
+            <p>BattleStocks is the fun way to learn the ins and outs of the stock market and gain real market experience in developing strong portfolio’s.</p>
+            <p>
+              <center><%= link_to 'Start playing today!', sign_up_path, :class => 'btn btn-primary btn-large'%></center>
+            </p>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+            <br>
+            <div class="span3">
+              <blockquote>
+                <p>I learned a lot even though I was having fun.</p>
+                <small>Joseph Banks, <cite title="Source Title">Student</cite></small>
+              </blockquote>
             </div>
-  		</div>
-
-	    <div class="span5">
-        <% if !current_user %>
-		    <h3>Your virtual stock market competition using real-time data.
-		    Create a game, invite your friends, and win by earning the most money.
-	      Get started and  <%= link_to 'Sign up!', sign_up_path, :class => 'btn btn'%></h3>
-        <% else %>
+            <div class="span3">
+              <blockquote>
+                <p>It's easy for me to track the student's progress.</p>
+                <small>George Thomas, <cite title="Source Title">Professor</cite></small>
+              </blockquote>
+            </div>
+            <div class="span3">
+              <blockquote>
+                <p>I recommend this to new clients.</p>
+                <small>Julia Harris, <cite title="Source Title">Financial Planner</cite></small>
+              </blockquote>
+            </div>
+            <div class="span3">
+              <blockquote>
+                <p>I am able to try advanced portfolios with no risk.</p>
+                <small>Brandon Jones, <cite title="Source Title">Investor</cite></small>
+              </blockquote>
+            </div>
+    </div>
+  </div>
+<% else %>
           <%= render :partial => 'game_show' %>
-        <% end %>
-
-		  </div>
-	</div>
-</div>
+<% end %>
