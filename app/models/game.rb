@@ -65,6 +65,8 @@ class Game < ActiveRecord::Base
           end
         end
 
+        # current rank
+
         # update winner_id
         game.winner_id = UserGame.for_game(game.id).by_balance.first.user_id
 

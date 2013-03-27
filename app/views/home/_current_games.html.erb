@@ -4,7 +4,6 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Manager</th>
               <th>Winner</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -15,7 +14,6 @@
           <% @current_games.each do |game| %>
             <tr>
               <td><%= link_to game.name, game_path(game) %></td>
-              <td><%= link_to User.find_by_id(game.manager_id).username, user_path(game.manager_id) %></td>
               <td>
                 <% if game.winner_id.nil? %>
                 N/A
