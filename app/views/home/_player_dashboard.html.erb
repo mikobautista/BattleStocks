@@ -1,10 +1,21 @@
 <div class="row">
+
 	<div class="span10">
 		<%= render :partial => "stock_owned" %>
 	</div>
-	<div class="span10">
-		<%= render :partial => "current_games" %>
-		<%= render :partial => "upcoming_games" %>
-		<%= render :partial => "past_games" %>
+	<div class="span6">
+		<div class = "container-box">
+			<%= render :partial => "current_games" %>
+		</div>
+	</div>
+	<div class = "span6">
+		<div class = "container-box">
+			<%= render :partial => "upcoming_games" %>
+		</div>
+	</div>
+	<div class = "span12">
+		<div class = "container-box">
+			<%= render :partial => "past_games" %>
+		</div>
 	</div>
 </div>

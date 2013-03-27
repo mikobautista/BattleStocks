@@ -3,8 +3,9 @@
   <h3>Stock Quotes</h3>
 </div>
 <div class = "span7">
-  <h3>Current Games </h3>
-  <table class="table table-striped">
+  <div class = "container-box">
+    <h3>Current Games </h3>
+        <table class="table table-striped">
             <thead>
               <tr>
                 <th>Name</th>
@@ -42,6 +43,7 @@
             <% end %>
           </tbody>
         </table>
-  <% end %>
+    <% end %>
+  </div>
   <%= link_to "Create New Game", new_game_path, :class => 'btn btn-primary' %>
 </div>
