@@ -16,9 +16,9 @@
       <tr>
         <td><%= link_to user_game.user.username, user_path(user_game.user) %></td>
         <td><%= link_to user_game.game.name, game_path(user_game.game)%></td>
-        <td>$<%= user_game.balance.to_f/100 %></td>
+        <td><%= number_to_currency(user_game.balance.to_f/100) %></td>
         <td><%= user_game.points %></td>
-        <td>$<%= user_game.total_value_in_stocks.to_f/100 %></td>
+        <td><%= number_to_currency(user_game.total_value_in_stocks.to_f/100) %></td>
         <td>
           <%= link_to "View", user_game_path(user_game), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

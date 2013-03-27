@@ -19,7 +19,7 @@
   <dt><strong>Quantity:</strong></dt>
   <dd><%= @transaction.qty %></dd>
   <dt><strong>Value Per Stock:</strong></dt>
-  <dd>$<%= @transaction.value_per_stock.to_f/100 %></dd>
+  <dd><%= number_to_currency(@transaction.value_per_stock.to_f/100) %></dd>
   <dt><strong>Date:</strong></dt>
   <dd><%= @transaction.date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M:%S%P)") %></dd>
 </dl>

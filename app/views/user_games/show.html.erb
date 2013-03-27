@@ -7,11 +7,11 @@
   <dt><strong>Game:</strong></dt>
   <dd><%= @user_game.game.name %></dd>
   <dt><strong>Balance:</strong></dt>
-  <dd>$<%= @user_game.balance.to_f/100 %></dd>
+  <dd><%= number_to_currency(@user_game.balance.to_f/100) %></dd>
   <dt><strong>Points:</strong></dt>
   <dd><%= @user_game.points %></dd>
   <dt><strong>Stock Value:</strong></dt>
-  <dd>$<%= @user_game.total_value_in_stocks.to_f/10 %></dd>
+  <dd><%= number_to_currency(@user_game.total_value_in_stocks.to_f/100) %></dd>
   <dt><strong>Is Active:</strong></dt>
   <dd><%= @user_game.is_active %></dd>
 </dl>

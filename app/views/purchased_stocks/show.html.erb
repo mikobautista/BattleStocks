@@ -10,15 +10,15 @@
   <dt><strong>Stock Code:</strong></dt>
   <dd><%= @purchased_stock.stock_code %></dd>
   <dt><strong>Money Spent:</strong></dt>
-  <dd>$<%= @purchased_stock.money_spent.to_f/100 %></dd>
+  <dd><%= number_to_currency(@purchased_stock.money_spent.to_f/100) %></dd>
   <dt><strong>Money Earned:</strong></dt>
-  <dd>$<%= @purchased_stock.money_earned.to_f/100 %></dd>
+  <dd><%= number_to_currency(@purchased_stock.money_earned.to_f/100) %></dd>
   <dt><strong>Current Value:</strong></dt>
-  <dd>$<%= (@purchased_stock.value_in_stocks/@purchased_stock.total_qty).to_f/100 %></dd>
+  <dd><%= number_to_currency((@purchased_stock.value_in_stocks/@purchased_stock.total_qty).to_f/100) %></dd>
   <dt><strong>Total Quantity:</strong></dt>
   <dd><%= @purchased_stock.total_qty %></dd>
   <dt><strong>Total Value:</strong></dt>
-  <dd>$<%= @purchased_stock.value_in_stocks.to_f/100 %></dd>
+  <dd><%= number_to_currency(@purchased_stock.value_in_stocks.to_f/100) %></dd>
 </dl>
 
 <div class="form-actions">

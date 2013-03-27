@@ -14,7 +14,7 @@
         <% if purchased_stock.total_qty > 0 %>
           <td><%= purchased_stock.stock_code %></td>
           <td><%= purchased_stock.total_qty %></td>
-          <td>$<%= purchased_stock.value_in_stocks.to_f/100 %></td>
+          <td><%= number_to_currency(purchased_stock.value_in_stocks.to_f/100) %></td>
           <td><%= link_to "View", purchased_stock_path(purchased_stock), :class => 'btn btn-mini' %></td>
         <% end %>
       </tr>
