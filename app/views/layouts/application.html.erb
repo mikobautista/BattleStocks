@@ -18,16 +18,7 @@
 	    		<span class="icon-bar"></span>
 	    	</a>
 	    	<a class="brand" href="/">BattleStocks</a>
-	    	<div class="nav-collapse">
-	    		<ul class="nav pull-right">
-    				<% if current_user %>
-              <li><%= link_to current_user.username, user_path(current_user) %></li>
-    					<li><%= link_to "Logout", log_out_path %></li>
-  					<% else %>
-    					<li><%= link_to "Login", log_in_path %></li>
-  					<% end %>
-				</ul>
-			</div>
+	    	<%= render :partial => 'partials/header'%>
 		</div>
   	</div>
 </div>
