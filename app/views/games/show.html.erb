@@ -7,9 +7,9 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @game.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
-  <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M)") %></dd>
+  <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
-  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%b. %e, %Y (%I:%M)") %></dd>
+  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:budget) %>:</strong></dt>
   <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:is_terminated) %>:</strong></dt>
