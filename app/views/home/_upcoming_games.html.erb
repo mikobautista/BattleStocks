@@ -26,7 +26,9 @@
               <td><%= game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y (%I:%M%P)") %></td>
               <td><%= number_to_currency(game.budget/100) %></td>
               <td>
-                <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(game), :class => 'btn btn-mini' %>
+                <% if current_user.id = game.manager_id %>
+                  <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(game), :class => 'btn btn-mini' %>
+                <% end %>
               </td>
             </tr>
           <% end %>
