@@ -1,0 +1,28 @@
+<h2>My Stock</h2>
+<% if !@owned_stock.empty? %>
+	<table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Stock Code</th>
+              <th>Total Quantity</th>
+              <th>Money Spent</th>
+              <th>Value In Stocks</th>
+              <th>Money Earned</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @owned_stock.each do |stock| %>
+            <tr>
+              <td><%= stock.stock_code %></td>
+              <td><%= stock.total_qty %></td>
+              <td><%= number_to_currency(stock.money_spent) %></td>
+              <td><%= number_to_currency(stock.value_in_stocks)%></td>
+              <td><%= number_to_currency(stock.money_earned)%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+<% else %>
+  <h3>You do not own stock.</h3>
+<% end %>
