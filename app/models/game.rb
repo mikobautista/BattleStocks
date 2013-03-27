@@ -28,6 +28,12 @@ class Game < ActiveRecord::Base
   # -----------------------------
   scope :for_user, lambda { |x| joins(:user_games).where("user_id = ?", x) }
   scope :ongoing, where('is_terminated = ?', false)
+  scope :current, where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
+  scope :upcoming, where('start_date > ?', Time.now).where('is_terminated = ?', false)
+  scope :past, where('end_date <= ?', Time.now)
+  scope :ending_soonest, order('end_date, start_date DESC')
+  scope :starting_soonest, order('start_date, end_date')
+  scope :most_recent, order('end_date DESC, start_date DESC')
 
   def dollars_to_cents
   	self.budget *= 100
