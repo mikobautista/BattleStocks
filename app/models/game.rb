@@ -5,6 +5,19 @@ class Game < ActiveRecord::Base
   has_many :invitations
   has_many :user_games
   has_many :users, :through => :user_games
+  
+  # Validations
+  validates_format_of :budget, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
+  validates_format_of :name, :with => /.+/, :message => "name cannot be blank"
+  validates_format_of :name, :with => /.+/, :message => "name cannot be blank"
+  validates_date :end_date
+  validates_date :start_date
+  validates_presence_of :budget
+  validates_presence_of :end_date
+  validates_presence_of :start_date
+  validates_presence_of :manager_id
+  validates_presence_of :name
+  
 
   # Callbacks
   # -----------------------------
@@ -15,6 +28,12 @@ class Game < ActiveRecord::Base
   # -----------------------------
   scope :for_user, lambda { |x| joins(:user_games).where("user_id = ?", x) }
   scope :ongoing, where('is_terminated = ?', false)
+  scope :current, where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
+  scope :upcoming, where('start_date > ?', Time.now).where('is_terminated = ?', false)
+  scope :past, where('end_date <= ?', Time.now)
+  scope :ending_soonest, order('end_date, start_date DESC')
+  scope :starting_soonest, order('start_date, end_date')
+  scope :most_recent, order('end_date DESC, start_date DESC')
 
   def dollars_to_cents
   	self.budget *= 100
@@ -45,6 +64,8 @@ class Game < ActiveRecord::Base
             purchase.save!
           end
         end
+
+        # current rank
 
         # update winner_id
         game.winner_id = UserGame.for_game(game.id).by_balance.first.user_id

@@ -18,16 +18,7 @@
 	    		<span class="icon-bar"></span>
 	    	</a>
 	    	<a class="brand" href="/">BattleStocks</a>
-	    	<div class="nav-collapse">
-	    		<ul class="nav pull-right">
-    				<% if current_user %>
-              <li><%= link_to current_user.username, user_path(current_user) %></li>
-    					<li><%= link_to "Logout", log_out_path %></li>
-  					<% else %>
-    					<li><%= link_to "Login", log_in_path %></li>
-  					<% end %>
-				</ul>
-			</div>
+	    	<%= render :partial => 'partials/header'%>
 		</div>
   	</div>
 </div>
@@ -35,26 +26,19 @@
 <!-- Home Page Content -->
 <div class="container">
   <div class="row">
+  	<% flash.each do |name, msg| %>
+			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				<a class="close" data-dismiss="alert">x</a>
+				<%= msg %>
+			</div>
+    <% end %>
     <%= yield %>
   </div>
 </div>
 
 <!-- Footer -->
-<div class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="navbar-inner">
-    <div class="container">
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li><a href="#" id="randomjs">RandomJS</a></li>
-            <li><%= link_to "About", about_path %></li>
-            <li><%= link_to "Team", team_path %></li>
-            <li><%= link_to "Help", help_path %></li>
-            <li><%= link_to "Contact", contact_path %></li>
-            <li><%= link_to "Feedback", feedback_path %></li>
-          </ul>
-      </div>
-    </div>
-  </div>
+<div id="navbar">
+  <%= render :partial => 'partials/footer'%>
 </div>
 
 </body>
