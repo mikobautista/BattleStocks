@@ -1,19 +1,18 @@
 <%- model_class = @game.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<h1>Game: <%=@game.name %></h1>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
   <dd><%= @manager.username %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @game.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
   <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
-  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
+  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
+  <% if @game.is_terminated %>
+    <strong>*Game has been terminated.</strong>
+  <% end %></dd>
   <dt><strong><%= model_class.human_attribute_name(:budget) %>:</strong></dt>
   <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_terminated) %>:</strong></dt>
-  <dd><%= @game.is_terminated %></dd>
 </dl>
 
 <dl class="dl-horizontal">
