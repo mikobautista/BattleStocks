@@ -3,7 +3,6 @@ require 'test_helper'
 class InvitationTest < ActiveSupport::TestCase
   # relationship macros
   should belong_to(:game)
-  should have_many(:transactions)
   
   # validations 
   should validate_presence_of(:email)
