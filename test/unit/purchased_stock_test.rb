@@ -38,12 +38,12 @@ class PurchasedStockTest < ActiveSupport::TestCase
        assert_equal 40, @transaction1.qty
      end
 
-# now run tests:
-# test the scope 'for_user_game'
-should "show all user_games for user" do
+  # now run tests:
+  # test the scope 'for_user_game'
+  should "show all user_games for user" do
        assert_equal @usergame1, UserGame.for_purchased_stock(@goog)
        assert_equal 1, UserGame.for_purchased_stock(@goog).size
-end
+  end
 
  # test the scope 'for_user'
      should "show all games for user_game" do
@@ -56,4 +56,5 @@ end
        assert_equal @game1, Game.for_user(@alex)
        assert_equal 1, Game.for_user(@alexh).size
      end
+  end
 end
