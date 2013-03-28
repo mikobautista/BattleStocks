@@ -20,13 +20,13 @@ class PurchasedStockTest < ActiveSupport::TestCase
      end
 
      # and provide a teardown method as well
-     teardown do
-       @alex.destroy
-       @usergame1.destroy
-       @game1.destroy
-       @goog.destroy
-       @transaction1.destroy
-     end
+     #teardown do
+      # @alex.destroy
+       #@usergame1.destroy
+      # @game1.destroy
+      # @goog.destroy
+       #@transaction1.destroy
+    # end
      
      # now run the tests:
      # test one of each factory (not really required, but not a bad idea)
