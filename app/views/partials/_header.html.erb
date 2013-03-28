@@ -1,6 +1,9 @@
 <div class="nav-collapse">
 	<ul class="nav pull-right">
 		<% if current_user %>
+  			<% if ! current_page?(root_url) %>
+				<li><%= link_to "Dashboard", root_url %></li>
+  			<% end %>
   			<li><%= link_to current_user.username, user_path(current_user) %></li>
 			<li><%= link_to "Logout", log_out_path %></li>
 		<% else %>
@@ -9,3 +12,5 @@
 		<% end %>
 	  </ul>
 </div>
+
+<br></br>

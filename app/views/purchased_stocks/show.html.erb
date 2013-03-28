@@ -6,7 +6,7 @@
   <dt><strong>Username:</strong></dt>
   <dd><%= @purchased_stock.user_game.user.username %></dd>
   <dt><strong>Game:</strong></dt>
-  <dd><%= @purchased_stock.user_game.game.name %></dd>
+  <dd><%= link_to @purchased_stock.user_game.game.name, game_path(@purchased_stock.user_game.game) %></dd>
   <dt><strong>Stock Code:</strong></dt>
   <dd><%= @purchased_stock.stock_code %></dd>
   <dt><strong>Money Spent:</strong></dt>
@@ -22,7 +22,3 @@
   <dt><strong>Total Value:</strong></dt>
   <dd><%= number_to_currency(@purchased_stock.value_in_stocks.to_f/100) %></dd>
 </dl>
-
-<div class="form-actions">
-  <%= link_to "Back", game_path(@purchased_stock.user_game.game), :class => 'btn'  %>
-</div>

@@ -1,53 +1,63 @@
-<%- model_class = @game.class -%>
-<h1>Game: <%=@game.name %></h1>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
-  <dd><%= @manager.username %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
-  <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
-  <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
-  <% if @game.is_terminated %>
-    <strong>*Game has been terminated.</strong>
-  <% end %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:budget) %>:</strong></dt>
-  <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
-</dl>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:balance) %>:</strong></dt>
-  <dd><%= number_to_currency(@current_user_game.balance.to_f/100) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
-  <dd><%= number_to_currency(@current_user_game.total_value_in_stocks.to_f/100) %></dd>
-</dl>
-<br>
-
-<div class="btn-group">
-  <% if @game.start_date > DateTime.now %>
-    <% if @game.manager_id == current_user.id %>
-      <button class="btn" id="user_game_button">Add Users</button>
-      <button class="btn" id="hide_button">Hide</button>
-    <% end %>
-  <% elsif @game.is_terminated == false %>
-    <%= render :partial => 'purchased_stock_index' %>
-    <button class="btn" id="transaction_button">Create Transaction</button>
-    <button class="btn" id="hide_button">Hide</button>
-  <% else %>
-    game ended
+<div class = "container-box">
+  <%- model_class = @game.class -%>
+  <h1>Game: <%= @game.name %>
+  <% if (current_user.id == @game.manager_id) && (@game.start_date > Time.now) && (@game.is_terminated == false) %>
+    <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(@game), :class => 'btn' %>
   <% end %>
+  </h1>
+
+  <dl class="dl-horizontal">
+    <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
+    <dd>
+      <% if current_user.id == @game.manager_id %>
+        <strong>You</strong>
+      <% else %>
+        <%= @manager.username %>
+      <% end %>
+    </dd>
+    <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
+    <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
+    <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
+    <% if @game.is_terminated %>
+      <strong>*Game has been terminated.</strong>
+    <% end %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:budget) %>:</strong></dt>
+    <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
+  </dl>
+
+  <dl class="dl-horizontal">
+    <dt><strong><%= model_class.human_attribute_name(:balance) %>:</strong></dt>
+    <dd><%= number_to_currency(@current_user_game.balance.to_f/100) %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
+    <dd><%= number_to_currency(@current_user_game.total_value_in_stocks.to_f/100) %></dd>
+  </dl>
+  <br>
+</div>
+<div class="well"> 
+  <div class="btn-group">
+    <% if @game.start_date > DateTime.now %>
+      <% if @game.manager_id == current_user.id %>
+        <button class="btn" id="user_game_button">Add Users</button>
+        <button class="btn" id="hide_button">Hide</button>
+      <% end %>
+    <% elsif @game.is_terminated == false %>
+      <%= render :partial => 'purchased_stock_index' %>
+      <button class="btn" id="transaction_button">Create Transaction</button>
+      <button class="btn" id="hide_button">Hide</button>
+    <% else %>
+      game ended
+    <% end %>
+  </div>
+  <br></br>
+
+  <!-- Form for transaction and user_game -->
+  <div class="transaction_partial">
+    <%= render :partial => 'transaction_form' %>
+  </div>
+  <div class="user_game_partial">
+    <%= render :partial => 'user_game_form' %>
+  </div>
 </div>
 
-<br></br>
 
-<!-- Form for transaction and user_game -->
-<div class="transaction_partial">
-  <%= render :partial => 'transaction_form' %>
-</div>
-<div class="user_game_partial">
-  <%= render :partial => 'user_game_form' %>
-</div>
-
-<div class="form-actions">
-  <%= link_to "Back", root_url, :class => 'btn'  %>
-</div>
