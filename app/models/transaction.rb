@@ -33,7 +33,7 @@ class Transaction < ActiveRecord::Base
       @purchase.save!
       @user_game.save!
     else
-      self.delete #fix this
+      self.delete
     end
   end
 

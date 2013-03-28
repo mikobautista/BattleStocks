@@ -46,7 +46,7 @@ class UserGamesController < ApplicationController
 
     respond_to do |format|
       if @user_game.save
-        format.html { redirect_to @user_game, notice: 'User game was successfully created.' }
+        format.html { redirect_to @user_game.game, notice: 'User game was successfully created.' }
         format.json { render json: @user_game, status: :created, location: @user_game }
       else
         format.html { render action: "new" }
