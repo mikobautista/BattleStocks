@@ -44,7 +44,7 @@ class TransactionTest < ActiveSupport::TestCase
        @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex, :game_id => @game1)
        @goog = FactoryGirl.create(:purchased_stock, :user_game => @usergame1, 
         :stock_code => 23, :total_quantity => 40, money_spent => 5000, :money_earned => 509000,
-        :value_in_stocks => :80)
+        :value_in_stocks => 80)
        @transaction1 = FactoryGirl.create(:transaction, :purchased_stock => @goog, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
      end
 
