@@ -3,6 +3,9 @@ class PurchasedStocksController < ApplicationController
   # GET /purchased_stocks.json
   def index
     @purchased_stocks = PurchasedStock.all
+    if logged_in?
+      @owned_stock = PurchasedStock.for_user(current_user)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,6 +3,7 @@
 	<table class="table table-striped">
           <thead>
             <tr>
+              <th>Game</th>
               <th>Stock Code</th>
               <th>Total Quantity</th>
               <th>Cost Basis</th>
@@ -14,6 +15,7 @@
           <tbody>
           <% @owned_stock.each do |stock| %>
             <tr>
+              <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %>
               <td><%= stock.stock_code %></td>
               <td><%= stock.total_qty %></td>
               <td><%= number_to_currency(stock.money_spent.to_f/100)%></td>

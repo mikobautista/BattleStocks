@@ -1,22 +1,35 @@
 <%- model_class = PurchasedStock.new.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Game</th>
-      <th>Stock Code</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @purchased_stocks.each do |purchased_stock| %>
-      <tr>
-        <td><%= link_to purchased_stock.user_game.user.username, user_path(purchased_stock.user_game.user) %></td>
-        <td><%= link_to purchased_stock.user_game.game.name, game_path(purchased_stock.user_game.game) %></td>
-        <td><%= purchased_stock.stock_code %></td>
-        <td><%= link_to "View", purchased_stock_path(purchased_stock), :class => 'btn btn-mini' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% if logged_in? %>
+  <h2>My Stock</h2>
+  <% if !@owned_stock.empty? %>
+    <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Game</th>
+                <th>Stock Code</th>
+                <th>Total Quantity</th>
+                <th>Cost Basis</th>
+                <th>Value In Stocks</th>
+                <th>Money Earned</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @owned_stock.each do |stock| %>
+              <tr>
+                <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %>
+                <td><%= stock.stock_code %></td>
+                <td><%= stock.total_qty %></td>
+                <td><%= number_to_currency(stock.money_spent.to_f/100)%></td>
+                <td><%= number_to_currency(stock.value_in_stocks.to_f/100)%></td>
+                <td><%= number_to_currency(stock.money_earned.to_f/100)%></td>
+                <td><%= link_to "View", purchased_stock_path(stock), :class => 'btn btn-mini' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+  <% else %>
+    <h3>You do not own stock.</h3>
+  <% end %>
+<% end %>
