@@ -90,9 +90,16 @@ class GamesController < ApplicationController
   # PUT /games/1.json
   def update
     @game = Game.find(params[:id])
+    @usergames = UserGame.for_game(@game.id)
 
     respond_to do |format|
       if @game.update_attributes(params[:game])
+        @game.budget *= 100
+        for usergame in @usergames
+          usergame.balance = @game.budget
+          usergame.save!
+        end
+        @game.save!
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { head :no_content }
       else

@@ -14,7 +14,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        :end_date => 10.days.from_now.to_date, :budget => 10)
        @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex, :game_id => @game1)
        @goog = FactoryGirl.create(:purchased_stock, :user_game => @usergame1, 
-        :stock_code => "goog", :total_quantity => 40, money_spent => 5000, :money_earned => 509000,
+        :stock_code => "goog", :total_quantity => 40, money_spent => 5000, :money_earned => 0,
         :value_in_stocks => 80)
        @transaction1 = FactoryGirl.create(:transaction, :purchased_stock => @goog, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
      end
