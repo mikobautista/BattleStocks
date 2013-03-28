@@ -3,5 +3,8 @@ class Invitation < ActiveRecord::Base
 
   # Relationships
   belongs_to :game
+  
+  # Validations
+  validates_presence_of :game_id
 
 end
