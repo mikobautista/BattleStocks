@@ -10,7 +10,7 @@
     <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
     <dd>
       <% if current_user.id == @game.manager_id %>
-        <strong>You</strong>
+        <%= @manager.username %> <strong> (You)</strong>
       <% else %>
         <%= @manager.username %>
       <% end %>
