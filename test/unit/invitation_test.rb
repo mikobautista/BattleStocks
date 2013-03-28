@@ -1,4 +1,4 @@
-hrequire 'test_helper'
+require 'test_helper'
 
 class InvitationTest < ActiveSupport::TestCase
   # relationship macros
