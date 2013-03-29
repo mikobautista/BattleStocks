@@ -61,6 +61,9 @@ class GamesController < ApplicationController
   # GET /games/1/edit
   def edit
     @game = Game.find(params[:id])
+    @start_date = (@game.start_date - 14400).to_date
+    @end_date = (@game.end_date - 14400).to_date
+
   end
 
   # POST /games
@@ -100,7 +103,7 @@ class GamesController < ApplicationController
           usergame.save!
         end
         @game.save!
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Game was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
