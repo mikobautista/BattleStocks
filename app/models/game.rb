@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  attr_accessible :budget, :end_date, :is_terminated, :manager_id, :name, :start_date, :winner_id
+  attr_accessible :budget, :end_date, :is_terminated, :manager_id, :name, :start_date, :winner_id, :user_games
 
   # Relationships
   has_many :invitations
@@ -30,7 +30,7 @@ class Game < ActiveRecord::Base
   scope :current, where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
   scope :upcoming, where('start_date > ?', Time.now).where('is_terminated = ?', false)
   scope :past, where('end_date <= ?', Time.now)
-  scope :ending_soonest, order('end_date, start_date DESC')
+  scope :ending_soonest, order('end_date, start_date')
   scope :starting_soonest, order('start_date, end_date')
   scope :most_recent, order('end_date DESC, start_date DESC')
 
@@ -63,8 +63,6 @@ class Game < ActiveRecord::Base
             purchase.save!
           end
         end
-
-        # current rank
 
         # update winner_id
         game.winner_id = UserGame.for_game(game.id).by_balance.first.user_id
