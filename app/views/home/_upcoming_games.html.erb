@@ -1,10 +1,9 @@
 <h2>Upcoming Games</h2>
-<% if !@upcoming_games.empty? %>
+<% if !@upcoming_user_games.empty? %>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Winner</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Budget</th>
@@ -12,26 +11,19 @@
       </tr>
     </thead>
     <tbody>
-    <% @upcoming_games.each do |game| %>
-      <tr>
-        <td><%= link_to game.name, game_path(game) %></td>
-        <td>
-          <% if game.winner_id.nil? %>
-          N/A
-          <% else %>
-          <%= link_to User.find_by_id(game.winner_id).username, user_path(game.winner_id) %>
-          <% end %>
-        </td>
-        <td><%= game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-        <td><%= game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-        <td><%= number_to_currency(game.budget.to_f/100)%></td>
-        <td>
-          <% if current_user.id == game.manager_id %>
-            <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(game), :class => 'btn btn-mini' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+      <% @upcoming_user_games.each do |ugame| %>
+        <tr>
+          <td><%= link_to ugame.game.name, game_path(ugame.game) %></td>
+          <td><%= ugame.game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
+          <td><%= ugame.game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
+          <td><%= number_to_currency(ugame.game.budget.to_f/100) %></td>
+          <td>
+            <% if current_user.id == ugame.game.manager_id %>
+              <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(ugame.game), :class => 'btn btn-mini' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 <% else %>

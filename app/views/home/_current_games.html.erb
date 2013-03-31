@@ -1,34 +1,33 @@
 <h2>Current Games <%= link_to "Create New Game", new_game_path, :class => 'btn btn-success' %></h2>
-<% if !@current_games.empty? %>
-<table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Rank</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Budget</th>
-              <th>Balance</th>
-              <th>Stock Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @current_user_games.each do |ugame| %>
-                <tr>
-                  <td><%= link_to ugame.game.name, game_path(ugame.game) %></td>
-                  <td>
-                    <%= ugame.get_rank %>/<%= ugame.game.users.count %>
-                  </td>
-                  <td><%= ugame.game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-                  <td><%= ugame.game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-                  <td><%= number_to_currency(ugame.game.budget.to_f/100) %></td>
-                  <td><%= number_to_currency(ugame.balance.to_f/100) %></td>
-                  <td><%= number_to_currency(ugame.total_value_in_stocks.to_f/100) %></td>
-                </tr>
-            <% end %>
-
-        </tbody>
-      </table>
+<% if ! @current_user_games.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Rank</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Budget</th>
+        <th>Balance</th>
+        <th>Stock Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @current_user_games.each do |ugame| %>
+          <tr>
+            <td><%= link_to ugame.game.name, game_path(ugame.game) %></td>
+            <td>
+              <%= ugame.get_rank %>/<%= ugame.game.users.count %>
+            </td>
+            <td><%= ugame.game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
+            <td><%= ugame.game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
+            <td><%= number_to_currency(ugame.game.budget.to_f/100) %></td>
+            <td><%= number_to_currency(ugame.balance.to_f/100) %></td>
+            <td><%= number_to_currency(ugame.total_value_in_stocks.to_f/100) %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <h3>There are no current games.</h3>
 <% end %>
