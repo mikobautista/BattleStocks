@@ -22,5 +22,4 @@ class UserGame < ActiveRecord::Base
     hash = Hash[UserGame.for_game(self.game.id).by_balance.map.with_index.to_a]
     return hash[self] + 1
   end
-
 end
