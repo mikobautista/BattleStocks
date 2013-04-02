@@ -3,6 +3,14 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = Game.for_user(current_user)
+
+    if logged_in?
+      @current_user_games = UserGame.current.for_user(current_user).ending_soonest
+      @upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
+      @past_user_games = UserGame.past.for_user(current_user).most_recent
+
+      @owned_stock = PurchasedStock.for_user(current_user)
+    end
     
     respond_to do |format|
       format.html # index.html.erb

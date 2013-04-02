@@ -16,8 +16,10 @@
     <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
     <dd><%= @user.total_points %></dd>
     </br>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    <div class="form-actions">
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_user_path(@user), :class => 'btn btn-primary' %>
+    </div>
   </dl>
 </div>
 

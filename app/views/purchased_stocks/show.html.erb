@@ -1,24 +1,22 @@
-<%- model_class = @purchased_stock.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<div class = "container-box">
+  <h2><%= @purchased_stock.stock_code %> in  <%= @purchased_stock.user_game.game.name %></h2>
 
-
-<dl class="dl-horizontal">
-  <dt><strong>Username:</strong></dt>
-  <dd><%= @purchased_stock.user_game.user.username %></dd>
-  <dt><strong>Game:</strong></dt>
-  <dd><%= link_to @purchased_stock.user_game.game.name, game_path(@purchased_stock.user_game.game) %></dd>
-  <dt><strong>Stock Code:</strong></dt>
-  <dd><%= @purchased_stock.stock_code %></dd>
-  <dt><strong>Money Spent:</strong></dt>
-  <dd><%= number_to_currency(@purchased_stock.money_spent.to_f/100) %></dd>
-  <dt><strong>Cost Basis:</strong></dt>
-  <dd><%= number_to_currency(@purchased_stock.money_spent.to_f/100) %></dd>
-  <dt><strong>Money Earned:</strong></dt>
-  <dd><%= number_to_currency(@purchased_stock.money_earned.to_f/100) %></dd>
-  <dt><strong>Current Value:</strong></dt>
-  <dd><%= number_to_currency((@purchased_stock.value_in_stocks/@purchased_stock.total_qty).to_f/100) %></dd>
-  <dt><strong>Total Quantity:</strong></dt>
-  <dd><%= @purchased_stock.total_qty %></dd>
-  <dt><strong>Total Value:</strong></dt>
-  <dd><%= number_to_currency(@purchased_stock.value_in_stocks.to_f/100) %></dd>
-</dl>
+  <dl class="dl-horizontal">
+    <dt><strong>Game:</strong></dt>
+    <dd><%= link_to @purchased_stock.user_game.game.name, game_path(@purchased_stock.user_game.game) %></dd>
+    <dt><strong>Stock Code:</strong></dt>
+    <dd><%= @purchased_stock.stock_code %></dd>
+    <dt><strong>Money Spent:</strong></dt>
+    <dd><%= number_to_currency(@purchased_stock.money_spent.to_f/100) %></dd>
+    <dt><strong>Cost Basis:</strong></dt>
+    <dd><%= number_to_currency(@purchased_stock.money_spent.to_f/100) %></dd>
+    <dt><strong>Money Earned:</strong></dt>
+    <dd><%= number_to_currency(@purchased_stock.money_earned.to_f/100) %></dd>
+    <dt><strong>Current Value:</strong></dt>
+    <dd><%= number_to_currency((@purchased_stock.value_in_stocks/@purchased_stock.total_qty).to_f/100) %></dd>
+    <dt><strong>Total Quantity:</strong></dt>
+    <dd><%= @purchased_stock.total_qty %></dd>
+    <dt><strong>Total Value:</strong></dt>
+    <dd><%= number_to_currency(@purchased_stock.value_in_stocks.to_f/100) %></dd>
+  </dl>
+</div>
