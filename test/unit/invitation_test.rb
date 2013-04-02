@@ -5,12 +5,16 @@ class InvitationTest < ActiveSupport::TestCase
   should belong_to(:game)
   
   # validations 
-  should validate_presence_of(:email)
-  should validate_presence_of(:game_id)
+  should allow_value("fred@fred.com").for(:email)
+  should allow_value("fred@andrew.cmu.edu").for(:email)
+  should allow_value("my_fred@fred.org").for(:email)
+  should allow_value("fred123@fred.gov").for(:email)
+  should allow_value("my.fred@fred.net").for(:email)
   
-  should allow_value("Jonathan@gmail.com").for(:email)
-  should allow_value("ab123@yahoo.com").for(:email)
-  
-  should_not allow_value("Jonathan!!!gmail.com").for(:email)
+  should_not allow_value("fred").for(:email)
+  should_not allow_value("fred@fred,com").for(:email)
+  should_not allow_value("fred@fred.uk").for(:email)
+  should_not allow_value("my fred@fred.com").for(:email)
+  should_not allow_value("fred@fred.con").for(:email)
 
 end
