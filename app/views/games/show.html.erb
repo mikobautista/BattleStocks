@@ -35,27 +35,30 @@
   <br>
 </div>
 <div class="well"> 
-  <div class="btn-group">
+    <h3>Players</h3>
+          <%= render :partial => 'players_list' %>
     <% if @game.start_date > DateTime.now %>
       <% if @game.manager_id == current_user.id %>
-        <h3>Players</h3>
-          <%= render :partial => 'players_list' %>
           <button class="btn btn-success" id="user_game_button">Invite Player</button>
           <button class="btn" id="hide_button">Hide</button>
       <% end %>
     <% end %>
-    <% if @game.start_date < DateTime.now %>
-      <%= render :partial => 'purchased_stock_index' %>
-      <% if @game.is_terminated == false %>
-        <% if @game.end_date > DateTime.now %>
-          <button class="btn btn-success" id="transaction_button">Create Transaction</button>
-          <button class="btn" id="hide_button">Hide</button>
-        <% else %>
-          <h4>This game has ended.</h4>
-        <% end %>
-      <% end %>  
-    <% end %>
+</div>
+
+<% if @game.start_date < DateTime.now %>
+  <div class="well"> 
+    <%= render :partial => 'purchased_stock_index' %>
+    <% if @game.is_terminated == false %>
+      <% if @game.end_date > DateTime.now %>
+        <button class="btn btn-success" id="transaction_button">Create Transaction</button>
+        <button class="btn" id="hide_button">Hide</button>
+      <% else %>
+        <h4>This game has ended.</h4>
+      <% end %>
+    <% end %>  
   </div>
+<% end %>
+
   <br></br>
 
   <!-- Form for transaction and user_game -->
