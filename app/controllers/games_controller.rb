@@ -22,6 +22,7 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+    @userGame = UserGame.for_game(params[:id]).limit(1)
 
     # all users that haven't already been added to the game
     @users_not_added = User.all - User.in_game(@game.id)

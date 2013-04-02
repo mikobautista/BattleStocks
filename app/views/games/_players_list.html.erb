@@ -4,21 +4,29 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th><p>Rank</p></th>
         <th><p>Username</p></th>
         <th><p>Email</p></th>
+        <th><p>Portfolio Value</p></th>
+        <th><p>ROI</p></th>
       </tr>
     </thead>
     <tbody>
-      <% @game.users.alphabetical.each do |user| %>
-        <tr>
-          <% if current_user == user %>
-            <td><%= user.username %><strong> (You)</strong></td>
-            <td><%= link_to user.email, user_path(current_user)%></td>
-          <% else %>
-            <td><%= user.username %></td>
-            <td><%= user.email %></td>
-          <% end %>
-        </tr>
+      <% @userGame.each do |ugame| %>
+        <% ugame.game.users.each do |player| %>
+          <tr>
+            <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
+            <% if current_user == player %>
+              <td><%= player.username %><strong> (You)</strong></td>
+              <td><%= link_to player.email, user_path(current_user)%></td>
+            <% else %>
+              <td><%= player.username %></td>
+              <td><%= player.email %></td>
+            <% end %>
+            <td><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></td>
+            <td><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
