@@ -22,9 +22,9 @@
                   <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %>
                   <td><%= stock.stock_code %></td>
                   <td><%= stock.total_qty %></td>
-                  <td><%= number_to_currency(stock.money_spent.to_f/100)%></td>
-                  <td><%= number_to_currency(stock.value_in_stocks.to_f/100)%></td>
-                  <td><%= number_to_currency(stock.money_earned.to_f/100)%></td>
+                  <td><p align="right"><%= number_to_currency(stock.money_spent.to_f/100)%></p></td>
+                  <td><p align="right"><%= number_to_currency(stock.value_in_stocks.to_f/100)%></p></td>
+                  <td><p align="right"><%= number_to_currency(stock.money_earned.to_f/100)%></p></td>
                   <td><%= link_to "View", purchased_stock_path(stock), :class => 'btn btn-mini' %>
                   </td>
                 </tr>

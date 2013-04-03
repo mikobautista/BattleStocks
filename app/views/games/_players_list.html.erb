@@ -7,8 +7,8 @@
         <th><p>Rank</p></th>
         <th><p>Username</p></th>
         <th><p>Email</p></th>
-        <th><p>Portfolio Value</p></th>
-        <th><p>ROI</p></th>
+        <th><p align="right">Portfolio Value</p></th>
+        <th><p align="right">ROI</p></th>
       </tr>
     </thead>
     <tbody>
@@ -23,8 +23,8 @@
               <td><%= player.username %></td>
               <td><%= player.email %></td>
             <% end %>
-            <td><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></td>
-            <td><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></td>
+            <td><p align="right"><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></p></td>
+            <td><p align="right"><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></p></td>
           </tr>
         <% end %>
       <% end %>
