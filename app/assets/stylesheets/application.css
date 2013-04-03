@@ -8,9 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ *
  *= require bootstrap-datepicker
  *= require_tree .
+ *= require_self
  */
 
 #inline{
@@ -21,19 +22,19 @@
   margin-left: -15px;
  }
 
-.main_page_links li a {
+.navbar .main_pages_links li > a {
+ font-family: Helvetica;
+}
+
+.navbar .main_pages_links li > a:hover {
 
 }
 
-.main_page_links li a:hover {
+.navbar .login_links li a {
 
 }
 
-.login_links li a {
-
-}
-
-.login_links li a:hover {
+.navbar .login_links li a:hover {
 
 }
 
@@ -41,7 +42,7 @@ body {
   padding: 80px 0;
 }
  
-.header_style{
+.navbar{
   height: 55px;
 }
 
