@@ -21,8 +21,7 @@ class GameTest < ActiveSupport::TestCase
    should_not allow_value("").for(:name)
 
    # Dates
-   should allow_value(Time.now.to_date).for(:start_date)
-   should allow_value(10.days.from_now.to_date).for(:end_date)
+   should allow_value(1.day.from_now.to_date).for(:start_date)
    should_not allow_value("asdfasdf").for(:start_date)
    should_not allow_value("asdfasdf").for(:end_date)
 
