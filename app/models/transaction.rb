@@ -3,16 +3,20 @@ class Transaction < ActiveRecord::Base
   attr_accessor :stock_code, :game_id
 
   # Relationships
+  # -----------------------------
   belongs_to :purchased_stock
 
   # Callbacks
+  # -----------------------------
   before_create :get_price_and_update_purchased_stock_and_user_game
 
+  # Methods
+  # -----------------------------
   def get_price_and_update_purchased_stock_and_user_game
-  	require 'yahoo_stock'
+    require 'yahoo_stock'
     @purchase = self.purchased_stock
     @user_game = self.purchased_stock.user_game
-  	self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
     money_involved = self.qty * self.value_per_stock
     # can't buy if not enough money
     if self.is_buy and @user_game.balance >= money_involved

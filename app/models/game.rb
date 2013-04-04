@@ -2,11 +2,13 @@ class Game < ActiveRecord::Base
   attr_accessible :budget, :end_date, :is_terminated, :manager_id, :name, :start_date, :winner_id, :user_games
 
   # Relationships
+  # -----------------------------
   has_many :invitations
   has_many :user_games
   has_many :users, :through => :user_games
   
   # Validations
+  # -----------------------------
   validates_format_of :budget, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
   validates_format_of :name, :with => /.+/, :message => "name cannot be blank"
   validates_date :start_date, :after => lambda { Date.current }, :message => "start date must start tomorrow onwards"
@@ -34,6 +36,8 @@ class Game < ActiveRecord::Base
   scope :starting_soonest, order('start_date, end_date')
   scope :most_recent, order('end_date DESC, start_date DESC')
 
+  # Methods
+# -----------------------------
   def dollars_to_cents
   	self.budget *= 100
   end
