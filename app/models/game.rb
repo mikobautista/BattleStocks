@@ -9,7 +9,7 @@ class Game < ActiveRecord::Base
   # Validations
   validates_format_of :budget, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
   validates_format_of :name, :with => /.+/, :message => "name cannot be blank"
-  validates_date :start_date, :after => lambda { Date.current }, :message => "start date must start tomorrow onwards"
+  validates_date :start_date, :on_or_after => lambda { Date.current }, :message => "start date must start tomorrow onwards"
   validates_date :end_date, :on_or_after => :start_date, :message => "end date must be on or after start date"
   validates_presence_of :budget
   validates_presence_of :end_date
