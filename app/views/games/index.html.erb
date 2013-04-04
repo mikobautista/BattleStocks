@@ -1,54 +1,17 @@
-<%- model_class = Game.new.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Manager</th>
-      <th>Winner</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Budget</th>
-      <th>Ongoing?</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= link_to game.name, game_path(game) %></td>
-        <td><%= link_to User.find_by_id(game.manager_id).username, user_path(game.manager_id) %></td>
-        <td>
-          <% if game.winner_id.nil? %>
-          N/A
-          <% else %>
-          <%= link_to User.find_by_id(game.winner_id).username, user_path(game.winner_id) %>
-          <% end %>
-        </td>
-        <td><%= game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-        <td><%= game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></td>
-        <td><%= number_to_currency(game.budget.to_f/100) %></td>
-        <td>
-          <% if game.is_terminated %>
-            No
-          <% else %>
-            Yes
-          <% end %>
-        </td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_game_path(game), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      game_path(game),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_game_path,
-            :class => 'btn btn-primary' %>
+<div class="row">
+  <div class="span12">
+    <div class = "container-box">
+      <%= render :partial => "current_games" %>
+    </div>
+  </div>
+  <div class = "span6">
+    <div class = "container-box">
+      <%= render :partial => "upcoming_games" %>
+    </div>
+  </div>
+  <div class = "span6">
+    <div class = "container-box">
+      <%= render :partial => "past_games" %>
+    </div>
+  </div>
+</div>
