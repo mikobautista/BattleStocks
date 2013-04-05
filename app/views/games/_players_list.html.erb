@@ -12,21 +12,14 @@
       </tr>
     </thead>
     <tbody>
-      <% @userGame.each do |ugame| %>
-        <% ugame.game.users.each do |player| %>
+      <% UserGame.for_game(@game.id).each do |ugame| %>
           <tr>
             <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
-            <% if current_user == player %>
-              <td><%= player.username %><strong> (You)</strong></td>
-              <td><%= link_to player.email, user_path(current_user)%></td>
-            <% else %>
-              <td><%= player.username %></td>
-              <td><%= player.email %></td>
-            <% end %>
+            <td><%= link_to ugame.user.username, user_path(ugame.user) %></td>
+            <td><%= ugame.user.email %></td>
             <td><p align="right"><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></p></td>
             <td><p align="right"><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></p></td>
           </tr>
-        <% end %>
       <% end %>
     </tbody>
   </table>
