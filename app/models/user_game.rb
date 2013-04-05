@@ -52,5 +52,5 @@ class UserGame < ActiveRecord::Base
     end
     return (self.total_value_in_stocks-(total_value * 100))/(total_value * 100)
   end
-
+  
 end
