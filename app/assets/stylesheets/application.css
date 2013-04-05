@@ -27,7 +27,9 @@
  }
 
 .navbar .main_pages_links li > a {
-
+  font-family: Helvetica;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .navbar .main_pages_links li > a:hover {
@@ -36,10 +38,14 @@ background-color: #505050;
 }
 
 .navbar .login_links li a {
-<<<<<<< HEAD
  font-family: 'AaarghNormal', Helvetica, Arial;
  font-size: 15px;
+}
 
+.navbar .footer_links li > a {
+  font-family: Helvetica;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .navbar .login_links li a:hover {
