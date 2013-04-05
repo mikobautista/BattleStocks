@@ -10,6 +10,10 @@ class Transaction < ActiveRecord::Base
   # -----------------------------
   before_create :get_price_and_update_purchased_stock_and_user_game
 
+  # Validations
+  # -----------------------------
+  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
+
   # Methods
   # -----------------------------
   def get_price_and_update_purchased_stock_and_user_game
