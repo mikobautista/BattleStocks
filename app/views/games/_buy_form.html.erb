@@ -1,13 +1,10 @@
+<h3>Buy Stock</h3>
 <%= simple_form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :stock_code, :label => "Stock Code" %>
   <%= f.input :qty, :label => "Quantity" %>
-  <%= f.input :is_buy, :collection => [['Buy', true], ['Sell', false]], :as => :radio_buttons,
-    :label => "Purchase Type" %>
+  <%= f.hidden_field :is_buy, :value => true %>
   <%= f.hidden_field :game_id, :value => @game.id %>
 
-
-  <div class="form-actions">
-    <%= f.submit "Create Transaction", :class => 'btn btn-primary' %>
-  </div>
+  <%= f.submit "Submit", :class => 'btn btn-primary' %>
   
 <% end %>
