@@ -42,7 +42,9 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     # within time bounds
-    if true#10 <= DateTime.now.hour or (13 <= DateTime.now.hour and DateTime.now.minute >= 30) and DateTime.now.hour <= 20
+    if true#(14 <= DateTime.now.hour or (13 <= DateTime.now.hour and DateTime.now.minute >= 30))
+      # and (DateTime.now.hour <= 20)
+      # and (DateTime.now.wday != 0 or DateTime.now.wday != 6)
       
       # create purchased_stock
       @user_game = current_user.user_games.find_by_game_id(params[:transaction][:game_id])
