@@ -44,30 +44,29 @@
       <% end %>
     <% end %>
 </div>
+<div class="user_game_partial">
+  <%= render :partial => 'user_game_form' %>
+</div>
 
 <% if @game.start_date < DateTime.now %>
   <div class="well"> 
     <%= render :partial => 'purchased_stock_index' %>
     <% if @game.is_terminated == false %>
       <% if @game.end_date > DateTime.now %>
-        <button class="btn btn-success" id="transaction_button">Create Transaction</button>
-        <button class="btn" id="hide_button">Hide</button>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#buy" data-toggle="tab">Buy</a></li>
+          <li><a href="#sell" data-toggle="tab">Sell</a></li>
+        </ul>   
+        <div class="tab-content">
+          <div class="tab-pane active" id="buy"><%= render :partial => 'buy_form' %></div>
+          <div class="tab-pane" id="sell"><%= render :partial => 'sell_form' %></div>
+        </div>
       <% else %>
         <h4>This game has ended.</h4>
       <% end %>
     <% end %>  
   </div>
 <% end %>
-
-  <br></br>
-
-  <!-- Form for transaction and user_game -->
-  <div class="transaction_partial">
-    <%= render :partial => 'transaction_form' %>
-  </div>
-  <div class="user_game_partial">
-    <%= render :partial => 'user_game_form' %>
-  </div>
 </div>
 
 

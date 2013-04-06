@@ -2,5 +2,17 @@
 	<%- model_class = @user.class -%>
 	<h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
 	                                 :default => "Edit #{model_class.model_name.human}") %></h1>
+	<% if @user.errors.any? %>
+    <div class="well well-small">
+      	<div class="error_messages">
+	        <h3>Form is invalid</h3>
+	        <ul>
+	          <% for message in @user.errors.full_messages %>
+	        	<li><%= message %></li>
+	          <% end %>
+	        </ul>
+	      	</div>
+    	</div>
+  	<% end %>
 	<%= render :partial => 'form' %>
 </div>
