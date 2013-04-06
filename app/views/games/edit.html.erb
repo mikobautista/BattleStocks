@@ -1,5 +1,17 @@
 <div class="container-box">
 	<%- model_class = @game.class -%>
+	<% if @game.errors.any? %>
+	    <div class="well well-small">
+	      <div class="error_messages">
+	        <h3>Form is invalid</h3>
+	        <ul>
+	          <% for message in @game.errors.full_messages %>
+	            <li><%= message %></li>
+	          <% end %>
+	        </ul>
+	      </div>
+	    </div>
+  	<% end %>
 	<h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
 	    :default => "Edit #{model_class.model_name.human}") %></h1>
 	<%= render :partial => 'edit_form' %>

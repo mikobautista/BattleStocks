@@ -2,16 +2,16 @@
 	<%- model_class = @game.class -%>
 	<h1>New Game</h1>
 	<% if @game.errors.any? %>
-          <div class="well well-small">
-            <div class="error_messages">
-              <h3>Form is invalid</h3>
-              <ul>
-                <% for message in @game.errors.full_messages %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-    <% end %>
+    <div class="well well-small">
+      <div class="error_messages">
+        <h3>Form is invalid</h3>
+        <ul>
+          <% for message in @game.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 	<%= render :partial => 'new_form' %>
 </div>
