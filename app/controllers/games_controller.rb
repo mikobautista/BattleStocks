@@ -5,9 +5,9 @@ class GamesController < ApplicationController
     @games = Game.for_user(current_user)
 
     if logged_in?
-      @current_user_games = UserGame.current.for_user(current_user).ending_soonest
-      @upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
-      @past_user_games = UserGame.past.for_user(current_user).most_recent
+      @current_user_games = UserGame.current.for_user(current_user).ending_soonest.paginate(:page => params[:current_games_page]).per_page(5)
+      @upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest.paginate(:page => params[:upcoming_games_page]).per_page(5)
+      @past_user_games = UserGame.past.for_user(current_user).most_recent.paginate(:page => params[:past_games_page]).per_page(5)
 
       @owned_stock = PurchasedStock.for_user(current_user)
     end

@@ -147,6 +147,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
+    will_paginate (3.0.3)
 
 PLATFORMS
   ruby
@@ -173,3 +174,4 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   validates_timeliness
+  will_paginate

@@ -33,3 +33,5 @@
   <h3>There are no current games.</h3>
 <% end %>
 
+<%= will_paginate @current_user_games, :param_name => 'current_games_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+
