@@ -15,7 +15,15 @@
     </thead>
     <tbody>
       <% @current_user_games.each do |ugame| %>
-          <tr>
+          <% if ugame.get_rank == 1 %>
+            <tr class="success">
+          <% elsif (ugame.get_rank/ugame.game.users.count) <= 0.50 %>
+            <tr class="warning">
+          <% elsif (ugame.get_rank/ugame.game.users.count) > 0.50 %>
+            <tr class="error">
+          <% else %>
+            <tr>
+          <% end %>
             <td><%= link_to ugame.game.name, game_path(ugame.game) %></td>
             <td>
               <%= ugame.get_rank %>/<%= ugame.game.users.count %>
