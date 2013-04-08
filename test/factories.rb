@@ -2,7 +2,7 @@ FactoryGirl.define do
   
   factory :user do
     username "lalala"
-    email "flabbergast@gmail.com"
+    email "asdf@gmail.com"
     total_points 0
     password "secret"
     password_confirmation "secret"
@@ -16,12 +16,12 @@ FactoryGirl.define do
     budget 10000
     start_date 1.day.from_now.to_date
     end_date 10.days.from_now.to_date
-    manager_id 0
   end
   
   factory :user_game do
     points 0
     total_value_in_stocks 0
+    balance 0
     is_active true
     association :user
     association :game
