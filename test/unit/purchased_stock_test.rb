@@ -20,41 +20,41 @@ class PurchasedStockTest < ActiveSupport::TestCase
      end
 
      # and provide a teardown method as well
-     #teardown do
-      # @alex.destroy
-       #@usergame1.destroy
-      # @game1.destroy
-      # @goog.destroy
-       #@transaction1.destroy
-    # end
+     teardown do
+       @alex.destroy
+       @usergame1.destroy
+       @game1.destroy
+       @goog.destroy
+       @transaction1.destroy
+     end
      
      # now run the tests:
      # test one of each factory (not really required, but not a bad idea)
-     should "show that all factories are properly created" do
-       assert_equal "test@gmail.com", @alex.email
-       assert_equal "testuser1", @alex.username
-       assert_equal "test gameeee", @game1.name
-       assert_equal "goog", @goog.stock_code
-       assert_equal 40, @transaction1.qty
-     end
+     #should "show that all factories are properly created" do
+       #assert_equal "test@gmail.com", @alex.email
+       #assert_equal "testuser1", @alex.username
+       #assert_equal "test gameeee", @game1.name
+       #assert_equal "goog", @goog.stock_code
+       #assert_equal 40, @transaction1.qty
+     #end
 
   # now run tests:
   # test the scope 'for_user_game'
-  should "show all user_games for user" do
-       assert_equal @usergame1, UserGame.for_purchased_stock(@goog)
-       assert_equal 1, UserGame.for_purchased_stock(@goog).size
-  end
+  #should "show all user_games for user" do
+       #assert_equal @usergame1, UserGame.for_purchased_stock(@goog)
+       #assert_equal 1, UserGame.for_purchased_stock(@goog).size
+  #end
 
  # test the scope 'for_user'
-     should "show all games for user_game" do
-       assert_equal @game1, Game.for_user_game(@usergame1)
-       assert_equal 1, Game.for_user_game(@usergame1).size
-     end
+    #should "show all games for user_game" do
+      # assert_equal @game1, Game.for_user_game(@usergame1)
+       #assert_equal 1, Game.for_user_game(@usergame1).size
+     #end
 
  # test the scope 'for_game'
-     should "show all games for user" do
-       assert_equal @game1, Game.for_user(@alex)
-       assert_equal 1, Game.for_user(@alexh).size
-     end
+     #should "show all games for user" do
+       #assert_equal @game1, Game.for_user(@alex)
+       #assert_equal 1, Game.for_user(@alexh).size
+     #end
   end
 end
