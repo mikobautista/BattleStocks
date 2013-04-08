@@ -26,14 +26,27 @@ FactoryGirl.define do
     association :user
     association :game
   end
-
-  # factory :purchased_stock do
-  # end
-  # 
-  # factory :invitation do 
-  # end
-  # 
-  # factory :transaction do 
-  # end
+  
+   factory :purchased_stock do
+    association :user_game
+    stock_code "goog"
+    total_qty 100
+    money_spent 5000
+    money_earned 100
+    value_in_stocks 80
+  end
+ 
+  factory :invitation do 
+    association :game
+    email "flabby@gmail.com"
+  end
+   
+  factory :transaction do
+    association :purchased_stock
+    date Time.now.to_date
+    qty 40
+    value_per_stock 45000
+    is_buy true
+  end
   
 end
