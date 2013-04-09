@@ -1,9 +1,19 @@
-<% if logged_in? %>
-	<h2><%= @query.upcase %></h2>
-	<dl class="dl-horizontal">
-		<dt><strong>Stock Name:</strong></dt>
-		<dd><%= @query.upcase %></dd>
-		<dt><strong>Current Value:</strong></dt>
-    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
-  	</dl>
-<% end %>
+<div class = "container-box">
+	<% if logged_in? %>
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<h2><%= @query.upcase %></h2>
+				<dl class="dl-horizontal">
+					<dt><strong>Stock Name:</strong></dt>
+					<dd><%= @query.upcase %></dd>
+					<dt><strong>Current Value:</strong></dt>
+			    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
+			  	</dl>
+			<% else %>
+				<h3><%= @query.upcase %> stock code is invalid.</h3>
+			<% end %>
+		<% else %>
+			<h3>Please enter a stock code to search.</h3>
+		<% end %>
+	<% end %>
+</div>
