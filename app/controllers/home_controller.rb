@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   		@past_user_games = UserGame.past.for_user(current_user).most_recent
 
   		@owned_stock = PurchasedStock.for_user(current_user)
+      
   	end
   end
 end

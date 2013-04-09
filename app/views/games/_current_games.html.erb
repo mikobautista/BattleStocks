@@ -1,13 +1,13 @@
 <h2>Current Games </h2>
-</i><%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :class => 'btn btn-mini btn-success' %>
-<% if !@current_user_games.empty? %>
+<%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :type => 'button', :class => 'btn btn-mini btn-success' %>
+<% if ! @current_user_games.empty? %>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Rank</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th><p>Name</p></th>
+        <th><p>Rank</p></th>
+        <th><p>Start Date</p></th>
+        <th><p>End Date</p></th>
         <th><p align="right">Budget</p></th>
         <th><p align="right">Balance</p></th>
         <th><p align="right">Stock Value</p></th>
