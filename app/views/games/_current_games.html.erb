@@ -1,7 +1,7 @@
-<h2>Current Games </h2>
-</i><%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :class => 'btn btn-mini btn-success' %>
-<% if !@current_user_games.empty? %>
-  <table class="table table-striped">
+<h2>Current Games 
+</i><%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :class => 'btn btn-success' %>
+<% if !@current_user_games.empty? %></h2>
+  <table class="table table-condensed table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -32,4 +32,6 @@
 <% else %>
   <h3>There are no current games.</h3>
 <% end %>
+
+<%= will_paginate @current_user_games, :param_name => 'current_games_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
 
