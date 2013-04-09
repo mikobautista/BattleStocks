@@ -1,24 +1,10 @@
 <div class ="span4">
   <div class = "container-box">
-    <form>
       <h3>Research Stocks</h3>
-      <form action="/search" method="get">
-         <table cellspacing="0" cellpadding="0" border="0" class="search-form-pt-wrapper search-form-table">
-            <tbody><tr class="search-form-pt search-form-row">
-               <td class="queryFieldCell search-form-cell">
-                  <span class="queryFieldWrapper">
-                     <input type="text" value="" name="query" class="text queryField">
-                  </span>
-               </td>
-               <td class="queryButtonCell search-form-cell">
-                  <span class="queryButtonWrapper">
-                     <input type="submit" value="Search" class="btn">
-                  </span>
-               </td>
-            </tr>
-         </tbody></table> 
-      </form>
-    </form>
+      <form class="form-search" action="/search" method="get">  
+        <input type="text" name="query" class="input-medium search-query">  
+        <button type="submit" value="Search" class="btn">Search</button>  
+      </form>  
   </div>
   <div class = "container-box">
     <h3> Stocks Quicklook</h3>

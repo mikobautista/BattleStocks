@@ -14,6 +14,6 @@ class HomeController < ApplicationController
   def search 
     # allows for the admin to search from their dashboard
     @query = params[:query]
-    @stock_value = PurchasedStock.search(@query)
+    @stock_value = PurchasedStock.search("#{params[:query]}")
   end
 end
