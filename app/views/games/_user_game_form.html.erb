@@ -1,6 +1,14 @@
+<%= stylesheet_link_tag "chosen.jquery", :media => "all" %>
+<%= javascript_include_tag "chosen" %>
+
+<script>
+  $(document).ready(function() { $("#user_id").chosen({no_results_text: "No results matched"}); });
+</script>
+
 <%= simple_form_for @user_game, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :user_id, :label => "User", :collection => @users_not_added,
-    :prompt => "Select User", :label_method => :username %>
+
+  <%= select_tag('user_id', options_for_select(@users_not_added.collect{ |u| [u.username, u.id] }), :multiple => true, :'data-placeholder' => 'Select Users to Add') %>
+
 
   <%= f.hidden_field :game_id, :value => @game.id %>
   <%= f.hidden_field :balance, :value => @game.budget %>

@@ -16,7 +16,6 @@ class Game < ActiveRecord::Base
   validates_presence_of :budget
   validates_presence_of :end_date
   validates_presence_of :start_date
-  validates_presence_of :manager_id
   validates_presence_of :name
   
 

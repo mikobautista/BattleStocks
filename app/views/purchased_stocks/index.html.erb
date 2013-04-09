@@ -4,7 +4,7 @@
   <div class = "container-box">
     <h2>My Stocks</h2>
     <% if !@owned_stock.empty? %>
-      <table class="table table-striped">
+      <table class="table table-condensed table-striped">
               <thead>
                 <tr>
                   <th><p>Game</p></th>
@@ -36,3 +36,5 @@
     <% end %>
   </div>
 <% end %>
+
+<%= will_paginate @owned_stock, :param_name => 'owned_stock_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>

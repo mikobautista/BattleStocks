@@ -1,5 +1,5 @@
 class PurchasedStock < ActiveRecord::Base
-  attr_accessible :money_earned, :money_spent, :stock_code, :total_qty, :user_game_id, :value_in_stocks
+  attr_accessible :money_earned, :money_spent, :stock_code, :total_qty, :user_game_id, :value_in_stocks, :get_price
 
   # Relationships
   # -----------------------------
@@ -20,6 +20,11 @@ class PurchasedStock < ActiveRecord::Base
   # -----------------------------
   def stock_code_upper
   	self.stock_code.upcase!
+  end
+
+  def get_price
+    require 'yahoo_stock'
+    return ((YahooStock::Quote.new(:stock_symbols => [self.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
   end
 
 end

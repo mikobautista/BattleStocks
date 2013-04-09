@@ -44,5 +44,4 @@ class Transaction < ActiveRecord::Base
       self.delete
     end
   end
-
 end
