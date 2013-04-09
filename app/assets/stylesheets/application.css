@@ -14,10 +14,13 @@
  *= require_self
  */
 
+body{
+  background: #fffCf5;
+}
+
 #logo {
   float: left;
 }
-
  
 .navbar .brand {
   margin-left: -12px;
@@ -34,7 +37,8 @@
 
 .navbar .main_pages_links li > a:hover {
 
-background-color: #505050;
+background-color: white;
+color: black;
 }
 
 .navbar .login_links li a {
@@ -44,8 +48,9 @@ background-color: #505050;
 
 .navbar .footer_links li > a {
   font-family: Helvetica;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
+
 }
 
 .navbar .login_links li a:hover {
