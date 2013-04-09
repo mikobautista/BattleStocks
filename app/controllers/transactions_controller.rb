@@ -48,8 +48,7 @@ class TransactionsController < ApplicationController
       
       # create purchased_stock
       @user_game = current_user.user_games.find_by_game_id(params[:transaction][:game_id])
-      @purchase = @user_game.purchased_stocks.find_or_create_by_stock_code!(params[:transaction][:stock_code])
-      @purchase.save!
+      @purchase = @user_game.purchased_stocks.find_or_create_by_stock_code!(params[:transaction][:stock_code].upcase)
 
       # create transaction & link to purchased_stock
       @transaction = Transaction.new(params[:transaction])
@@ -58,6 +57,7 @@ class TransactionsController < ApplicationController
 
       respond_to do |format|
         if @transaction.save
+          @purchase.save
           format.html { redirect_to @user_game.game, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
