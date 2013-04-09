@@ -41,10 +41,18 @@ background-color: white;
 color: black;
 }
 
+.navbar .main_pages_links li > a:active {
+
+background-color: white;
+color: black;
+}
+
+
 .navbar .login_links li a {
  font-family: 'AaarghNormal', Helvetica, Arial;
  font-size: 15px;
 }
+
 
 .navbar .footer_links li > a {
   font-family: Helvetica;
