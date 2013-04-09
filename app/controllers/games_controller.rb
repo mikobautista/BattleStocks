@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  require 'will_paginate'
   # GET /games
   # GET /games.json
   def index

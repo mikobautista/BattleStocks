@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  require 'will_paginate'
   def index
   	if logged_in?
   		@current_user_games = UserGame.current.for_user(current_user).ending_soonest.paginate(:page => params[:current_games_page]).per_page(10)
