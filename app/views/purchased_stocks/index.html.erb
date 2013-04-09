@@ -19,8 +19,8 @@
               <tbody>
               <% @owned_stock.each do |stock| %>
                 <tr>
-                  <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %>
-                  <td><%= stock.stock_code %></td>
+                  <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %></td>
+                  <td><%= link_to stock.stock_code, src="/search?query=#{stock.stock_code}" %></td>
                   <td><%= stock.total_qty %></td>
                   <td><p align="right"><%= number_to_currency(stock.money_spent.to_f/100)%></p></td>
                   <td><p align="right"><%= number_to_currency(stock.value_in_stocks.to_f/100)%></p></td>
