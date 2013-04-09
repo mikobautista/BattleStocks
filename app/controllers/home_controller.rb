@@ -8,4 +8,10 @@ class HomeController < ApplicationController
   		@owned_stock = PurchasedStock.for_user(current_user)
   	end
   end
+
+  def search 
+    # allows for the admin to search from their dashboard
+    @query = params[:query]
+    @stock_value = PurchasedStock.search(@query)
+  end
 end

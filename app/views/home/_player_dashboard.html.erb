@@ -2,8 +2,22 @@
   <div class = "container-box">
     <form>
       <h3>Research Stocks</h3>
-      <input type="text" class = "input-medium search-query">
-      <button type="submit" class="btn">Search</button>
+      <form action="/search" method="get">
+         <table cellspacing="0" cellpadding="0" border="0" class="search-form-pt-wrapper search-form-table">
+            <tbody><tr class="search-form-pt search-form-row">
+               <td class="queryFieldCell search-form-cell">
+                  <span class="queryFieldWrapper">
+                     <input type="text" value="" name="query" class="text queryField">
+                  </span>
+               </td>
+               <td class="queryButtonCell search-form-cell">
+                  <span class="queryButtonWrapper">
+                     <input type="submit" value="Search" class="btn">
+                  </span>
+               </td>
+            </tr>
+         </tbody></table> 
+      </form>
     </form>
   </div>
   <div class = "container-box">

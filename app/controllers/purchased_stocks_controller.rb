@@ -30,6 +30,21 @@ class PurchasedStocksController < ApplicationController
     end
   end
 
+  def show_stock
+    @purchased_stock = PurchasedStock.find(params[:id])
+    # update purchased_stock's value_in_stocks
+    current_value_in_stocks = 0 
+    if (@purchased_stock.total_qty > 0)
+      new_value = ((YahooStock::Quote.new(:stock_symbols => [@purchased_stock.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    end
+    @purchased_stock.value_in_stocks = new_value * @purchased_stock.total_qty
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @purchased_stock }
+    end
+  end
+
   # GET /purchased_stocks/new
   # GET /purchased_stocks/new.json
   def new

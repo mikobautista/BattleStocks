@@ -20,7 +20,7 @@ BattleStocks::Application.routes.draw do
   match '/help', :to => 'home#help'
   match '/contact', :to => 'home#contact'
   match '/feedback', :to => 'home#feedback'
-
+  match '/search', :to => 'home#search'
 
   #bcrypt routes
   get "log_out" => "sessions#destroy", :as => "log_out"
