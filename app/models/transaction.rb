@@ -22,6 +22,10 @@ class Transaction < ActiveRecord::Base
     @purchase = self.purchased_stock
     @user_game = self.purchased_stock.user_game
     self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    # invalid stock code -> no such thing as free stocks
+    if self.value_per_stock == 0
+      return false
+    end
     money_involved = self.qty * self.value_per_stock
     # can't buy if not enough money
     if self.is_buy and @user_game.balance >= money_involved
