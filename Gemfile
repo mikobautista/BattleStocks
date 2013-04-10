@@ -61,3 +61,4 @@ gem "mocha"
 gem 'simplecov'
 gem 'validates_timeliness'
 
+gem 'cancan'
