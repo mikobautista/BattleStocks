@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
 
   # Callbacks
   # -----------------------------
-  before_create :get_price_and_update_purchased_stock_and_user_game
+  # validate :get_price_and_update_purchased_stock_and_user_game
 
   # Validations
   # -----------------------------
@@ -16,6 +16,7 @@ class Transaction < ActiveRecord::Base
 
   # Methods
   # -----------------------------
+
   def get_price_and_update_purchased_stock_and_user_game
     require 'yahoo_stock'
     @purchase = self.purchased_stock
@@ -31,6 +32,7 @@ class Transaction < ActiveRecord::Base
       @user_game.total_value_in_stocks += money_involved
       @purchase.save!
       @user_game.save!
+      return true
     # can't sell more than you currently have
     elsif (!self.is_buy) and @purchase.total_qty >= self.qty
       @purchase.total_qty -= self.qty
@@ -40,8 +42,10 @@ class Transaction < ActiveRecord::Base
       @user_game.total_value_in_stocks -= money_involved
       @purchase.save!
       @user_game.save!
+      return true
     else
-      self.delete
+      #redirect_to @user_game.game, notice: 'Transaction was NOT successfully created.'
+      return false
     end
   end
 end
