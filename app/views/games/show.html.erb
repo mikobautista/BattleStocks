@@ -1,10 +1,10 @@
 <div class = "container-box">
   <%- model_class = @game.class -%>
   <h1>Game: <%= @game.name %>
-  <% if (current_user.id == @game.manager_id) && (@game.start_date > Time.now) && (@game.is_terminated == false) %>
-    <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(@game), :class => 'btn' %>
-  <% end %>
   </h1>
+  <% if (current_user.id == @game.manager_id) && (@game.start_date > Time.now) && (@game.is_terminated == false) %>
+    <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(@game), :class => 'btn btn-mini' %>
+  <% end %>
 
   <dl class="dl-horizontal">
     <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>

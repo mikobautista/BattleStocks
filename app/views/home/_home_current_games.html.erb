@@ -18,10 +18,10 @@
         Rank:
         <%= ugame.get_rank %>/<%= ugame.game.users.count %>
         <br>
-        Balance: 
+        <h4>Balance: </h4>
         <%= number_to_currency(ugame.balance.to_f/100) %>
         <br>
-        Stock Value: 
+        <h4>Stock Value: </h4>
         <%= number_to_currency(ugame.total_value_in_stocks.to_f/100) %>
       </div>
     </div>
