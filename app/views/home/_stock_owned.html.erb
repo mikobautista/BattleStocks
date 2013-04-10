@@ -7,9 +7,9 @@
             </tr>
           </thead>
           <tbody>
-          <% @owned_stock.find(:all, :select => "stock_code, value_in_stocks, total_qty", :group => "stock_code").each do |stock| %>
+          <% @owned_stock.each do |stock| %>
             <tr>
-              <% if (stock.value_in_stocks != 0) && (stock.total_qty != 0) %>
+              <% if (stock.total_qty != 0) %>
                 <td><%= link_to stock.stock_code, root_url %></td>
                 <td><%= number_to_currency((stock.get_price).to_f/100) %></td>
               <% end %>
