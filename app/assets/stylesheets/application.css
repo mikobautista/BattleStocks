@@ -44,7 +44,7 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E0E0E0 100%);
 .home_game_content {
   margin-top: 13px;
   background: white;
-  height: 200px;
+/*  height: 200px;*/
   border: 1px solid #dcdcdc;
 }
 

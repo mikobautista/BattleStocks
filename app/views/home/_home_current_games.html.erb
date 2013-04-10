@@ -15,13 +15,13 @@
           <li>3rd Place: </li>
         </ul> 
       <div class = "home_game_rank pull-right">
-        Rank: 
+        Rank:
         <%= ugame.get_rank %>/<%= ugame.game.users.count %>
         <br>
         Balance: 
         <%= number_to_currency(ugame.balance.to_f/100) %>
         <br>
-        Stock Value:
+        Stock Value: 
         <%= number_to_currency(ugame.total_value_in_stocks.to_f/100) %>
       </div>
     </div>
