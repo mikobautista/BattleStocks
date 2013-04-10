@@ -10,7 +10,7 @@
           <% @owned_stock.each do |stock| %>
             <tr>
               <% if (stock.total_qty != 0) %>
-                <td><%= link_to stock.stock_code, root_url %></td>
+                <td><%= link_to stock.stock_code, src="/search?query=#{stock.stock_code}" %></td>
                 <td><%= number_to_currency((stock.get_price).to_f/100) %></td>
               <% end %>
             </tr>
