@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   		@upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
   		@past_user_games = UserGame.past.for_user(current_user).most_recent
 
-  		@owned_stock = PurchasedStock.for_user(current_user)
+  		@owned_stock = PurchasedStock.for_user(current_user).find(:all, :select => "DISTINCT stock_code, total_qty", :group => "stock_code")
       
   	end
   end
