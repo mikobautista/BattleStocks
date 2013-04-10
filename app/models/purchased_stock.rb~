@@ -15,7 +15,11 @@ class PurchasedStock < ActiveRecord::Base
   # -----------------------------
 
   validates_format_of :stock_code, :with => /.+/, :message => "stock_code cannot be blank"
-    validates_format_of :money_earned, :money_spent, :total_qty, :value_in_stocks, :with => /^[0-9]\d*/, :message => "should only be integers only without decimals, including 0"
+  validates_format_of :money_earned, :with => /^[1-9]\d*/, :message => "money_earned should only be integers only without decimals, including 0"
+  validates_format_of :money_spent, :with => /^[0-9]\d*/, :message => "money_spent should only be integers only without decimals, including 0"
+  validates_format_of :total_qty, :with => /^[0-9]\d*/, :message => "total_ qty should only be integers only without decimals, including 0"
+  validates_format_of :value_in_stocks, :with => /^[0-9]\d*/, :message => "value_in_stocks should only be integers only without decimals, including 0"
+ 
   #/(^[0]{1}$|^[-]?[1-9]{1}\d*$)/
   validates_presence_of :money_earned
   validates_presence_of :money_spent

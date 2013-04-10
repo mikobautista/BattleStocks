@@ -21,7 +21,7 @@ class Transaction < ActiveRecord::Base
   validates_presence_of :stock_code
   
   validates_numericality_of :qty, :greater_than => 0
-  #validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
+  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
 
   # Methods
   # -----------------------------
