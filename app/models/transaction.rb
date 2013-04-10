@@ -23,7 +23,8 @@ class Transaction < ActiveRecord::Base
     @user_game = self.purchased_stock.user_game
     self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
     # invalid stock code -> no such thing as free stocks
-    if self.value_per_stock == 0
+    # can't buy/sell negative stocks
+    if self.value_per_stock == 0 or self.qty <= 0
       return false
     end
     money_involved = self.qty * self.value_per_stock
@@ -48,7 +49,6 @@ class Transaction < ActiveRecord::Base
       @user_game.save!
       return true
     else
-      #redirect_to @user_game.game, notice: 'Transaction was NOT successfully created.'
       return false
     end
   end
