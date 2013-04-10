@@ -4,7 +4,7 @@ class PurchasedStocksController < ApplicationController
   def index
     @purchased_stocks = PurchasedStock.all
     if logged_in?
-      @owned_stock = PurchasedStock.for_user(current_user).nonzero_cost_basis.paginate(:page => params[:owned_stock_page]).per_page(10)
+      @owned_stock = PurchasedStock.nonzero_cost_basis.for_user(current_user).paginate(:page => params[:owned_stock_page]).per_page(10)
     end
 
     respond_to do |format|
