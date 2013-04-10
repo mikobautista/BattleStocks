@@ -38,12 +38,10 @@
 <div class="well"> 
     <h3>Players</h3>
           <%= render :partial => 'players_list' %>
-    <% if @game.start_date > DateTime.now %>
       <% if @game.manager_id == current_user.id %>
           <button class="btn btn-success" id="user_game_button">Invite Player</button>
           <button class="btn" id="hide_button">Hide</button>
       <% end %>
-    <% end %>
 </div>
 <div class="user_game_partial">
   <%= render :partial => 'user_game_form' %>
