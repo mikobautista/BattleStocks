@@ -44,7 +44,9 @@
       <% end %>
 </div>
 <div class="user_game_partial">
-  <%= render :partial => 'user_game_form' %>
+  <% if @game.is_terminated == false %>
+    <%= render :partial => 'user_game_form' %>
+  <% end %>
 </div>
 
 <% if @game.start_date < DateTime.now %>
