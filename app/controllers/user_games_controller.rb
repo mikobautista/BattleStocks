@@ -2,7 +2,7 @@ class UserGamesController < ApplicationController
   # GET /user_games
   # GET /user_games.json
   def index
-    @user_games = UserGame.by_balance.all
+    @user_games = UserGame.by_portfolio_value.all
 
     respond_to do |format|
       format.html # index.html.erb

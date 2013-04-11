@@ -15,7 +15,7 @@ class UserGame < ActiveRecord::Base
 
   #Scopes
   # -----------------------------
-  scope :by_balance, order('balance DESC')
+  scope :by_portfolio_value, order('balance + total_value_in_stocks DESC')
   scope :for_game, lambda { |x| where("game_id = ?", x) }
   scope :for_user, lambda { |x| where("user_id = ?", x) }
   scope :current, joins(:game).where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
@@ -28,7 +28,7 @@ class UserGame < ActiveRecord::Base
   # Methods
   # -----------------------------
   def get_rank
-    hash = Hash[UserGame.for_game(self.game.id).by_balance.map.with_index.to_a]
+    hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
     return hash[self] + 1
   end
 
