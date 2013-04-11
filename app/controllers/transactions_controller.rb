@@ -68,7 +68,7 @@ class TransactionsController < ApplicationController
       end
     # not within time bounds
     else
-      redirect_to root_url
+      format.html { redirect_to @user_game.game, alert: 'Unable to perform transactions at this time.' }
     end
 
   end

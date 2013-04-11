@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # password must be present and at least 4 characters long, with a confirmation
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
-  validates_length_of :password, :minimum => 4
+  #validates_length_of :password, :minimum => 4
   
   validates_presence_of :username
   validates_uniqueness_of :username, :email

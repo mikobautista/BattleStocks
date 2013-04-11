@@ -17,6 +17,19 @@ class Transaction < ActiveRecord::Base
   # Methods
   # -----------------------------
 
+  def flush_purchased_stock_and_user_game
+    @purchase = self.purchased_stock
+    @user_game = self.purchased_stock.user_game
+    money_involved = self.qty * self.value_per_stock
+    @purchase.total_qty = 0
+    @purchase.money_earned += money_involved
+    @purchase.value_in_stocks = 0
+    @user_game.balance += money_involved
+    @user_game.total_value_in_stocks = 0
+    @purchase.save!
+    @user_game.save!
+  end
+
   def get_price_and_update_purchased_stock_and_user_game
     require 'yahoo_stock'
     @purchase = self.purchased_stock
@@ -35,6 +48,7 @@ class Transaction < ActiveRecord::Base
       @purchase.value_in_stocks += money_involved
       @user_game.balance -= money_involved
       @user_game.total_value_in_stocks += money_involved
+      self.save!
       @purchase.save!
       @user_game.save!
       return true
@@ -45,6 +59,7 @@ class Transaction < ActiveRecord::Base
       @purchase.value_in_stocks -= money_involved
       @user_game.balance += money_involved
       @user_game.total_value_in_stocks -= money_involved
+      self.save!
       @purchase.save!
       @user_game.save!
       return true

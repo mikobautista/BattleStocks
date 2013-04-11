@@ -38,7 +38,7 @@
 <div class="well"> 
     <h3>Players</h3>
           <%= render :partial => 'players_list' %>
-      <% if @game.manager_id == current_user.id %>
+      <% if @game.manager_id == current_user.id and @game.is_terminated == false %>
           <button class="btn btn-success" id="user_game_button">Invite Player</button>
           <button class="btn" id="hide_button">Hide</button>
       <% end %>
