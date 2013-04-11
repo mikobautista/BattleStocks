@@ -52,7 +52,7 @@ class Game < ActiveRecord::Base
     require 'yahoo_stock'
     for game in Game.all
       # mark all games as finished
-      if game.end_date < DateTime.now
+      if game.end_date < DateTime.now and game.winner_id.nil?
 
         game.is_terminated = true
 
@@ -63,7 +63,7 @@ class Game < ActiveRecord::Base
             transaction = Transaction.create(:purchased_stock_id => purchase.id, :date => DateTime.now,
               :qty => purchase.total_qty, :value_per_stock => value, :is_buy => false)
             transaction.save!
-            purchase.save!
+            #purchase.save!
           end
         end
 
