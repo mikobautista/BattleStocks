@@ -52,7 +52,7 @@ class Game < ActiveRecord::Base
     require 'yahoo_stock'
     for game in Game.all
       # mark all games as finished
-      if game.end_date < DateTime.now
+      if game.end_date < DateTime.now and game.is_terminated == false
 
         game.is_terminated = true
 
