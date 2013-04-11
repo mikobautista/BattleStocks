@@ -4,7 +4,7 @@ class PurchasedStocksController < ApplicationController
   def index
     @purchased_stocks = PurchasedStock.all
     if logged_in?
-      @owned_stock = PurchasedStock.for_user(current_user).paginate(:page => params[:owned_stock_page]).per_page(10)
+      @owned_stock = PurchasedStock.nonzero_cost_basis.for_user(current_user).paginate(:page => params[:owned_stock_page]).per_page(10)
     end
 
     respond_to do |format|
@@ -16,6 +16,21 @@ class PurchasedStocksController < ApplicationController
   # GET /purchased_stocks/1
   # GET /purchased_stocks/1.json
   def show
+    @purchased_stock = PurchasedStock.find(params[:id])
+    # update purchased_stock's value_in_stocks
+    current_value_in_stocks = 0 
+    if (@purchased_stock.total_qty > 0)
+      new_value = ((YahooStock::Quote.new(:stock_symbols => [@purchased_stock.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    end
+    @purchased_stock.value_in_stocks = new_value * @purchased_stock.total_qty
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @purchased_stock }
+    end
+  end
+
+  def show_stock
     @purchased_stock = PurchasedStock.find(params[:id])
     # update purchased_stock's value_in_stocks
     current_value_in_stocks = 0 

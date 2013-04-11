@@ -1,12 +1,21 @@
 class HomeController < ApplicationController
+  require 'will_paginate'
   def index
   	if logged_in?
   		@current_user_games = UserGame.current.for_user(current_user).ending_soonest.paginate(:page => params[:current_games_page]).per_page(10)
   		@upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
   		@past_user_games = UserGame.past.for_user(current_user).most_recent
 
-  		@owned_stock = PurchasedStock.for_user(current_user)
+  		@owned_stock = PurchasedStock.for_user(current_user).find(:all, :select => "DISTINCT stock_code, total_qty", :group => "stock_code")
       
   	end
+  end
+
+  def search 
+    # allows for the admin to search from their dashboard
+    @query = params[:query]
+    if @query != ""
+      @stock_value = PurchasedStock.search(@query)
+    end
   end
 end

@@ -54,14 +54,15 @@ class TransactionsController < ApplicationController
       @transaction = Transaction.new(params[:transaction])
       @transaction.purchased_stock = @purchase
       @transaction.date = DateTime.now
+      @game = @transaction.purchased_stock.user_game.game
 
       respond_to do |format|
-        if @transaction.save
+        if @transaction.save && @transaction.get_price_and_update_purchased_stock_and_user_game
           @purchase.save
           format.html { redirect_to @user_game.game, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
-          format.html { render action: "new" }
+          format.html { redirect_to @user_game.game, alert: 'Transaction was NOT successfully created.' }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
       end

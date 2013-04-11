@@ -18,6 +18,7 @@
 
 $(function () {
 
+
   $('.transaction_partial').hide();
   $('.user_game_partial').hide();
 

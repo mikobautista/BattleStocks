@@ -1,32 +1,19 @@
 <div class ="span4">
   <div class = "container-box">
-    <form>
       <h3>Research Stocks</h3>
-      <input type="text" class = "input-medium search-query">
-      <button type="submit" class="btn">Search</button>
-    </form>
+      <form class="form-search" action="/search" method="get">  
+        <input type="text" name="query" class="input-medium search-query">  
+        <button type="submit" value="Search" class="btn">Search</button>  
+      </form>  
   </div>
   <div class = "container-box">
     <h3> Stocks Quicklook</h3>
-      <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><p>Symbol</p></th>
-        <th><p>Price</p></th>
-        <th><p>Change</p></th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-        </tr>
-    </tbody>
-  </table>
     <%= render :partial => "stock_owned" %>
   </div>
 </div>
 
 <div class="span8">
 	<div class = "container-box">
-		<%= render :partial => "current_games" %>
+		<%= render :partial => "home_current_games" %>
 	</div>
 </div>

@@ -43,6 +43,7 @@ class PurchasedStock < ActiveRecord::Base
   scope :for_user_game, lambda { |x| where("user_game_id = ?", x) }
   scope :for_game, lambda { |x| joins(:user_game).where("game_id = ?", x) }
   scope :for_user, lambda { |x| joins(:user_game).where("user_id = ?", x) }
+  scope :nonzero_cost_basis, where("money_spent > ?", 0)
 
   # Methods
   # -----------------------------
@@ -53,6 +54,14 @@ class PurchasedStock < ActiveRecord::Base
   def get_price
     require 'yahoo_stock'
     return ((YahooStock::Quote.new(:stock_symbols => [self.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+  end
+
+  # searches for all stores by name
+  def self.search(search)
+    if search
+      require 'yahoo_stock'
+      return ((YahooStock::Quote.new(:stock_symbols => [search]).results(:to_array).output[0][1].to_f) * 100).to_i
+    end
   end
 
 end

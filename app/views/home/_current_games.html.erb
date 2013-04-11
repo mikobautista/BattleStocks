@@ -1,5 +1,5 @@
-<h2>Current Games 
-<%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :type => 'button', :class => 'btn btn-success' %></h2>
+<h2>Current Games </h2>
+<%= link_to raw("<i class='icon-plus'></i> New Game"), new_game_path, :type => 'button', :class => 'btn btn-mini btn-success' %>
 <% if ! @current_user_games.empty? %>
   <table class="table table-condensed table-striped">
     <thead>

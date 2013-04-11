@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
 
   # Callbacks
   # -----------------------------
-  before_create :get_price_and_update_purchased_stock_and_user_game
+  # validate :get_price_and_update_purchased_stock_and_user_game
 
   # Validations
   # -----------------------------
@@ -25,11 +25,17 @@ class Transaction < ActiveRecord::Base
 
   # Methods
   # -----------------------------
+
   def get_price_and_update_purchased_stock_and_user_game
     require 'yahoo_stock'
     @purchase = self.purchased_stock
     @user_game = self.purchased_stock.user_game
     self.value_per_stock = ((YahooStock::Quote.new(:stock_symbols => [@purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+    # invalid stock code -> no such thing as free stocks
+    # can't buy/sell negative stocks
+    if self.value_per_stock == 0 or self.qty <= 0
+      return false
+    end
     money_involved = self.qty * self.value_per_stock
     # can't buy if not enough money
     if self.is_buy and @user_game.balance >= money_involved
@@ -40,6 +46,7 @@ class Transaction < ActiveRecord::Base
       @user_game.total_value_in_stocks += money_involved
       @purchase.save!
       @user_game.save!
+      return true
     # can't sell more than you currently have
     elsif (!self.is_buy) and @purchase.total_qty >= self.qty
       @purchase.total_qty -= self.qty
@@ -49,8 +56,9 @@ class Transaction < ActiveRecord::Base
       @user_game.total_value_in_stocks -= money_involved
       @purchase.save!
       @user_game.save!
+      return true
     else
-      self.delete
+      return false
     end
   end
 end

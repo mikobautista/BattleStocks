@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  require 'will_paginate'
   # GET /games
   # GET /games.json
   def index
@@ -33,18 +34,21 @@ class GamesController < ApplicationController
     @current_user_game = UserGame.find_by_user_id_and_game_id(current_user.id, @game.id)
     @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id)
 
-    # update current_user's total_value_in_stocks
-    current_value_in_stocks = 0 
+    # update all users' total_value_in_stocks
     require 'yahoo_stock'
-    for purchase in PurchasedStock.for_user_game(@current_user_game.id)
-      if (purchase.total_qty > 0)
-        new_value = ((YahooStock::Quote.new(:stock_symbols => [purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
-        current_value_in_stocks += purchase.total_qty * new_value
-        purchase.value_in_stocks = purchase.total_qty * new_value
-        purchase.save!
+    for ugame in UserGame.for_game(@current_user_game.game_id)
+      current_value_in_stocks = 0
+      for purchase in PurchasedStock.for_user_game(ugame.id)
+        if (purchase.total_qty > 0)
+          new_value = ((YahooStock::Quote.new(:stock_symbols => [purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+          current_value_in_stocks += purchase.total_qty * new_value
+          purchase.value_in_stocks = purchase.total_qty * new_value
+          purchase.save!
+        end
+        ugame.total_value_in_stocks = current_value_in_stocks
+        ugame.save!
       end
     end
-    @current_user_game.total_value_in_stocks = current_value_in_stocks
     
     @transaction = Transaction.new
     @manager = User.find_by_id(@game.manager_id)
