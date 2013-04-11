@@ -37,6 +37,7 @@ class PurchasedStock < ActiveRecord::Base
   scope :for_game, lambda { |x| joins(:user_game).where("game_id = ?", x) }
   scope :for_user, lambda { |x| joins(:user_game).where("user_id = ?", x) }
   scope :nonzero_cost_basis, where("money_spent > ?", 0)
+  scope :nonzero, where("total_qty > ?", 0)
 
   # Methods
   # -----------------------------
