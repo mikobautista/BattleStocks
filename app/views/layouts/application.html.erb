@@ -28,9 +28,9 @@
 </div>
 
 <!-- Home Page Content -->
+<% flash.each do |name, msg| %>
 <div class="container">
   <div class="row">
-  	<% flash.each do |name, msg| %>
 			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
 				<a class="close" data-dismiss="alert">x</a>
 				<%= msg %>
