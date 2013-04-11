@@ -10,9 +10,21 @@
         </div>
       </div>
         <ul class = "home_game_competitor" >
-          <li>1st Place: </li>
-          <li>2nd Place: </li>
-          <li>3rd Place: </li>
+          <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value[0].user.username, user_path(ugame.user) %></li>
+          <li>2nd Place: 
+            <% if UserGame.for_game(ugame.game).size >= 2 %>
+              <%= link_to UserGame.for_game(ugame.game).by_portfolio_value[1].user.username, user_path(ugame.user) %>
+            <% else %>
+              N/A
+            <% end %>
+            </li>
+          <li>3rd Place:
+            <% if UserGame.for_game(ugame.game).size >= 3 %>
+                <%= link_to UserGame.for_game(ugame.game).by_portfolio_value[2].user.username, user_path(ugame.user) %>
+              <% else %>
+                N/A
+              <% end %>
+          </li>
         </ul> 
       <div class = "home_game_rank pull-right">
         Rank:

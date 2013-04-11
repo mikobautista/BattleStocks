@@ -52,19 +52,16 @@ class Game < ActiveRecord::Base
     require 'yahoo_stock'
     for game in Game.all
       # mark all games as finished
-      if game.end_date < DateTime.now and game.winner_id.nil?
+      if game.end_date < DateTime.now
 
         game.is_terminated = true
 
         # sell all stocks
-        for purchase in PurchasedStock.for_game(game.id)
-          if (purchase.total_qty > 0)
-            value = ((YahooStock::Quote.new(:stock_symbols => [purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
-            transaction = Transaction.create(:purchased_stock_id => purchase.id, :date => DateTime.now,
-              :qty => purchase.total_qty, :value_per_stock => value, :is_buy => false)
-            transaction.save!
-            #purchase.save!
-          end
+        for purchase in PurchasedStock.nonzero.for_game(game.id)
+          value = ((YahooStock::Quote.new(:stock_symbols => [purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
+          transaction = Transaction.create!(:purchased_stock_id => purchase.id, :date => DateTime.now,
+            :qty => purchase.total_qty, :value_per_stock => value, :is_buy => false)
+          transaction.flush_purchased_stock_and_user_game
         end
 
         # update winner_id
