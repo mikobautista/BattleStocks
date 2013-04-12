@@ -53,6 +53,7 @@ ul.home_game_competitor {
   list-style: none;
   display: inline-block;
   margin: 30px 4px 30px 80px;
+  color: red;
 }
 
 .home_game_rank {
@@ -62,6 +63,7 @@ ul.home_game_competitor {
 }
 
 /*General Styling*/
+
 
 .btn {
   font-family: Helvetica, Arial, Verdana;
@@ -74,8 +76,6 @@ body{
 #logo {
   float: left;
 }
-
-
 
 .container-box{
   padding: 19px;
@@ -99,6 +99,10 @@ body{
   padding-top: 17px;
   padding-right: 30px;
   font-size: 30px;
+ }
+
+ .navbar .brand:hover{
+  background-color: transparent;
  }
 
 .navbar .main_pages_links li > a {
