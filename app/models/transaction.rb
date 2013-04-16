@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  attr_accessible :date, :is_buy, :purchased_stock_id, :qty, :value_per_stock, :stock_code, :game_id
+  attr_accessible :date, :is_buy, :purchased_stock_id, :qty, :value_per_stock
   attr_accessor :stock_code, :game_id
 
   # Relationships
@@ -15,13 +15,13 @@ class Transaction < ActiveRecord::Base
   validates_presence_of :date
   validates_presence_of :is_buy
   validates_presence_of :purchased_stock_id
-  validates_presence_of :game_id
   validates_presence_of :qty
   validates_presence_of :value_per_stock
-  validates_presence_of :stock_code
   
   validates_numericality_of :qty, :greater_than => 0
-  #validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
+  validates_numericality_of :value_per_stock, :greater_than => 0  
+  validates_date :date
+  validates :is_buy, :inclusion => {:in => [true, false]}
 
   # Methods
   # -----------------------------

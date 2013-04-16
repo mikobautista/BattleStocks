@@ -11,7 +11,14 @@ class UserGame < ActiveRecord::Base
   # -----------------------------
   validates_presence_of :game_id
   validates_presence_of :user_id
+  validates_presence_of :balance
+  validates_presence_of :is_active
+  validates_presence_of :points
+  validates_presence_of :total_value_in_stocks
 
+  validates_numericality_of :balance, :greater_than_or_equal_to => 0
+  validates_numericality_of :total_value_in_stocks, :greater_than => 0  
+  validates :is_active, :inclusion => {:in => [true, false]}
 
   #Scopes
   # -----------------------------

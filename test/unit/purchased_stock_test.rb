@@ -66,7 +66,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
         :stock_code => "goog", :total_qty => 40, :money_spent => 5000, :money_earned => 0,
         :value_in_stocks => 80)
-       @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_in_stocks => 45000, :is_buy => true)
+       @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
      end
 
      # and provide a teardown method as well

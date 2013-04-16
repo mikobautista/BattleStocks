@@ -19,15 +19,7 @@ class PurchasedStock < ActiveRecord::Base
   validates_numericality_of :money_spent, :greater_than_or_equal_to => 0
   validates_numericality_of :total_qty, :greater_than_or_equal_to => 0
   validates_numericality_of :value_in_stocks, :greater_than_or_equal_to => 0
- 
- #number to currency in rails 
 
-  #validates_format_of :money_earned, :with => /^[1-9]\d*/, :message => "money_earned should only be integers only without decimals, including 0"
-  #validates_format_of :money_spent, :with => /^[0-9]\d*/, :message => "money_spent should only be integers only without decimals, including 0"
-  #validates_format_of :total_qty, :with => /^[0-9]\d*/, :message => "total_ qty should only be integers only without decimals, including 0"
-  #validates_format_of :value_in_stocks, :with => /^[0-9]\d*/, :message => "value_in_stocks should only be integers only without decimals, including 0"
- 
-  #/(^[0]{1}$|^[-]?[1-9]{1}\d*$)/
   validates_presence_of :money_earned
   validates_presence_of :money_spent
   validates_presence_of :stock_code

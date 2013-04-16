@@ -85,7 +85,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        assert_equal "test@gmail.com", @alex.email
        assert_equal "testuser1", @alex.username
        assert_equal "test gameeee", @game1.name
-       assert_equal "goog", @goog.stock_code
+       assert_equal "GOOG", @goog.stock_code
        assert_equal 40, @transaction1.qty
      end
  
