@@ -20,11 +20,11 @@
 			<% end %>
 		</div>
 	</div>
-	<div class ="span6">
-		<div class = "container-box">
-			<% if logged_in? %>
+	<% if logged_in? %>
 				<% if @query != "" %>
 					<% if @stock_value != 0 %>
+						<div class ="span6">
+						<div class = "container-box">
 						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
 					<% end %>
 				<% end %>
