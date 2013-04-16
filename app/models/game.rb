@@ -52,10 +52,8 @@ class Game < ActiveRecord::Base
     require 'yahoo_stock'
     for game in Game.all
       # mark all games as finished
-      if game.end_date < DateTime.now and game.is_terminated == false
-
-        game.is_terminated = true
-
+      if game.end_date < DateTime.now and game.winner_id.nil?
+        
         # sell all stocks
         for purchase in PurchasedStock.nonzero.for_game(game.id)
           value = ((YahooStock::Quote.new(:stock_symbols => [purchase.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
