@@ -22,6 +22,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
 
   # money_earned
   # -----------------------------
+  should validate_numericality_of :money_earned
   should allow_value(1000000).for(:money_earned)
   should allow_value(0).for(:money_earned)
   should_not allow_value("asdfasdf").for(:money_earned)
@@ -29,6 +30,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
 
   # money_spent
   # -----------------------------
+  should validate_numericality_of :money_spent
   should allow_value(1000000).for(:money_spent)
   should allow_value(0).for(:money_spent)
   should_not allow_value("asdfasdf").for(:money_spent)
@@ -36,6 +38,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
 
   # total_qty
   # -----------------------------
+  should validate_numericality_of :total_qty
   should allow_value(1000000).for(:total_qty)
   should allow_value(0).for(:total_qty)
   should_not allow_value("asdfasdf").for(:total_qty)
@@ -43,6 +46,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
 
   # value_in_stocks
   # -----------------------------
+  should validate_numericality_of :value_in_stocks
   should allow_value(1000000).for(:value_in_stocks)
   should allow_value(0).for(:value_in_stocks)
   should_not allow_value("asdfasdf").for(:value_in_stocks)
@@ -59,10 +63,10 @@ class PurchasedStockTest < ActiveSupport::TestCase
        @game1 = FactoryGirl.create(:game, :manager_id => @alex.id, :name => "test gameeee", :start_date => Time.now.to_date, 
        :end_date => 10.days.from_now.to_date, :budget => 10)
        @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex.id, :game_id => @game1.id)
-       @goog = FactoryGirl.create(:purchased_stock, :user_game => @usergame1.id, 
+       @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
         :stock_code => "goog", :total_qty => 40, :money_spent => 5000, :money_earned => 0,
         :value_in_stocks => 80)
-       @transaction1 = FactoryGirl.create(:transaction, :purchased_stock => @goog.id, :date => Time.now.to_date, :qty => 40, :value_in_stocks => 45000, :is_buy => true)
+       @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_in_stocks => 45000, :is_buy => true)
      end
 
      # and provide a teardown method as well
@@ -77,13 +81,13 @@ class PurchasedStockTest < ActiveSupport::TestCase
 
      # now run the tests:
      # test one of each factory (not really required, but not a bad idea)
-     #should "show that all factories are properly created" do
-       #assert_equal "test@gmail.com", @alex.email
-       #assert_equal "testuser1", @alex.username
-       #assert_equal "test gameeee", @game1.name
-       #assert_equal "goog", @goog.stock_code
-       #assert_equal 40, @transaction1.qty
-     #end
+     should "show that all factories are properly created" do
+       assert_equal "test@gmail.com", @alex.email
+       assert_equal "testuser1", @alex.username
+       assert_equal "test gameeee", @game1.name
+       assert_equal "GOOG", @goog.stock_code
+       assert_equal 40, @transaction1.qty
+     end
  
 
   # now run tests:

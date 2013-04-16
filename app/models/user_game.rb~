@@ -16,9 +16,10 @@ class UserGame < ActiveRecord::Base
   validates_presence_of :points
   validates_presence_of :total_value_in_stocks
 
-  validates_numericality_of :balance, :greater_than_or_equal_to => 0
-  validates_numericality_of :total_value_in_stocks, :greater_than => 0  
-  validates :is_active, :inclusion => {:in => [true, false]}
+  validates_numericality_of :qty, :greater_than => 0
+  validates_numericality_of :value_per_stock, :greater_than => 0  
+  validates_date :date
+  validates :is_buy, :inclusion => {:in => [true, false]}
 
   #Scopes
   # -----------------------------
