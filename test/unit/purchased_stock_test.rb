@@ -52,19 +52,18 @@ class PurchasedStockTest < ActiveSupport::TestCase
   should_not allow_value("asdfasdf").for(:value_in_stocks)
   should_not allow_value(-10000).for(:value_in_stocks)
 
-
-
-
-
    context "Creating one game" do
      # create the objects I want with factories
      setup do 
        @alex = FactoryGirl.create(:user, :email => "test@gmail.com", :username => "testuser1")
-       @game1 = FactoryGirl.create(:game, :manager_id => @alex.id, :name => "test gameeee", :start_date => Time.now.to_date, 
+       @game1 = FactoryGirl.create(:game, :name => "test gameeee", :start_date => Time.now.to_date, 
        :end_date => 10.days.from_now.to_date, :budget => 10)
-       @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex.id, :game_id => @game1.id)
+       @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex.id, :game_id => @game1.id, :balance => 2000, :is_active => true, :points => 200, :total_value_in_stocks => 3000)
        @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
         :stock_code => "goog", :total_qty => 40, :money_spent => 5000, :money_earned => 0,
+        :value_in_stocks => 80)
+       @appl = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
+        :stock_code => "appl", :total_qty => 0, :money_spent => 0, :money_earned => 0,
         :value_in_stocks => 80)
        @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
      end
@@ -75,6 +74,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        @usergame1.destroy
        @game1.destroy
        @goog.destroy
+       @appl.destroy
        @transaction1.destroy
      end
 
@@ -85,28 +85,50 @@ class PurchasedStockTest < ActiveSupport::TestCase
        assert_equal "test@gmail.com", @alex.email
        assert_equal "testuser1", @alex.username
        assert_equal "test gameeee", @game1.name
+       assert_equal @alex.id, @usergame1.user_id
        assert_equal "GOOG", @goog.stock_code
+       assert_equal "APPL", @appl.stock_code
        assert_equal 40, @transaction1.qty
      end
  
 
-  # now run tests:
-  # test the scope 'for_user_game'
-  #should "show all user_games for user" do
-       #assert_equal @usergame1, UserGame.for_purchased_stock(@goog)
-       #assert_equal 1, UserGame.for_purchased_stock(@goog).size
-  #end
+   # now run tests:
+   # test the scope 'for_user_game'
+   should "show all purchased_stocks for a particular user_game" do
+        assert_equal @goog, PurchasedStock.for_user_game(@usergame1).first
+        assert_equal @appl, PurchasedStock.for_user_game(@usergame1).second
+        assert_equal 2, PurchasedStock.for_user_game(@usergame1).size
+   end
 
- # test the scope 'for_user'
-    #should "show all games for user_game" do
-      # assert_equal @game1, Game.for_user_game(@usergame1)
-       #assert_equal 1, Game.for_user_game(@usergame1).size
-     #end
+   # test the scope 'for_game'
+   should "show all purchased stocks for a particular game" do
+        assert_equal @goog, PurchasedStock.for_game(@game1).first
+        assert_equal @appl, PurchasedStock.for_game(@game1).second
+        assert_equal 2, PurchasedStock.for_game(@game1).size
+   end
 
- # test the scope 'for_game'
-     #should "show all games for user" do
-       #assert_equal @game1, Game.for_user(@alex)
-       #assert_equal 1, Game.for_user(@alexh).size
-     #end
+   # test the scope 'for_user'
+   should "show all purchased stocks for a particular user" do
+        assert_equal @goog, PurchasedStock.for_user(@alex).first
+        assert_equal @appl, PurchasedStock.for_user(@alex).second
+        assert_equal 2, PurchasedStock.for_user(@alex).size
+   end
+
+   # test the scope 'nonzero_cost_basis'
+   should "show all the purchased stocks that have money spent > 0" do
+        assert_equal @goog.id, PurchasedStock.nonzero_cost_basis.map{|ps| ps.id}.third
+   end
+
+   # test the scope 'nonzero'
+   should "show all the purchased_stocks that have total_quantity > 0" do
+        assert_equal @goog.id, PurchasedStock.nonzero.map{|ps| ps.id}.third
+   end
+
+   # test the method stock_code_upper
+   should "show the upper case stock codes" do
+        assert_equal "GOOG", @goog.stock_code
+        assert_equal "APPL", @appl.stock_code
+   end
+ 
   end
 end

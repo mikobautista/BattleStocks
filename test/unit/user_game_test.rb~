@@ -149,5 +149,7 @@ class UserGameTest < ActiveSupport::TestCase
   should "show the most recent user_games for a particular game" do 
        assert_equal [@game1.id, @game3.id, @game2.id], UserGame.most_recent.map{|ug| ug.game_id}
   end 
+
+  # test the method 'get_rank'
  end
 end

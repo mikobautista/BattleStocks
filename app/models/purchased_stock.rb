@@ -27,9 +27,6 @@ class PurchasedStock < ActiveRecord::Base
   validates_presence_of :user_game_id
   validates_presence_of :value_in_stocks
 
- #validates_format_of :stock_code, :with => /(?-i)(?<=\s|^)[A-Z]{1,4}(\.[A-#Z]{1,2})?(?=\s|$)/, :message => "invalid stock code"
-
-
   # Scope
   # -----------------------------
   scope :for_user_game, lambda { |x| where("user_game_id = ?", x) }
@@ -49,7 +46,7 @@ class PurchasedStock < ActiveRecord::Base
     return ((YahooStock::Quote.new(:stock_symbols => [self.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i
   end
 
-  # searches for all stores by name
+  # searches for all stocks by name
   def self.search(search)
     if search
       require 'yahoo_stock'
