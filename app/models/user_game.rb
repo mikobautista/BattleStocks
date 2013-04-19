@@ -12,19 +12,20 @@ class UserGame < ActiveRecord::Base
   validates_presence_of :game_id
   validates_presence_of :user_id
   validates_presence_of :balance
-  validates_presence_of :is_active
+  #validates_presence_of :is_active
   validates_presence_of :points
   validates_presence_of :total_value_in_stocks
 
   validates_numericality_of :balance, :greater_than_or_equal_to => 0
-  validates_numericality_of :total_value_in_stocks, :greater_than => 0  
+  validates_numericality_of :total_value_in_stocks, :greater_than_or_equal_to => 0 
+  validates_numericality_of :points, :greater_than_or_equal_to => 0
   validates :is_active, :inclusion => {:in => [true, false]}
 
   #Scopes
   # -----------------------------
   scope :by_portfolio_value, order('balance + total_value_in_stocks DESC')
-  scope :for_game, lambda { |x| where("game_id = ?", x) }
-  scope :for_user, lambda { |x| where("user_id = ?", x) }
+  scope :for_game, lambda { |game_id| where("game_id = ?", game_id) }
+  scope :for_user, lambda { |user_id| where("user_id = ?", user_id) }
   scope :current, joins(:game).where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
   scope :upcoming, joins(:game).where('start_date > ?', Time.now).where('is_terminated = ?', false)
   scope :past, joins(:game).where('end_date <= ?', Time.now)
