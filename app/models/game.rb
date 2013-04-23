@@ -11,8 +11,8 @@ class Game < ActiveRecord::Base
   # -----------------------------
   validates_numericality_of :budget, :greater_than => 0
   validates_format_of :name, :with => /.+/, :message => "name cannot be blank"
-  validates_date :start_date, :on_or_after => lambda { Date.current }, :message => "start date must start tomorrow onwards"
-  validates_date :end_date, :on_or_after => :start_date, :message => "end date must be on or after start date"
+  validates_date :start_date, :on_or_after => lambda { Date.current }, :message => "start date must start tomorrow onwards", :before => :create
+  validates_date :end_date, :on_or_after => :start_date, :message => "end date must be on or after start date", :before => :create
   validates_presence_of :budget
   validates_presence_of :end_date
   validates_presence_of :start_date
