@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   		@upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
   		@past_user_games = UserGame.past.for_user(current_user).most_recent
 
-  		@owned_stock = PurchasedStock.for_user(current_user).nonzero
+  		@owned_stock = PurchasedStock.for_user(current_user).nonzero.paginate(:page => params[:owned_stock_page]).per_page(6)
       @owned_stock_array = []
       for stock in @owned_stock
         @owned_stock_array += [[stock.stock_code, stock.get_price]]
