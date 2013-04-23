@@ -89,7 +89,9 @@ body{
   padding-top: 20px;
 }
 
-
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+  border-width: 0 0 4px;
+}
 .navbar .brand{
   font-size: 30px;
 }
