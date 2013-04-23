@@ -9,7 +9,9 @@
 							<dt><strong>Stock Name:</strong></dt>
 							<dd><%= @query.upcase %></dd>
 							<dt><strong>Current Value:</strong></dt>
-					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>	
+					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
+					    	<dt><strong>Test:</strong></dt>
+					    	<dd><%= @stock_info.meta_description %></dd>	
 					  	</dl>
 					<% else %>
 						<h3><%= @query.upcase %> stock code is invalid.</h3>
@@ -23,9 +25,10 @@
 	<% if logged_in? %>
 				<% if @query != "" %>
 					<% if @stock_value != 0 %>
-						<div class ="span6">
+						<div class ="span12">
 						<div class = "container-box">
 						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
+						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=my&q=l&l=on&z=l&a=v&p=s&lang=en-US&region=US")%></center>
 					<% end %>
 				<% end %>
 			<% end %>
