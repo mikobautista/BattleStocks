@@ -10,8 +10,8 @@
 							<dd><%= @query.upcase %></dd>
 							<dt><strong>Current Value:</strong></dt>
 					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
-					    	<dt><strong>Test:</strong></dt>
-					    	<dd><%= @stock_info.meta_description %></dd>	
+					    	<dt><strong>Price Change:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></dd>
 					  	</dl>
 					<% else %>
 						<h3><%= @query.upcase %> stock code is invalid.</h3>
