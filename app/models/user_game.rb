@@ -31,6 +31,7 @@ class UserGame < ActiveRecord::Base
   scope :ending_soonest, joins(:game).order('end_date, start_date')
   scope :starting_soonest, joins(:game).order('start_date, end_date')
   scope :most_recent, joins(:game).order('end_date DESC, start_date DESC')
+  scope :alphabetical, joins(:user).order('username DESC')
 
   # Methods
   # -----------------------------
