@@ -19,6 +19,8 @@ class HomeController < ApplicationController
     @query = params[:query]
     if @query != ""
       @stock_value = PurchasedStock.search(@query)
+      @stock_info = MetaInspector.new("http://www.reuters.com/finance/stocks/overview?symbol=#{@query.upcase}")
+      @stock_description = MetaInspector.new("http://www.reuters.com/finance/stocks/companyProfile?symbol=#{@query.upcase}")
     end
   end
 end

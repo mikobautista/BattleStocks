@@ -1,34 +1,70 @@
 <div class="row">
-	<div class ="span4">
-		<div class = "container-box">
-			<% if logged_in? %>
-				<% if @query != "" %>
-					<% if @stock_value != 0 %>
-						<h2><%= @query.upcase %></h2>
-						<dl class="dl-horizontal">
-							<dt><strong>Stock Name:</strong></dt>
-							<dd><%= @query.upcase %></dd>
-							<dt><strong>Current Value:</strong></dt>
-					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>	
-					  	</dl>
-					<% else %>
-						<h3><%= @query.upcase %> stock code is invalid.</h3>
-					<% end %>
+	<div class ="span12">
+		<% if logged_in? %>
+			<% if @query != "" %>
+				<% if @stock_value != 0 %>
+					<h3><%= @query.upcase %> (<%=@stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %> )</h3>
+					<dl class="stocks">
+						<dt class="stocks"><strong>Current Value:</strong></br>
+				    	<h3><%= number_to_currency(@stock_value.to_f/100) %></h3></dt>
+				    	
+				    	<dt class="stocks"><strong>Price Change:</strong></br>
+				    	<% if (@stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text).include?('-') %>
+				    		<h3><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></h3></dt>
+				    	<% else %>
+				    		<h3><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></h3></dt>
+				    	<% end %>
+
+				    	<dt class="stocks"><strong>Prev Close:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Prev Close')]/following-sibling::*[2]").text %></strong></br></br>
+				    	<strong>Open:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Open')]/following-sibling::*[2]").text %></strong></dt>
+
+				    	<dt class="stocks"><strong>Day's High:</strong></br>
+				    	<strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailHigh')]").text %></font></strong></br></br>
+				    	<strong>Day's Low:</strong></br>
+				    	<strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailLow')]").text %></font></strong></dt>
+
+				    	<dt class="stocks"><strong>Volume:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></strong></br></br>
+				    	<strong>Avg. Volume:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></strong></dt>
+
+				    	<dt class="stocks"><strong>52-Week High:</strong></br>
+				    	<strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></font></strong></br></br>
+				    	<strong>52-Week Low:</strong></br>
+				    	<strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></font></strong></dt>
+				    	<!-- <dd><%= @stock_description.parsed_document %></dd> -->		    
+				  	</dl>
 				<% else %>
-					<h3>Please enter a stock code to search.</h3>
+					<h3><%= @query.upcase %> stock code is invalid.</h3>
 				<% end %>
+			<% else %>
+				<h3>Please enter a stock code to search.</h3>
 			<% end %>
-		</div>
+		<% end %>
 	</div>
 	<% if logged_in? %>
-				<% if @query != "" %>
-					<% if @stock_value != 0 %>
-						<div class ="span6">
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+					<div class ="span6">
 						<div class = "container-box">
-						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
-					<% end %>
-				<% end %>
+							<h4>About <%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>:</h4>
+				    		<%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %>
+				    	</div>
+				    </div>
 			<% end %>
-		</div>
-	</div>
+		<% end %>
+	<% end %>
+	<% if logged_in? %>
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<div class ="span6">
+					<div class = "container-box">
+						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
 </div>

@@ -56,5 +56,4 @@ class PurchasedStock < ActiveRecord::Base
       return ((YahooStock::Quote.new(:stock_symbols => [search]).results(:to_array).output[0][1].to_f) * 100).to_i
     end
   end
-
 end
