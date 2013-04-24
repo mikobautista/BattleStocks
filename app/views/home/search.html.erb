@@ -12,6 +12,23 @@
 					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
 					    	<dt><strong>Price Change:</strong></dt>
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></dd>
+					    	<dt><strong>Prev Close:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Prev Close')]/following-sibling::*[2]").text %></dd>
+					    	<dt><strong>Open:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Open')]/following-sibling::*[2]").text %></dd>
+					    	<dt><strong>Day's High:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailHigh')]").text %></dd>
+					    	<dt><strong>Day's Low:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailLow')]").text %></dd>
+					    	<dt><strong>Volume:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></dd>
+					    	<dt><strong>Avg. Volume:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></dd>
+					    	<dt><strong>52 Week High:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></dd>
+					    	<dt><strong>52 Week Low:</strong></dt>
+					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></dd>
+					    	<dd><%= @stock_info.parsed_document %></dd>
 					  	</dl>
 					<% else %>
 						<h3><%= @query.upcase %> stock code is invalid.</h3>
