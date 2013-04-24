@@ -27,8 +27,6 @@
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></dd>
 					    	<dt><strong>52-Week Low:</strong></dt>
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></dd>
-					    	<dt><strong>About:</strong></dt>
-					    	<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
 					    	<!-- <dd><%= @stock_description.parsed_document %></dd> -->
 					  	</dl>
 					<% else %>
@@ -41,15 +39,37 @@
 		</div>
 	</div>
 	<% if logged_in? %>
-				<% if @query != "" %>
-					<% if @stock_value != 0 %>
-						<div class ="span12">
-						<div class = "container-box">
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<div class ="span6">
+					<div class = "container-box">
 						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
-						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=my&q=l&l=on&z=l&a=v&p=s&lang=en-US&region=US")%></center>
-					<% end %>
-				<% end %>
+					</div>
+				</div>
 			<% end %>
-		</div>
-	</div>
+		<% end %>
+	<% end %>
+	<% if logged_in? %>
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<div class ="span12">
+					<div class = "container-box">
+						<dt><strong>About:</strong></dt>
+			    		<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
+			    	</div>
+			    </div>
+			<% end %>
+		<% end %>
+	<% end %>
+	<% if logged_in? %>
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<div class ="span12">
+					<div class = "container-box">
+						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=my&q=l&l=on&z=l&a=v&p=s&lang=en-US&region=US")%></center>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
 </div>
