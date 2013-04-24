@@ -52,12 +52,8 @@ module BattleStocks
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
-
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
-    # Precompile additional assets
-    config.assets.precompile += %w( .svg .eot .woff .ttf )
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
