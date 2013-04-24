@@ -4,8 +4,7 @@
 			<% if logged_in? %>
 				<% if @query != "" %>
 					<% if @stock_value != 0 %>
-						<h2><%= @query.upcase %></h2>
-						<h4><%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text %></h4>
+						<h2><%= @query.upcase %> (<%=@stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>)</h2>
 						<dl class="dl-horizontal">
 							<dt><strong>Current Value:</strong></dt>
 					    	<dd><strong><%= number_to_currency(@stock_value.to_f/100) %></strong></dd>
@@ -58,7 +57,7 @@
 			<% if @stock_value != 0 %>
 				<div class ="span12">
 					<div class = "container-box">
-						<dt><strong>About:</strong></dt>
+						<h3>About <%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>:</h3>
 			    		<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
 			    	</div>
 			    </div>
