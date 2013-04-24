@@ -64,3 +64,15 @@ div {
     list-style: square;
   }
 }
+
+ dl { float:left; 
+  width:100%;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0px 6px 11px #D0D0D0;
+  border: 1px solid #dcdcdc;}
+ dt,
+ dd { float:left; width: 150px; margin:0; padding:0;}
+ dt { padding-right:0.5em;}
+
