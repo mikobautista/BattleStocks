@@ -90,7 +90,7 @@ body{
 }
 
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
-  border-width: 0 0 4px;
+  border-width: 0 0 0px;
 }
 .navbar .brand{
   font-size: 30px;
@@ -116,6 +116,8 @@ body{
 .navbar .main_pages_links li > a:hover {
 
 background-color: white;
+border-bottom: 2px;
+border-color: red;
 color: black;
 }
 
