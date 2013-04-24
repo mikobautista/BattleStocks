@@ -35,7 +35,7 @@ class Game < ActiveRecord::Base
   scope :most_recent, order('end_date DESC, start_date DESC')
 
   # Methods
-# -----------------------------
+  # -----------------------------
   def dollars_to_cents
   	self.budget *= 100
   end
