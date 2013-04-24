@@ -1,10 +1,10 @@
 <div class="row">
-	<div class ="span4">
+	<div class ="span6">
 		<div class = "container-box">
 			<% if logged_in? %>
 				<% if @query != "" %>
 					<% if @stock_value != 0 %>
-						<h2><%= @query.upcase %> (<%=@stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>)</h2>
+						<h3><%= @query.upcase %> (<%=@stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %> )</h3>
 						<dl class="dl-horizontal">
 							<dt><strong>Current Value:</strong></dt>
 					    	<dd><strong><%= number_to_currency(@stock_value.to_f/100) %></strong></dd>
@@ -55,23 +55,12 @@
 	<% if logged_in? %>
 		<% if @query != "" %>
 			<% if @stock_value != 0 %>
-				<div class ="span12">
-					<div class = "container-box">
-						<h3>About <%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>:</h3>
-			    		<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
-			    	</div>
-			    </div>
-			<% end %>
-		<% end %>
-	<% end %>
-	<% if logged_in? %>
-		<% if @query != "" %>
-			<% if @stock_value != 0 %>
-				<div class ="span12">
-					<div class = "container-box">
-						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=my&q=l&l=on&z=l&a=v&p=s&lang=en-US&region=US")%></center>
-					</div>
-				</div>
+					<div class ="span12">
+						<div class = "container-box">
+							<h4>About <%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>:</h4>
+				    		<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
+				    	</div>
+				    </div>
 			<% end %>
 		<% end %>
 	<% end %>
