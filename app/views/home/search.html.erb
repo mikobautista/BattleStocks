@@ -8,25 +8,29 @@
 						<h4><%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text %></h4>
 						<dl class="dl-horizontal">
 							<dt><strong>Current Value:</strong></dt>
-					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
+					    	<dd><strong><%= number_to_currency(@stock_value.to_f/100) %></strong></dd>
 					    	<dt><strong>Price Change:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></dd>
+					    	<% if (@stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text).include?('-') %>
+					    		<dd><strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></strong></dd>
+					    	<% else %>
+					    		<dd><strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></strong></dd>
+					    	<% end %>
 					    	<dt><strong>Prev Close:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Prev Close')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Prev Close')]/following-sibling::*[2]").text %></strong></dd>
 					    	<dt><strong>Open:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Open')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Open')]/following-sibling::*[2]").text %></strong></dd>
 					    	<dt><strong>Day's High:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailHigh')]").text %></dd>
+					    	<dd><strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailHigh')]").text %></font></strong></dd>
 					    	<dt><strong>Day's Low:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailLow')]").text %></dd>
+					    	<dd><strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailLow')]").text %></font></strong></dd>
 					    	<dt><strong>Volume:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></strong></dd>
 					    	<dt><strong>Avg. Volume:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></strong></dd>
 					    	<dt><strong>52-Week High:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></font></strong></dd>
 					    	<dt><strong>52-Week Low:</strong></dt>
-					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></dd>
+					    	<dd><strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></font></strong></dd>
 					    	<!-- <dd><%= @stock_description.parsed_document %></dd> -->
 					  	</dl>
 					<% else %>
