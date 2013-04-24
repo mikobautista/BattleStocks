@@ -34,10 +34,30 @@ class UserGame < ActiveRecord::Base
 
   # Methods
   # -----------------------------
+  
+  # def get_rank
+    # hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
+    # return hash[self] + 1
+  # end
+  
+  # ------ NEW PORTION BELOW, REPLACING ABOVE METHOD ------ #
   def get_rank
     hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
-    return hash[self] + 1
+    if hash[self] == 0
+      return 1
+    else
+      x = hash[self]
+      while x > 0 && hash.key(x).get_portfolio == hash.key(x-1).get_portfolio
+          x -= 1
+      end
+      return x + 1
+    end
   end
+  
+  def get_portfolio
+    return self.total_value_in_stocks + self.balance
+  end
+  # ------ ENDS HERE ------- #
 
   def get_ROI
     require 'yahoo_stock'
