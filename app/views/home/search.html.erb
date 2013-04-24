@@ -5,9 +5,8 @@
 				<% if @query != "" %>
 					<% if @stock_value != 0 %>
 						<h2><%= @query.upcase %></h2>
+						<h4><%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text %></h4>
 						<dl class="dl-horizontal">
-							<dt><strong>Stock Name:</strong></dt>
-							<dd><%= @query.upcase %></dd>
 							<dt><strong>Current Value:</strong></dt>
 					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>
 					    	<dt><strong>Price Change:</strong></dt>
@@ -24,11 +23,13 @@
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></dd>
 					    	<dt><strong>Avg. Volume:</strong></dt>
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></dd>
-					    	<dt><strong>52 Week High:</strong></dt>
+					    	<dt><strong>52-Week High:</strong></dt>
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></dd>
-					    	<dt><strong>52 Week Low:</strong></dt>
+					    	<dt><strong>52-Week Low:</strong></dt>
 					    	<dd><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></dd>
-					    	<dd><%= @stock_info.parsed_document %></dd>
+					    	<dt><strong>About:</strong></dt>
+					    	<dd><%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %></dd>
+					    	<!-- <dd><%= @stock_description.parsed_document %></dd> -->
 					  	</dl>
 					<% else %>
 						<h3><%= @query.upcase %> stock code is invalid.</h3>
