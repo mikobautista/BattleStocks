@@ -17,6 +17,10 @@
 
  /*Home Current Games Partial Styling*/
 
+.home_body{
+  text-align: center;
+  display: inline-block;
+}
 
 .home_game_header {
   padding: 15px;
@@ -52,18 +56,21 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E0E0E0 100%);
 ul.home_game_competitor {
   list-style: none;
   display: inline-block;
-  margin: 30px 4px 30px 80px;
+  margin: 30px 65px 30px 100px;
   color: black;
+  vertical-align: top;
+  text-align: left;
 }
 
 .home_game_rank {
+  display: inline-block;
   padding-right: 100px;
   margin: 30px 4px 30px 4px;
+  text-align: left;
   font-family: Helvetica, Arial, Verdana;
 }
 
 /*General Styling*/
-
 
 .btn {
   font-family: Helvetica, Arial, Verdana;
@@ -116,8 +123,6 @@ body{
 .navbar .main_pages_links li > a:hover {
 
 background-color: white;
-border-bottom: 2px;
-border-color: red;
 color: black;
 }
 
