@@ -22,7 +22,7 @@
           <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[0].user.id) %><strong> (You)</strong><% end %>
           <% if UserGame.for_game(ugame.game).size >= 2 %>
             <li>
-              <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio %>
+              <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio %>
                 1st Place: 
               <% else %>
                 2nd Place:
@@ -32,9 +32,9 @@
           <% end %>
           <% if UserGame.for_game(ugame.game).size >= 3 %>
             <li>
-              <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].get_portfolio %>
+              <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].get_portfolio %>
                 1st Place: 
-              <% elsif UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio%>
+              <% elsif UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].get_portfolio%>
                 2nd Place:
               <% else %>
                 3rd Place:
