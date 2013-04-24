@@ -19,8 +19,8 @@ stocks_logo.png: stocks_logo-d9bf4d5aba17d9cf80e1e32fe0688f0c.png
 stocks_logo/index.png: stocks_logo-d9bf4d5aba17d9cf80e1e32fe0688f0c.png
 application.js: application-b6a7cb02759a46463fca303694ee1398.js
 application/index.js: application-b6a7cb02759a46463fca303694ee1398.js
-application.css: application-e935cffa197f67540e4162bfb07f350c.css
-application/index.css: application-e935cffa197f67540e4162bfb07f350c.css
+application.css: application-c26b336dcc525d1d9202b8ee286d2f0b.css
+application/index.css: application-c26b336dcc525d1d9202b8ee286d2f0b.css
 jquery.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
 jquery/index.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
 fontawesome-webfont.eot: fontawesome-webfont-635909f146e208b3509acdf3b154bf0d.eot

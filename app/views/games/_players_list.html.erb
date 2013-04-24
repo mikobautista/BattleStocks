@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% UserGame.for_game(@game.id).by_portfolio_value.each do |ugame| %>
+      <% UserGame.for_game(@game.id).by_portfolio_value.alphabetical.each do |ugame| %>
           <tr>
             <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
             <td><%= link_to ugame.user.username, user_path(ugame.user) %></td>
