@@ -2,6 +2,9 @@ class GamesController < ApplicationController
   require 'will_paginate'
   # GET /games
   # GET /games.json
+  
+  authorize_resource
+  
   def index
     @games = Game.for_user(current_user)
 
@@ -131,6 +134,16 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to games_url }
       format.json { head :no_content }
+    end
+  end
+  before_filter :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to log_in_url # halts request cycle
     end
   end
 end

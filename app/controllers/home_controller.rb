@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  
   require 'will_paginate'
   def index
   	if logged_in?

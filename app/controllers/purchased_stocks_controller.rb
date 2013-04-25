@@ -1,6 +1,9 @@
 class PurchasedStocksController < ApplicationController
   # GET /purchased_stocks
   # GET /purchased_stocks.json
+  
+  authorize_resource
+  
   def index
     @purchased_stocks = PurchasedStock.all
     if logged_in?
@@ -102,6 +105,17 @@ class PurchasedStocksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to purchased_stocks_url }
       format.json { head :no_content }
+    end
+  end
+  
+  before_filter :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to log_in_url # halts request cycle
     end
   end
 end

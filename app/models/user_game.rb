@@ -18,12 +18,25 @@ class UserGame < ActiveRecord::Base
   scope :ending_soonest, joins(:game).order('end_date, start_date')
   scope :starting_soonest, joins(:game).order('start_date, end_date')
   scope :most_recent, joins(:game).order('end_date DESC, start_date DESC')
+  scope :by_portfolio_value, order('balance + total_value_in_stocks DESC')
 
   # Methods
   # -----------------------------
   def get_rank
-    hash = Hash[UserGame.for_game(self.game.id).by_balance.map.with_index.to_a]
-    return hash[self] + 1
+    hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
+    if hash[self] == 0
+      return 1
+    else
+      x = hash[self]
+      while x > 0 && hash.key(x).get_portfolio == hash.key(x-1).get_portfolio
+          x -= 1
+      end
+      return (x+1)
+    end
+  end
+  
+  def get_portfolio
+    return self.total_value_in_stocks + self.balance
   end
 
   def get_ROI
@@ -52,5 +65,4 @@ class UserGame < ActiveRecord::Base
     end
     return (self.total_value_in_stocks-(total_value * 100))/(total_value * 100)
   end
-  
 end

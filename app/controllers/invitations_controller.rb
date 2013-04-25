@@ -1,6 +1,9 @@
 class InvitationsController < ApplicationController
   # GET /invitations
   # GET /invitations.json
+  
+  authorize_resource
+  
   def index
     @invitations = Invitation.all
 
@@ -80,4 +83,16 @@ class InvitationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  before_filter :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to log_in_url # halts request cycle
+    end
+  end
+  
 end
