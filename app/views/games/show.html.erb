@@ -15,43 +15,41 @@
           <%= @manager.username %>
         <% end %>
       </dd>
-      <dt><strong><%= model_class.human_attribute_name(:start_date) %>:</strong></dt>
+      <dt><strong>Start Date:</strong></dt>
       <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:end_date) %>:</strong></dt>
+      <dt><strong>End Date:</strong></dt>
       <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
       <% if @game.is_terminated %>
         <strong>*Game has been terminated.</strong>
       <% end %></dd>
       <dt><strong>Initial Balance:</strong></dt>
       <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
-    </dl>
-
-    <dl class="dl-horizontal">
       <dt><strong>Current Balance:</strong></dt>
       <dd><%= number_to_currency(@current_user_game.balance.to_f/100) %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:total_value_in_stocks) %>:</strong></dt>
+      <dt><strong><%= 'Total Value in Stocks' %>:</strong></dt>
       <dd><%= number_to_currency(@current_user_game.total_value_in_stocks.to_f/100) %></dd>
     </dl>
-    <br>
   </div>
 </div>
 
-<div class ="span6">
+<div class ="span7">
   <% if @game.start_date < DateTime.now %>
     <% if @game.is_terminated == false %>
         <% if @game.end_date > DateTime.now %>
-          <div class="well"> 
+          <div class="container-box"> 
             <%= render :partial => 'purchased_stock_index' %>
           </div>
         <% end %>
     <% end %>  
   <% end %>
 </div>
-<div class ="span6">
+
+<div class ="span5">
   <% if @game.start_date < DateTime.now %>
     <% if @game.is_terminated == false %>
         <% if @game.end_date > DateTime.now %>
-          <div class="well"> 
+          <div class="container-box"> 
+            <h3>Buy or Sell Stocks</h3>
             <ul class="nav nav-tabs">
                   <li class="active"><a href="#buy" data-toggle="tab">Buy</a></li>
                   <li><a href="#sell" data-toggle="tab">Sell</a></li>
@@ -67,19 +65,22 @@
 
 </div>
 
-<div class ="span12">
-  <div class="well"> 
+<div class ="span7">
+  <div class="container-box"> 
       <h3>Players</h3>
-            <%= render :partial => 'players_list' %>
-        <% if @game.manager_id == current_user.id and @game.is_terminated == false and @game.end_date >= DateTime.now %>
-            <button class="btn btn-success" id="user_game_button">Invite Player</button>
-            <button class="btn" id="hide_button">Hide</button>
-        <% end %>
-  </div>
-  <div class="user_game_partial">
-    <%= render :partial => 'user_game_form' %>
+      <%= render :partial => 'players_list' %>
+        
   </div>
 </div>
+
+<% if @game.manager_id == current_user.id and @game.is_terminated == false and @game.end_date >= DateTime.now %>
+  <div class ="span5">
+    <div class="container-box"> 
+        <h3>Add Players</h3>
+        <%= render :partial => 'user_game_form' %>
+    </div>
+  </div>
+<% end %>
 
 
 

@@ -1,9 +1,8 @@
-<h3>Buy Stock</h3>
+<strong>Buying</strong></br></br>
 <%= simple_form_for @transaction do |f| %>
-  <%= f.input :stock_code, :label => "Stock Code" %>
-  <%= f.input :qty, as: :string,:label => "Quantity" %>
-  <%= f.hidden_field :is_buy, :value => true %>
-  <%= f.hidden_field :game_id, :value => @game.id %>
-
-  <p align="right"><%= f.submit "Buy", :class => 'btn btn-primary' %></p>
+	<%= f.input :stock_code, :label => "Stock Code" %>
+	<%= f.input :qty, as: :string,:label => "Quantity" %>
+	<%= f.hidden_field :is_buy, :value => true %>
+	<%= f.hidden_field :game_id, :value => @game.id %>
+	<p align="right"><%= f.submit "Buy", :class => 'btn btn-info' %></p>
  <% end %>
