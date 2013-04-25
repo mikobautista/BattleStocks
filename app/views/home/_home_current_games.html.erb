@@ -20,6 +20,7 @@
       </div>
       <div class = "home_body">
         <ul class = "home_game_competitor pull-left" >
+          <h4>Rankings</h4>
           <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.id) %><strong> (You)</strong><% end %></li>
           <% if UserGame.for_game(ugame.game).size >= 2 %>
             <li>
@@ -45,10 +46,14 @@
           <% end %>
         </ul> 
         <div class = "home_game_rank pull-right">
+          <h4>Your Stats</h4>
           Rank:
           <%= ugame.get_rank %>/<%= ugame.game.users.count %>
           <br>
-          Balance: 
+          Initial Balance: 
+          <%= number_to_currency(ugame.game.budget.to_f/100) %>
+          <br>
+          Current Balance: 
           <%= number_to_currency(ugame.balance.to_f/100) %>
           <br>
           Stock Value: 

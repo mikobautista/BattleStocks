@@ -64,7 +64,7 @@ ul.home_game_competitor {
 
 .home_game_rank {
   display: inline-block;
-  padding-right: 100px;
+  padding-right: 0px;
   margin: 30px 4px 30px 4px;
   text-align: left;
   font-family: Helvetica, Arial, Verdana;
