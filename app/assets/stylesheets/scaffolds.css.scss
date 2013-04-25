@@ -67,7 +67,10 @@ div {
 
  dl.stocks { float:left; 
   width:100%;
-  padding: 19px;
+  padding-left: 19px;
+  padding-right: 0px;
+  padding-top: 19px;
+  padding-bottom: 19px;
   margin-bottom: 20px;
   background-color: white;
   box-shadow: 0px 6px 11px #D0D0D0;
