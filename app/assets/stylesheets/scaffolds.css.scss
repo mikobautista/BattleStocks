@@ -66,13 +66,18 @@ div {
 }
 
 .form-buysell {
-  float: none;
-  padding-top: 0;
-  text-align: left;
+  width: 4em;
+  float: left;
+  text-align: right;
+  margin-right: 0.5em;
+  display: block
 }
 
-.form-buysell.controls {
-  margin-left: 100px;
+.form-buysell label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 2px 10px;
 }
 
  dl.stocks { float:left; 
