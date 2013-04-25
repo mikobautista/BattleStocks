@@ -1,5 +1,10 @@
 <% if @game.users.all.count == 1 %>
-  <h4> There are no other players. </h4>
+  <% if @game.end_date >= DateTime.now %>
+    <h3>Players</h3>
+    <h4> There are no other players. </h4>
+  <% else %>
+    <h4> There were no other players. </h4>
+  <% end %>
 <% else %>
   <table class="table table-condensed">
     <thead>
