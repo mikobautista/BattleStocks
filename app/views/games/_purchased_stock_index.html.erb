@@ -1,20 +1,24 @@
 <h3>My Stocks</h3>
-<% if !@purchased_stocks.empty? %>
+<% if !@purchased_stocks_array.empty? %>
   <table class="table table-condensed">
     <thead>
       <tr>
         <th><p>Stock Code</p></th>
         <th><p align="right">Total Quantity</p></th>
+        <th><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x</p></th>
+        <th><p align="right">Market Price</p></th>
         <th><p align="right">Total Value</p></th>
       </tr>
     </thead>
     <tbody>
-      <% @purchased_stocks.each do |purchased_stock| %>
+      <% @purchased_stocks_array.each do |purchased_stock| %>
         <tr>
-          <% if purchased_stock.total_qty > 0 %>
-            <td><%= link_to purchased_stock.stock_code, src="/search?query=#{purchased_stock.stock_code}" %></td>
-            <td><p align="right"><%= purchased_stock.total_qty %></p></td>
-            <td><p align="right"><%= number_to_currency(purchased_stock.value_in_stocks.to_f/100) %></p></td>
+          <% if purchased_stock[1] > 0 %>
+            <td><strong><%= link_to purchased_stock[0], src="/search?query=#{purchased_stock[0]}" %></strong></td>
+            <td><p align="right"><%= purchased_stock[1] %></p></td>
+            <td><p>&nbsp;&nbsp;&nbsp;&nbsp;x</p></td>
+            <td><p align="right"><%= number_to_currency((purchased_stock[3]/purchased_stock[1]).to_f/100)%></p></td>
+            <td><strong><p align="right"><%= number_to_currency(purchased_stock[3].to_f/100) %></p></strong></td>
           <% end %>
         </tr>
       <% end %>
