@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212191729) do
+ActiveRecord::Schema.define(:version => 20130425183735) do
 
   create_table "games", :force => true do |t|
     t.integer  "manager_id"
@@ -69,11 +69,14 @@ ActiveRecord::Schema.define(:version => 20130212191729) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "email"
-    t.integer  "total_points",  :default => 0
-    t.boolean  "is_admin",      :default => false
-    t.boolean  "is_active",     :default => true
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "total_points",           :default => 0
+    t.boolean  "is_admin",               :default => false
+    t.boolean  "is_active",              :default => true
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.string   "auth_token"
   end
 
 end
