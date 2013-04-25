@@ -7,11 +7,11 @@
         <div class = "pull-right">
           <% if (ugame.game.start_date.month == ugame.game.end_date.month) && (ugame.game.start_date.year == ugame.game.end_date.year) %>
             <% if (ugame.game.end_date.day - Time.now.day - 1) == 0 %>
-              <strong>Ends today.</strong>
+              <i><font color="orange"><strong>Ends today.</strong></font></i>
             <% elsif (ugame.game.end_date.day - Time.now.day - 1) == 1 %>
-              Ends tomorrow.
+              <i>Ends tomorrow.</i>
             <% else %>
-              Ends in <%= ugame.game.end_date.day - Time.now.day - 1 %> days.
+              <i>Ends in <%= ugame.game.end_date.day - Time.now.day - 1 %> days.</i>
             <% end %>
           <% else %>
           <%= ugame.game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %> - <%= ugame.game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
@@ -19,8 +19,9 @@
         </div>
       </div>
       <div class = "home_body">
-        <ul class = "home_game_competitor" >
-          <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[0].user.id) %><strong> (You)</strong><% end %>
+        <ul class = "home_game_competitor pull-left" >
+          <h4>Rankings</h4>
+          <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.id) %><strong> (You)</strong><% end %></li>
           <% if UserGame.for_game(ugame.game).size >= 2 %>
             <li>
               <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio %>
@@ -28,7 +29,7 @@
               <% else %>
                 2nd Place:
               <% end %>
-              <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[1].user.id) %><strong> (You)</strong><% end %>
+              <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].user.id) %><strong> (You)</strong><% end %>
             </li>
           <% end %>
           <% if UserGame.for_game(ugame.game).size >= 3 %>
@@ -40,15 +41,19 @@
               <% else %>
                 3rd Place:
               <% end %>
-                <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[2].user.id) %><strong> (You)</strong><% end %>
+                <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[2].user.id) %><strong> (You)</strong><% end %>
             </li>
           <% end %>
         </ul> 
-        <div class = "home_game_rank">
+        <div class = "home_game_rank pull-right">
+          <h4>Your Stats</h4>
           Rank:
           <%= ugame.get_rank %>/<%= ugame.game.users.count %>
           <br>
-          Balance: 
+          Initial Balance: 
+          <%= number_to_currency(ugame.game.budget.to_f/100) %>
+          <br>
+          Current Balance: 
           <%= number_to_currency(ugame.balance.to_f/100) %>
           <br>
           Stock Value: 

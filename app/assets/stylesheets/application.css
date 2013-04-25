@@ -56,7 +56,7 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E0E0E0 100%);
 ul.home_game_competitor {
   list-style: none;
   display: inline-block;
-  margin: 30px 65px 30px 100px;
+  margin: 30px 65px 30px 50px;
   color: black;
   vertical-align: top;
   text-align: left;
@@ -64,7 +64,7 @@ ul.home_game_competitor {
 
 .home_game_rank {
   display: inline-block;
-  padding-right: 100px;
+  padding-right: 0px;
   margin: 30px 4px 30px 4px;
   text-align: left;
   font-family: Helvetica, Arial, Verdana;
