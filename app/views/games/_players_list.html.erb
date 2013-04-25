@@ -4,19 +4,27 @@
   <table class="table table-condensed">
     <thead>
       <tr>
-        <th><p>Rank</p></th>
+        <% if @game.start_date <= DateTime.now %>
+          <th><p>Rank</p></th>
+        <% end %>
         <th><p>Username</p></th>
-        <th><p align="right">Portfolio Value</p></th>
-        <th><p align="right">ROI</p></th>
+        <% if @game.start_date <= DateTime.now %>
+          <th><p align="right">Portfolio Value</p></th>
+          <th><p align="right">ROI</p></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% @current_players.each do |ugame| %>
           <tr>
-            <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
+            <% if @game.start_date <= DateTime.now %>
+              <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
+            <% end %>
             <td><%= link_to ugame.user.username, user_path(ugame.user) %></td>
-            <td><p align="right"><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></p></td>
-            <td><p align="right"><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></p></td>
+            <% if @game.start_date <= DateTime.now %>
+              <td><p align="right"><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></p></td>
+              <td><p align="right"><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></p></td>
+            <% end %>
           </tr>
       <% end %>
     </tbody>
