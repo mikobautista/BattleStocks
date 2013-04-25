@@ -6,7 +6,6 @@
       <th><p>Stock Code</p></th>
       <th><p align="right">Total Quantity</p></th>
       <th><p align="right">Total Value</p></th>
-      <th><p><%=t '.actions', :default => t("helpers.actions") %></p></th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +15,6 @@
           <td><%= link_to purchased_stock.stock_code, src="/search?query=#{purchased_stock.stock_code}" %></td>
           <td><p align="right"><%= purchased_stock.total_qty %></p></td>
           <td><p align="right"><%= number_to_currency(purchased_stock.value_in_stocks.to_f/100) %></p></td>
-          <td><%= link_to "View", purchased_stock_path(purchased_stock), :class => 'btn btn-mini' %></td>
         <% end %>
       </tr>
     <% end %>

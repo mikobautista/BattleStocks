@@ -13,7 +13,6 @@
                   <th><p align="right">Cost Basis</p></th>
                   <th><p align="right">Value In Stocks</p></th>
                   <th><p align="right">Money Earned</p></th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -25,8 +24,6 @@
                   <td><p align="right"><%= number_to_currency(stock.money_spent.to_f/100)%></p></td>
                   <td><p align="right"><%= number_to_currency(stock.value_in_stocks.to_f/100)%></p></td>
                   <td><p align="right"><%= number_to_currency(stock.money_earned.to_f/100)%></p></td>
-                  <td><%= link_to "View", purchased_stock_path(stock), :class => 'btn btn-mini' %>
-                  </td>
                 </tr>
               <% end %>
             </tbody>
