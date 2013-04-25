@@ -1,26 +1,25 @@
 <% if @game.users.all.count == 1 %>
   <h4> There are no other players. </h4>
 <% else %>
-  <table class="table table-striped">
+  <table class="table table-condensed">
     <thead>
       <tr>
         <th><p>Rank</p></th>
         <th><p>Username</p></th>
-        <th><p>Email</p></th>
         <th><p align="right">Portfolio Value</p></th>
         <th><p align="right">ROI</p></th>
       </tr>
     </thead>
     <tbody>
-      <% UserGame.for_game(@game.id).by_portfolio_value.alphabetical.each do |ugame| %>
+      <% @current_players.each do |ugame| %>
           <tr>
             <td><%= ugame.get_rank %>/<%= ugame.game.users.count %></td>
             <td><%= link_to ugame.user.username, user_path(ugame.user) %></td>
-            <td><%= ugame.user.email %></td>
             <td><p align="right"><%= number_to_currency((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100) %></p></td>
             <td><p align="right"><%= number_with_precision((((ugame.balance.to_f + ugame.total_value_in_stocks.to_f)/100 - ugame.game.budget.to_f/100) / (ugame.game.budget.to_f/100)), :precision => 2) %></p></td>
           </tr>
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @current_players, :param_name => 'game_players_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
 <% end %>

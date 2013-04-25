@@ -1,36 +1,40 @@
-<div class ="span12">
-  <div class = "container-box">
+ <div class ="span12"> 
     <%- model_class = @game.class -%>
     <h1>Game: <%= @game.name %></h1>
     <% if (current_user.id == @game.manager_id) && (@game.start_date > Time.now) && (@game.is_terminated == false) %>
       <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_game_path(@game), :class => 'btn btn-mini' %>
     <% end %>
-
-    <dl class="dl-horizontal">
-      <dt><strong><%= model_class.human_attribute_name(:manager_id) %>:</strong></dt>
-      <dd>
+</div>
+  <div class ="span12">
+    <dl class="games">
+      <dt class="games">
+        <strong><%= 'Manager' %>:</strong></br>
         <% if current_user.id == @game.manager_id %>
           <%= @manager.username %> <strong> (You)</strong>
         <% else %>
           <%= @manager.username %>
-        <% end %>
-      </dd>
-      <dt><strong>Start Date:</strong></dt>
-      <dd><%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
-      <dt><strong>End Date:</strong></dt>
-      <dd><%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
+        <% end %></br>
+          <%= @manager.email %>
+      </dt>
+      <dt class="games"><strong>Start Date:</strong></br>
+      <%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></br></br>
+      <strong>End Date:</strong></br>
+      <%= @game.end_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %>
       <% if @game.is_terminated %>
         <strong>*Game has been terminated.</strong>
-      <% end %></dd>
-      <dt><strong>Initial Balance:</strong></dt>
-      <dd><%= number_to_currency(@game.budget.to_f/100) %></dd>
-      <dt><strong>Current Balance:</strong></dt>
-      <dd><%= number_to_currency(@current_user_game.balance.to_f/100) %></dd>
-      <dt><strong><%= 'Total Value in Stocks' %>:</strong></dt>
-      <dd><%= number_to_currency(@current_user_game.total_value_in_stocks.to_f/100) %></dd>
+      <% end %></dt>
+      <dt class="games">
+        <strong>Initial Balance:</strong></br>
+        <%= number_to_currency(@game.budget.to_f/100) %></br></br>
+        <strong>Current Balance:</strong></br>
+        <%= number_to_currency(@current_user_game.balance.to_f/100) %></br></br>
+      </dt>
+      <dt class="games">
+        <strong><%= 'Total Value in Stocks' %>:</strong></br>
+        <%= number_to_currency(@current_user_game.total_value_in_stocks.to_f/100) %>
+      </dt>
     </dl>
   </div>
-</div>
 
 <div class ="span7">
   <% if @game.start_date < DateTime.now %>

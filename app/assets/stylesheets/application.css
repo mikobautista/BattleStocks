@@ -14,6 +14,10 @@
  *= require_self
  */
 
+.alert alert-success{
+  margin-left: 8px;
+ }
+
 
  /*Home Current Games Partial Styling*/
 
