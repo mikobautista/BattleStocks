@@ -14,9 +14,17 @@
  *= require_self
  */
 
+.alert alert-success{
+  margin-left: 8px;
+ }
+
 
  /*Home Current Games Partial Styling*/
 
+.home_body{
+  text-align: center;
+  display: inline-block;
+}
 
 .home_game_header {
   padding: 15px;
@@ -52,12 +60,17 @@ background-image: linear-gradient(to bottom, #FFFFFF 0%, #E0E0E0 100%);
 ul.home_game_competitor {
   list-style: none;
   display: inline-block;
-  margin: 30px 4px 30px 80px;
+  margin: 30px 65px 30px 50px;
+  color: black;
+  vertical-align: top;
+  text-align: left;
 }
 
 .home_game_rank {
-  padding-right: 100px;
+  display: inline-block;
+  padding-right: 0px;
   margin: 30px 4px 30px 4px;
+  text-align: left;
   font-family: Helvetica, Arial, Verdana;
 }
 
@@ -68,14 +81,12 @@ ul.home_game_competitor {
 }
 
 body{
-  background: #fffCf5;
+  background: #fffffc;
 }
 
 #logo {
   float: left;
 }
-
-
 
 .container-box{
   padding: 19px;
@@ -89,7 +100,9 @@ body{
   padding-top: 20px;
 }
 
-
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+  border-width: 0 0 0px;
+}
 .navbar .brand{
   font-size: 30px;
 }
@@ -99,6 +112,10 @@ body{
   padding-top: 17px;
   padding-right: 30px;
   font-size: 30px;
+ }
+
+ .navbar .brand:hover{
+  background-color: transparent;
  }
 
 .navbar .main_pages_links li > a {
@@ -193,3 +210,4 @@ body {
   display: block;
   font-style: italic;
 }
+

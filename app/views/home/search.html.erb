@@ -1,34 +1,76 @@
 <div class="row">
-	<div class ="span4">
-		<div class = "container-box">
-			<% if logged_in? %>
-				<% if @query != "" %>
-					<% if @stock_value != 0 %>
-						<h2><%= @query.upcase %></h2>
-						<dl class="dl-horizontal">
-							<dt><strong>Stock Name:</strong></dt>
-							<dd><%= @query.upcase %></dd>
-							<dt><strong>Current Value:</strong></dt>
-					    	<dd><%= number_to_currency(@stock_value.to_f/100) %></dd>	
-					  	</dl>
-					<% else %>
-						<h3><%= @query.upcase %> stock code is invalid.</h3>
-					<% end %>
+	<div class ="span12">
+		<% if logged_in? %>
+			<% if @query != "" %>
+				<% if @stock_value != 0 %>
+					<h3><%= @query.upcase %> (<%=@stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %> )</h3>
+					<dl class="stocks">
+						<dt class="stocks"><strong>Market Price:</strong></br>
+				    	<h3><%= number_to_currency(@stock_value.to_f/100) %></h3></dt>
+				    	
+				    	<dt class="stocks"><strong>Price Change:</strong></br>
+				    	<% if (@stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text).include?('-') %>
+				    		<h3><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></h3></dt>
+				    	<% else %>
+				    		<h3><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'valueContent')]").text %></font></h3></dt>
+				    	<% end %>
+
+				    	<dt class="stocks"><strong>Prev Close:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Prev Close')]/following-sibling::*[2]").text %></strong></br></br>
+				    	<strong>Open:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Open')]/following-sibling::*[2]").text %></strong></dt>
+
+				    	<dt class="stocks"><strong>Day's High:</strong></br>
+				    	<strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailHigh')]").text %></font></strong></br></br>
+				    	<strong>Day's Low:</strong></br>
+				    	<strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[contains(@class, 'sectionQuoteDetailLow')]").text %></font></strong></dt>
+
+				    	<dt class="stocks"><strong>Volume:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Volume')]/following-sibling::*[2]").text %></strong></br></br>
+				    	<strong>Avg. Volume:</strong></br>
+				    	<strong><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'Avg')]/following-sibling::*[2]").text %></strong></dt>
+
+				    	<dt class="stocks"><strong>52-Week High:</strong></br>
+				    	<strong><font color="green"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk High')]/following-sibling::*[2]").text %></font></strong></br></br>
+				    	<strong>52-Week Low:</strong></br>
+				    	<strong><font color="red"><%= @stock_info.parsed_document.at_xpath("//span[starts-with(.,'52-wk Low')]/following-sibling::*[2]").text %></font></strong></dt>	    
+				  	</dl>
 				<% else %>
-					<h3>Please enter a stock code to search.</h3>
+					<h3><%= @query.upcase %> stock code is invalid.</h3>
 				<% end %>
+			<% else %>
+				<h3>Please enter a stock code to search.</h3>
 			<% end %>
-		</div>
+		<% end %>
 	</div>
 	<% if logged_in? %>
-				<% if @query != "" %>
-					<% if @stock_value != 0 %>
-						<div class ="span6">
-						<div class = "container-box">
-						<center><%= image_tag("http://chart.finance.yahoo.com/z?s=#{@query.upcase}&t=6m&q=l&l=on&z=s&p=m50,m200")%></center>
-					<% end %>
-				<% end %>
+		<% if @query != "" %>
+			<% if @stock_value != 0 %>
+				<div class ="span7">
+					<div class = "container-box">
+						<h4>Interactive Chart</h4>
+						<script src="http://charts.wikinvest.com/wikinvest/wikichart/javascript/scripts.php" type="text/javascript"></script><div id="wikichartContainer_492CDFF6-7FA7-0D71-073C-3EA73804C724"><div style="width: 100%; text-align: center; vertical-align: center; margin-top: 100px;"><a href="http://get.adobe.com/flashplayer/"><img src="http://cdn.wikinvest.com/wikinvest/images/adobe_flash_logo.gif" alt="Flash" style="border-width: 0px;"/><br/>Flash Player 9 or higher is required to view the chart<br/><strong>Click here to download Flash Player now</strong></a></div></div><script type="text/javascript">if (typeof(embedWikichart) != "undefined") {embedWikichart("http://charts.wikinvest.com/WikiChartMini.swf","wikichartContainer_492CDFF6-7FA7-0D71-073C-3EA73804C724","100%","400",{"liveQuote":"false","rollingDate":"5 days","ticker":'<%= "#{@query.downcase}" %>',"showAnnotations":"false","embedCodeDate":"2013-4-24"},{});}</script><div style="font-size:9px;text-align:right;width:100%;font-family:Verdana"></div>
+					</div>
+				</div>
+				<div class ="span5">
+					<div class = "container-box">
+						<h4>Buzz about <%= @query.upcase %></h4>
+						<center>
+							<div id="stocktwits-widget-news"></div>
+							<script type="text/javascript" src="http://stocktwits.com/addon/widget/2/widget-loader.min.js"></script>
+							<script type="text/javascript">
+							STWT.Widget({container: 'stocktwits-widget-news', symbol: '<%= "#{@query.downcase}" %>', width: '300', height: '400', limit: '15', scrollbars: 'true', streaming: 'true', title: '', style: {link_color: '4871a8', link_hover_color: '4871a8', header_text_color: '000000', border_color: 'ffffff', divider_color: 'cecece', divider_color: 'cecece', divider_type: 'solid', box_color: 'f5f5f5', stream_color: 'ffffff', text_color: '000000', time_color: '999999'}});
+							</script>
+						</center>
+					</div>
+				</div>
+				<div class ="span12">
+					<div class = "container-box">
+						<h4>About <%= @stock_info.parsed_document.at_xpath("//div[@id='sectionTitle']").text.split(' (').first %>:</h4>
+			    		<%= (@stock_description.parsed_document.at_xpath("//div[@id='companyNews']//div[@class='moduleBody']")).text.split('» Full Overview of').first %>
+			    	</div>
+			    </div>
 			<% end %>
-		</div>
-	</div>
+		<% end %>	
+	<% end %>
 </div>

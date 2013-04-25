@@ -6,45 +6,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :password, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :password, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :password_confirmation, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :password_confirmation, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email, :class => 'text_field' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :total_points, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :total_points, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_admin, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :is_admin, :class => 'check_box' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_active, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :is_active, :class => 'check_box' %>
-    </div>
-  </div>
-
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                users_path, :class => 'btn' %>
+    <%= link_to "Cancel", root_url, :class => 'btn' %>
   </div>
 <% end %>

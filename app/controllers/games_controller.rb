@@ -29,10 +29,17 @@ class GamesController < ApplicationController
 
     # new user_game for adding more
     @user_game = UserGame.new
+    @current_players = UserGame.for_game(@game.id).by_portfolio_value.alphabetical.paginate(:page => params[:game_players_page]).per_page(5)
 
     # current_user's data in this game
     @current_user_game = UserGame.find_by_user_id_and_game_id(current_user.id, @game.id)
-    @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id)
+    # @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id).paginate(:page => params[:game_purchased_stocks_page]).per_page(4)
+
+    @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id).paginate(:page => params[:game_purchased_stocks_page]).per_page(4)
+    @purchased_stocks_array = []
+    for stock in @purchased_stocks
+      @purchased_stocks_array += [[stock.stock_code, stock.total_qty, stock.get_price, stock.value_in_stocks]]
+    end
 
     # update all users' total_value_in_stocks
     require 'yahoo_stock'

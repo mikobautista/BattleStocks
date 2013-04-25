@@ -46,7 +46,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_require_username
-    assert_equal ["can't be blank", "should only contain letters, numbers, or .-_@"], new_user(:username => '').errors[:username]
+    assert_equal ["can't be blank", "Username should only contain letters, numbers, or .-_@"], new_user(:username => '').errors[:username]
   end
 
   def test_require_password
@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_validate_odd_characters_in_username
-    assert_equal ["should only contain letters, numbers, or .-_@"], new_user(:username => 'odd ^&(@)').errors[:username]
+    assert_equal ["Username should only contain letters, numbers, or .-_@"], new_user(:username => 'odd ^&(@)').errors[:username]
   end
 
   def test_validate_password_length

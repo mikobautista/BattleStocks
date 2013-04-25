@@ -21,7 +21,10 @@
   </div>
 
   <div class="control-group">
-    <%= f.input :budget%>
+    <%= f.label "Budget in $", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :budget %>
+    </div>
   </div>
 
   <div class="form-actions">
