@@ -16,6 +16,6 @@
         </tbody>
       </table>
 <% else %>
-  <h3>You do not own stock.</h3>
+  <h4>You do not own stocks.</h4>
 <% end %>
 <%= will_paginate @owned_stock, :param_name => 'owned_stock_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
