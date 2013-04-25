@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class = "home_body">
-        <ul class = "home_game_competitor" >
-          <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[0].user.id) %><strong> (You)</strong><% end %>
+        <ul class = "home_game_competitor pull-left" >
+          <li>1st Place: <%= link_to UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].user.username, user_path(ugame.user) %><% if (current_user.id == UserGame.for_game(ugame.game).by_portfolio_value[0].user.id) %><strong> (You)</strong><% end %></li>
           <% if UserGame.for_game(ugame.game).size >= 2 %>
             <li>
               <% if  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[0].get_portfolio ==  UserGame.for_game(ugame.game).by_portfolio_value.alphabetical[1].get_portfolio %>
@@ -44,7 +44,7 @@
             </li>
           <% end %>
         </ul> 
-        <div class = "home_game_rank">
+        <div class = "home_game_rank pull-right">
           Rank:
           <%= ugame.get_rank %>/<%= ugame.game.users.count %>
           <br>
