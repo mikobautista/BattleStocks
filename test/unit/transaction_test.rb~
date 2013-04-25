@@ -6,7 +6,7 @@ class TransactionTest < ActiveSupport::TestCase
   
    # Presence of...1
    should validate_presence_of(:date)
-   should validate_presence_of(:is_buy)
+   #should validate_presence_of(:is_buy)
    should validate_presence_of(:purchased_stock_id)
    should validate_presence_of(:qty)
    should validate_presence_of(:value_per_stock)
@@ -15,12 +15,6 @@ class TransactionTest < ActiveSupport::TestCase
    should allow_value(Time.now.to_date).for(:date)
    should allow_value(10.days.from_now.to_date).for(:date)
    should_not allow_value("asdfasdf").for(:date)
-   
-   # is_buy
-   should allow_value(true).for(:is_buy)
-   should allow_value(false).for(:is_buy)
-   should_not allow_value("apple").for(:is_buy)
-   should_not allow_value(12).for(:is_buy)
    
    # qty
    should validate_numericality_of :qty

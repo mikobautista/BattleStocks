@@ -62,8 +62,8 @@ class PurchasedStockTest < ActiveSupport::TestCase
        @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
         :stock_code => "goog", :total_qty => 40, :money_spent => 5000, :money_earned => 0,
         :value_in_stocks => 80)
-       @appl = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
-        :stock_code => "appl", :total_qty => 0, :money_spent => 0, :money_earned => 0,
+       @aapl = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
+        :stock_code => "aapl", :total_qty => 0, :money_spent => 0, :money_earned => 0,
         :value_in_stocks => 80)
        @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
      end
@@ -74,7 +74,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        @usergame1.destroy
        @game1.destroy
        @goog.destroy
-       @appl.destroy
+       @aapl.destroy
        @transaction1.destroy
      end
 
@@ -87,7 +87,7 @@ class PurchasedStockTest < ActiveSupport::TestCase
        assert_equal "test gameeee", @game1.name
        assert_equal @alex.id, @usergame1.user_id
        assert_equal "GOOG", @goog.stock_code
-       assert_equal "APPL", @appl.stock_code
+       assert_equal "AAPL", @aapl.stock_code
        assert_equal 40, @transaction1.qty
      end
  
@@ -96,21 +96,21 @@ class PurchasedStockTest < ActiveSupport::TestCase
    # test the scope 'for_user_game'
    should "show all purchased_stocks for a particular user_game" do
         assert_equal @goog, PurchasedStock.for_user_game(@usergame1).first
-        assert_equal @appl, PurchasedStock.for_user_game(@usergame1).second
+        assert_equal @aapl, PurchasedStock.for_user_game(@usergame1).second
         assert_equal 2, PurchasedStock.for_user_game(@usergame1).size
    end
 
    # test the scope 'for_game'
    should "show all purchased stocks for a particular game" do
         assert_equal @goog, PurchasedStock.for_game(@game1).first
-        assert_equal @appl, PurchasedStock.for_game(@game1).second
+        assert_equal @aapl, PurchasedStock.for_game(@game1).second
         assert_equal 2, PurchasedStock.for_game(@game1).size
    end
 
    # test the scope 'for_user'
    should "show all purchased stocks for a particular user" do
         assert_equal @goog, PurchasedStock.for_user(@alex).first
-        assert_equal @appl, PurchasedStock.for_user(@alex).second
+        assert_equal @aapl, PurchasedStock.for_user(@alex).second
         assert_equal 2, PurchasedStock.for_user(@alex).size
    end
 
@@ -125,10 +125,16 @@ class PurchasedStockTest < ActiveSupport::TestCase
    end
 
    # test the method stock_code_upper
-   should "show the upper case stock codes" do
+   should "show all stock codes in upper case" do
         assert_equal "GOOG", @goog.stock_code
-        assert_equal "APPL", @appl.stock_code
+        assert_equal "AAPL", @aapl.stock_code
    end
- 
+   
+   # test the method get_price 
+   should "show the price fora particular purchased_stock " do 
+        puts @goog.get_price
+        puts @aapl.get_price
+   end  
+   
   end
 end

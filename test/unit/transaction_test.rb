@@ -35,7 +35,7 @@ class TransactionTest < ActiveSupport::TestCase
      # create the objects I want with factories
      setup do 
        @alex = FactoryGirl.create(:user, :email => "test@gmail.com", :username => "testuser1")
-       @game1 = FactoryGirl.create(:game, :manager_id => @alex.id, :name => "test gameeee", :start_date => Time.now.to_date, 
+       @game1 = FactoryGirl.create(:game, :name => "test gameeee", :start_date => Time.now.to_date, 
        :end_date => 10.days.from_now.to_date, :budget => 10)
        @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex.id, :game_id => @game1.id, :balance => 2000, :is_active => true, :points => 200, :total_value_in_stocks => 3000)
        @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 

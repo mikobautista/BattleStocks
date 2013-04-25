@@ -66,6 +66,8 @@ class GameTest < ActiveSupport::TestCase
       assert_equal 1000000, @game1.budget
     end
     
+    # ALL THE GAME SCOPES are being tested in the user_games model sooo liiikkee....
+    
     # THIS STILL NEEDS FIXING UP
     # # test the method 'convert_to_est' works
     # should "shows that convert_to_est method works" do
