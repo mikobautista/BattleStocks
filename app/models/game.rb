@@ -10,8 +10,8 @@ class Game < ActiveRecord::Base
   # Validations
   # -----------------------------
   validates_numericality_of :budget, :greater_than => 0
-  validates_date :start_date, :on_or_after => lambda { Time.now.to_date }, :on_or_after_message => "start date must today onwards", :on => :create
-  validates_date :end_date, :on_or_after => :start_date, :on_or_after_message => "end date must be on or after start date"
+  validates_date :start_date, :on_or_after => lambda { Time.now.to_date }, :on_or_after_message => "Start date must be on or after today.", :on => :create
+  validates_date :end_date, :on_or_after => :start_date, :on_or_after_message => "End date must be on or after the start date."
   validates_presence_of :budget
   validates_presence_of :end_date
   validates_presence_of :start_date

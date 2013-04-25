@@ -12,7 +12,7 @@ class Transaction < ActiveRecord::Base
 
   # Validations
   # -----------------------------
-  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
+  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "Quantity should be a positive integer."
 
   # Methods
   # -----------------------------

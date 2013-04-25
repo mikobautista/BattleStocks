@@ -14,7 +14,7 @@ class PurchasedStock < ActiveRecord::Base
   # Validations
   # -----------------------------
 
-  validates_format_of :stock_code, :with => /.+/, :message => "stock_code cannot be blank"
+  validates_format_of :stock_code, :with => /.+/, :message => "Stock code cannot be blank."
   validates_numericality_of :money_earned, :greater_than_or_equal_to => 0
   validates_numericality_of :money_spent, :greater_than_or_equal_to => 0
   validates_numericality_of :total_qty, :greater_than_or_equal_to => 0
