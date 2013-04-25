@@ -25,8 +25,8 @@ stocks_logo.png: stocks_logo-d9bf4d5aba17d9cf80e1e32fe0688f0c.png
 stocks_logo/index.png: stocks_logo-d9bf4d5aba17d9cf80e1e32fe0688f0c.png
 tester.png: tester-3e0454dad3def8a02e131a8c23d22e64.png
 tester/index.png: tester-3e0454dad3def8a02e131a8c23d22e64.png
-application.js: application-b6a7cb02759a46463fca303694ee1398.js
-application/index.js: application-b6a7cb02759a46463fca303694ee1398.js
+application.js: application-e2dd0ef7f1f204126bc057a8ded6a2e3.js
+application/index.js: application-e2dd0ef7f1f204126bc057a8ded6a2e3.js
 application.css: application-2047f65dce23b0efe41fc0cde53e6d56.css
 application/index.css: application-2047f65dce23b0efe41fc0cde53e6d56.css
 jquery.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
