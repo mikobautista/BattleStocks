@@ -52,9 +52,6 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
-<<<<<<< HEAD
-  
-=======
 
   def generate_token(column)
     begin
@@ -68,5 +65,4 @@ class User < ActiveRecord::Base
     save!
     UserMailer.password_reset(self).deliver
   end
->>>>>>> 8b0bf0112c3e7559272a3f607c64e258039c21af
 end

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130411224843) do
-=======
 ActiveRecord::Schema.define(:version => 20130425183735) do
->>>>>>> 8b0bf0112c3e7559272a3f607c64e258039c21af
 
   create_table "games", :force => true do |t|
     t.integer  "manager_id"
