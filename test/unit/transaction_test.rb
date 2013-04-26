@@ -9,7 +9,6 @@ class TransactionTest < ActiveSupport::TestCase
    #should validate_presence_of(:is_buy)
    should validate_presence_of(:purchased_stock_id)
    should validate_presence_of(:qty)
-   should validate_presence_of(:value_per_stock)
 
    # Date format
    should allow_value(Time.now.to_date).for(:date)
@@ -22,13 +21,7 @@ class TransactionTest < ActiveSupport::TestCase
    should_not allow_value(0).for(:qty)
    should_not allow_value("asdfasdf").for(:qty)
    should_not allow_value(-10000).for(:qty)
-   
-   # value_per stock
-   should validate_numericality_of :value_per_stock
-   should allow_value(1000000).for(:value_per_stock)
-   should_not allow_value(0).for(:value_per_stock)
-   should_not allow_value("asdfasdf").for(:value_per_stock)
-   should_not allow_value(-10000).for(:value_per_stock)
+
    
    
    context "Creating one game" do
