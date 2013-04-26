@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Nice try, profh"
+    flash[:error] = "Nice Try, Prof. H. Qapla"
     # "You are not authorized to access this page. Further, your IP address has been recorded and dispatched to the FBI, as you have just violated the Online Protection and Enforcement of Digital Trade Act"
     redirect_to root_url
   end
