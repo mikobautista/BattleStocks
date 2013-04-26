@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
  	end
   	helper_method :logged_in?
 	
+	rescue_from ActiveRecord::RecordNotFound do |variable|
+		flash[:notice] = "Nice Try, Prof. H. -- Qapla'!"
+		redirect_to :root
+	end
 end
