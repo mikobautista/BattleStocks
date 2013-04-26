@@ -12,8 +12,15 @@ class Transaction < ActiveRecord::Base
 
   # Validations
   # -----------------------------
-  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "Quantity should be a positive integer."
-
+  validates_presence_of :date
+  validates_presence_of :is_buy
+  validates_presence_of :purchased_stock_id
+  validates_presence_of :qty
+  
+  validates_numericality_of :qty, :greater_than => 0
+  validates_date :date
+  validates :is_buy, :inclusion => {:in => [true, false]}
+  
   # Methods
   # -----------------------------
 
