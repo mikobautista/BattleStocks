@@ -1,6 +1,8 @@
 <div class ="span12">
     <%- model_class = @user.class -%>
-    <h2>User Information</h2>
+    <h2>User Information<% if current_user.id == @user.id %>
+        <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_user_path(@user), :class => 'btn btn-mini' %>
+      <% end %></h2>
 
     <dl class="dl-horizontal">
       <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
@@ -16,10 +18,6 @@
       <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
       <dd><%= @user.total_points %></dd>
       </br>
-      <% if current_user.id == @user.id %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_user_path(@user), :class => 'btn btn-primary' %>
-      <% end %>
     </dl>
 </div>
 
