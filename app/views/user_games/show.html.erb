@@ -6,16 +6,14 @@
   <dd><%= @user_game.user.username %></dd>
   <dt><strong>Game:</strong></dt>
   <dd><%= @user_game.game.name %></dd>
-  <dt><strong>Balance:</strong></dt>
+  <dt><strong>Initial Balance:</strong></dt>
+  <dd><%= number_to_currency(@user_game.game.budget.to_f/100) %></dd>
+  <dt><strong>Current Balance:</strong></dt>
   <dd><%= number_to_currency(@user_game.balance.to_f/100) %></dd>
   <dt><strong>Points:</strong></dt>
   <dd><%= @user_game.points %></dd>
   <dt><strong>Stock Value:</strong></dt>
   <dd><%= number_to_currency(@user_game.total_value_in_stocks.to_f/100) %></dd>
-  <dt><strong>Is Active:</strong></dt>
-  <dd><%= @user_game.is_active %></dd>
-</dl>
-
-<div class="form-actions">
+  </br>
   <%= link_to "Back", game_path(@user_game.game), :class => 'btn'  %>
-</div>
+</dl>

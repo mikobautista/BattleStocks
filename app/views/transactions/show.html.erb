@@ -14,17 +14,12 @@
   <dd><%= @user.username %></dd>
   <dt><strong>Game:</strong></dt>
   <dd><%= @game.name %></dd>
+  <dt><strong>Date:</strong></dt>
+  <dd><%= @transaction.date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
   <dt><strong>Stock Code:</strong></dt>
   <dd><%= @transaction.purchased_stock.stock_code %></dd>
   <dt><strong>Quantity:</strong></dt>
   <dd><%= @transaction.qty %></dd>
-  <dt><strong>Value Per Stock:</strong></dt>
+  <dt><strong>Market Price:</strong></dt>
   <dd><%= number_to_currency(@transaction.value_per_stock.to_f/100) %></dd>
-  <dt><strong>Date:</strong></dt>
-  <dd><%= @transaction.date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></dd>
 </dl>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              transactions_path, :class => 'btn'  %>
-</div>

@@ -65,6 +65,8 @@ div {
   }
 }
 
+
+
  dl.stocks { float:left; 
   width:100%;
   padding-left: 19px;
@@ -93,3 +95,18 @@ div {
  dt.games,
  dd.games { float:left; width: 200px; margin:0; padding:0;}
  dt.games { padding-right:1em; font-weight:normal;}
+
+dl.dl-horizontal { float:left; 
+  width:100%;
+  padding-left: 19px;
+  padding-right: 0px;
+  padding-top: 19px;
+  padding-bottom: 19px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0px 6px 11px #D0D0D0;
+  border: 1px solid #dcdcdc;
+  }
+ dt.horizontal,
+ dd.horizontal { float:left; width: 200px; margin:0; padding:0;}
+ dt.horizontal { padding-right:1em; font-weight:normal;}
