@@ -5,9 +5,37 @@ class PurchasedStocksController < ApplicationController
   authorize_resource
   
   def index
-    @purchased_stocks = PurchasedStock.all
+    # @purchased_stocks = PurchasedStock.all
+    # if logged_in?
+    #   @owned_stock = PurchasedStock.nonzero_cost_basis.for_user(current_user).paginate(:page => params[:owned_stock_page]).per_page(10)
+    # end
+
+    #current owned stock
     if logged_in?
-      @owned_stock = PurchasedStock.nonzero_cost_basis.for_user(current_user).paginate(:page => params[:owned_stock_page]).per_page(10)
+      @current_user_game_owned = UserGame.current.for_user(current_user)
+      @current_owned_stock_array = []
+      if ! @current_user_game_owned.empty?
+        for ugame in @current_user_game_owned
+          @current_owned_stock = PurchasedStock.for_user_game(ugame).nonzero
+          for stock in @current_owned_stock
+            @current_owned_stock_array += [[ugame.game, stock.stock_code, stock.total_qty, stock.money_spent, stock.value_in_stocks, stock.money_earned]]
+          end
+        end
+      end
+    end
+
+    #past owned stock
+    if logged_in?
+      @past_user_game_owned = UserGame.past.for_user(current_user)
+      @past_owned_stock_array = []
+      if ! @past_user_game_owned.empty?
+        for ugame in @past_user_game_owned
+          @past_owned_stock = PurchasedStock.for_user_game(ugame).nonzero
+          for stock in @past_owned_stock
+            @past_owned_stock_array += [[ugame.game, stock.stock_code, stock.total_qty, stock.money_spent, stock.value_in_stocks, stock.money_earned]]
+          end
+        end
+      end
     end
 
     respond_to do |format|

@@ -9,13 +9,14 @@
   <div class ="span12">
     <dl class="games">
       <dt class="games">
+        <strong><%= 'Points Earned' %>:</strong></br>
+          <%= @current_user_game.points %></br></br>
         <strong><%= 'Manager' %>:</strong></br>
         <% if current_user.id == @game.manager_id %>
-          <%= @manager.username %> <strong> (You)</strong>
+          <%= link_to @manager.username, user_path(@manager) %> <strong> (You)</strong>
         <% else %>
-          <%= @manager.username %>
-        <% end %></br>
-          <%= @manager.email %>
+          <%= link_to @manager.username, user_path(@manager) %>
+        <% end %>
       </dt>
       <dt class="games"><strong>Start Date:</strong></br>
       <%= @game.start_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%y") %></br></br>

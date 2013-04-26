@@ -2,21 +2,25 @@
 <br>
 
 <div class="container-box">
-  <h3>BattleStocks is a virtual stock market simulator that:</h3>
+  <h3>BattleStocks is a virtual stock market simulator game that:</h3>
   <ul>
     <li>
       <h4>Provides you a risk-free but accurate environment to explore the stock market</h4>
-      BattleStocks is a stock market simulator that uses real-time NYSE and NASDAQ data. Users can buy and sell stock and track their returns as if they created a portfolio in real life.
+      BattleStocks uses real-time NYSE and NASDAQ data. Users can buy and sell stocks and track their capital gains as if they created a portfolio in real life.
       The difference is that BattleStocks is completely free making it the ideal platform for beginners to increase their confidence in their knowledge of the stock market and for current investors to test out new portfolio strategies without losing any money.
     </li><br>
     <li>
-      <h4>Allows you to compete against your friends to push themselves to create even stronger portfolios</h4>
-      Create a game, choose a starting budget, invite friends, and compete against them to make the most money in the BattleStock virtual stock money.
-      Competition brings out the best in us, as we push ourselves to learn more about the stock market in order to win. Expect even more creativity through competition.
+      <h4>Allows you to compete against your friends and create even stronger portfolios in a competitive environment</h4>
+      Create a game, choose an initial balance, invite players, and compete against them to gain the highest capital gain.
+      Competition brings out the best in us as we push ourselves to learn more about the stock market in order to win. You can expect even more creativity through competition.
     </li><br>
     <li>
+      <h4>Research Stocks</h4>
+      Search for a stock and find accurate statistics, an interactive chart, social buzz, and company information.
+    </li></br>
+    <li>
       <h4>Tracks your progress</h4>
-      During your competition, watch your return update in real-time.
+      During a competition, watch your capital gains update in real-time.
       After a competition, view results, see your previous portfolios, and witness how you have improved over time.
     </li>
   </ul>
@@ -24,93 +28,55 @@
 <br>
 
 <h2>How BattleStocks Works</h2>
-<div class="accordion" id="accordionHow">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep1">
-        Step 1: Create an account
-      </a>
-    </div>
-    <div id="collapseStep1" class="accordion-body collapse">
-      <div class="accordion-inner">
-        You must register in order to take advantage of BattleStocks. Registration is easy and will only take a minute. 
-        <%= link_to 'Register', sign_up_path, :class => 'btn btn'%>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep2">
-       Step 2: Create Game
-      </a>
-    </div>
-    <div id="collapseStep2" class="accordion-body collapse">
-      <div class="accordion-inner">
+<div class="container-box">
+  <h3>7 Simple Steps:</h3>
+<ul>
+  <li>
+      <h4>Step 1: Create an account</h4>
+      You must register in order to take advantage of BattleStocks. Registration is easy and will only take a minute. 
+      <%= link_to 'Register', sign_up_path, :class => 'btn btn'%>
+  </li>
+</ul>
+<ul>
+  <li>
+      <h4>Step 2: Create Game</h4>
        It's as simple as completing the create game form.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep3">
-        Step 3: Choose game settings
-      </a>
-    </div>
-    <div id="collapseStep3" class="accordion-body collapse">
-      <div class="accordion-inner">
-        Decide when you want to game to start and end. Choose the starting budget (the amount of money that each participant will have to spend on stocks at the start of the game).
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep4">
-        Step 4: Invite Friends
-      </a>
-    </div>
-    <div id="collapseStep4" class="accordion-body collapse">
-      <div class="accordion-inner">
-        Invite friends by entering their email addresses. Each friend will notified by an email asking them to register on BattleStocks and accept the game invitation.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep5">
-        Step 5: Create your portfolio by buying and selling stock
-      </a>
-    </div>
-    <div id="collapseStep5" class="accordion-body collapse">
-      <div class="accordion-inner">
-        From your dashboard, select the game that you would like to buy or sell stock for. <br><br>
-        To sell stock that you currently own, click the sell button to sell any stock that you own. <br><br>
-        To buy new stock, search for a stock using the company name or stock symbol. From the stock's page, enter the information into the "Buy Stock" form.<br><br>
+  </li>
+</ul>
+<ul>
+  <li>
+      <h4>Step 3: Choose game settings</h4>
+        Decide when you want the game to start and end. Choose the <i>Initial Budget</i> (the amount of money that each participant will have to spend on stocks at the start of the game).
+  </li>
+</ul>
+  <ul>
+    <li>
+        <h4>Step 4: Invite Players</h4>
+        Invite players by entering their username. Each player will automatically be added to the game.</br></br>
+        You can invite players before or during a game.
+    </li>
+  </ul>
+  <ul>
+    <li>
+        <h4>Step 5: Create your portfolio by buying and selling stock</h4>
+        From your dashboard, select the game that you would like to buy or sell stock for.</br></br> 
+        <center><i>or</i></center><br>
+        From the "My Games" page, select a current game that you would like to buy or sell stock for.</br></br>
+        To <strong>buy</strong> new stock, click the buy tab and complete the buying form<br><br>
+        To <strong>sell</strong> stock that you currently own, click the sell tab and complete the selling form to sell any stock that you own.<br><br>
 <!--         <center><div style="border: 1px solid #666; background-color:#B8B9D1;"><%= image_tag("battlestocks_example_screenshot.png", :alt => "Step 5") %></div></center><br> -->
-        Alternatively, click the buy/sell stock button where you will be taken to page where you can by stock by selecting the stock by entering the company name or stock symbol or sell stock by selecting from a drop-down list of currently owned stock to select one to sell.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep6">
-        Step 6: Track Progress
-      </a>
-    </div>
-    <div id="collapseStep6" class="accordion-body collapse">
-      <div class="accordion-inner">
-        From your dashboard, select the game that you wish to track. In this game page, you can see your current rank and how check on the status of the stock that you have purchased.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionHow" href="#collapseStep6">
-        Step 7: See Game Results
-      </a>
-    </div>
-    <div id="collapseStep6" class="accordion-body collapse">
-      <div class="accordion-inner">
-        From your dashboard, change from the current games list to the game history. Click the game for which you want to see results. Your final rank will display.
-      </div>
-    </div>
-  </div>
+    </li>
+  </ul>
+  <ul>
+    <li>
+        <h4>Step 6: Track Progress</h4>
+        From your dashboard, select the game that you wish to track. In the game page, you can see your statistics for that game, current rank compared to other players, and information about the stocks that you have purchased.
+    </li>
+  </ul>
+  <ul>
+    <li>
+        <h4>Step 7: See Game Results After Game Has Ended</h4>
+        From the "My Games" page, navigate to Past Games section. Click on the name of the game for which you want to see results. In the game page, you can see your statistics for that game and final rank compared to other players.
+    </li>
+  </ul>
+</div>

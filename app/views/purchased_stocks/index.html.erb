@@ -2,9 +2,9 @@
 
 <% if logged_in? %>
   <div class = "container-box">
-    <h2>My Stocks</h2>
-    <% if !@owned_stock.empty? %>
-      <table class="table table-condensed table-striped">
+    <h2>Stocks from Current Games</h2>
+    <% if ! @current_owned_stock_array.empty? %>
+      <table class="table table-condensed">
               <thead>
                 <tr>
                   <th><p>Game</p></th>
@@ -16,21 +16,49 @@
                 </tr>
               </thead>
               <tbody>
-              <% @owned_stock.each do |stock| %>
+              <% @current_owned_stock_array.each do |stock| %>
                 <tr>
-                  <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %></td>
-                  <td><%= link_to stock.stock_code, src="/search?query=#{stock.stock_code}" %></td>
-                  <td><p align="right"><%= stock.total_qty %></p></td>
-                  <td><p align="right"><%= number_to_currency(stock.money_spent.to_f/100)%></p></td>
-                  <td><p align="right"><%= number_to_currency(stock.value_in_stocks.to_f/100)%></p></td>
-                  <td><p align="right"><%= number_to_currency(stock.money_earned.to_f/100)%></p></td>
+                  <td><%= link_to stock[0].name, game_path(stock[0]) %></td>
+                  <td><%= link_to stock[1], src="/search?query=#{stock[1]}" %></td>
+                  <td><p align="right"><%= stock[2] %></p></td>
+                  <td><p align="right"><%= number_to_currency(stock[3].to_f/100)%></p></td>
+                  <td><p align="right"><%= number_to_currency(stock[4].to_f/100)%></p></td>
+                  <td><p align="right"><%= number_to_currency(stock[5].to_f/100)%></p></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
     <% else %>
-      <h3>You do not own stock.</h3>
+      <h4>You do not currently own any stock.</h4>
     <% end %>
-    <%= will_paginate @owned_stock, :param_name => 'owned_stock_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
   </div>
+  <% if ! @past_owned_stock_array.empty? %>
+    <div class = "container-box">
+      <h2>Stocks from Past Games</h2>
+        <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th><p>Game</p></th>
+                    <th><p>Stock Code</p></th>
+                    <th><p align="right">Total Quantity</p></th>
+                    <th><p align="right">Cost Basis</p></th>
+                    <th><p align="right">Total Value In Stocks</p></th>
+                    <th><p align="right">Capital Gains</p></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @past_owned_stock_array.each do |stock| %>
+                  <tr>
+                    <td><%= link_to stock[0].name, game_path(stock[0]) %></td>
+                    <td><%= link_to stock[1], src="/search?query=#{stock[1]}" %></td>
+                    <td><p align="right"><%= stock[2] %></p></td>
+                    <td><p align="right"><%= number_to_currency(stock[3].to_f/100)%></p></td>
+                    <td><p align="right"><%= number_to_currency(stock[4].to_f/100)%></p></td>
+                    <td><p align="right"><%= number_to_currency(stock[5].to_f/100)%></p></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+    </div>
+  <% end %>
 <% end %>

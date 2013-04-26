@@ -5,7 +5,7 @@
       <tr>
         <th><p>Stock Code</p></th>
         <th><p align="right">Total Quantity</p></th>
-        <th><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x</p></th>
+        <th><p align="right">&nbsp;&nbsp;&nbsp;x</p></th>
         <th><p align="right">Market Price</p></th>
         <th><p align="right">Total Value</p></th>
       </tr>
@@ -16,7 +16,7 @@
           <% if purchased_stock[1] > 0 %>
             <td><strong><%= link_to purchased_stock[0], src="/search?query=#{purchased_stock[0]}" %></strong></td>
             <td><p align="right"><%= purchased_stock[1] %></p></td>
-            <td><p>&nbsp;&nbsp;&nbsp;&nbsp;x</p></td>
+            <td><p align="right">&nbsp;&nbsp;&nbsp;x</p></td>
             <td><p align="right"><%= number_to_currency((purchased_stock[3]/purchased_stock[1]).to_f/100)%></p></td>
             <td><strong><p align="right"><%= number_to_currency(purchased_stock[3].to_f/100) %></p></strong></td>
           <% end %>

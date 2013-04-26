@@ -1,28 +1,24 @@
-<div class="container-box">
-  <%- model_class = @user.class -%>
-  <h2>User Account Information</h2>
+<div class ="span12">
+    <%- model_class = @user.class -%>
+    <h2>User Information<% if current_user.id == @user.id %>
+        <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_user_path(@user), :class => 'btn btn-mini' %>
+      <% end %></h2>
 
-  <dl class="dl-horizontal">
-    <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
-    <dd><%= @user.username %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-    <dd><%= @user.email %></dd>
-    <% if @user.is_admin %>
-      <dt><strong>Status:</strong></dt>
-      <dd>
-        <strong>Admin</strong>
-      </dd>
-    <% end %>
-    <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
-    <dd><%= @user.total_points %></dd>
-    </br>
-    <% if current_user.id == @user.id %>
-      <div class="form-actions">
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_user_path(@user), :class => 'btn btn-primary' %>
-    <% end %>
-    </div>
-  </dl>
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
+      <dd><%= @user.username %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+      <dd><%= @user.email %></dd>
+      <% if @user.is_admin %>
+        <dt><strong>Status:</strong></dt>
+        <dd>
+          <strong>Admin</strong>
+        </dd>
+      <% end %>
+      <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
+      <dd><%= @user.total_points %></dd>
+      </br>
+    </dl>
 </div>
 
 

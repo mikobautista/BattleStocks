@@ -1,6 +1,6 @@
 <h2>Upcoming Games</h2>
 <% if !@upcoming_user_games.empty? %>
-  <table class="table table-condensed table-striped">
+  <table class="table table-condensed">
     <thead>
       <tr>
         <th><p>Name</p></th>
@@ -27,7 +27,7 @@
     </tbody>
   </table>
 <% else %>
-  <h3>There are no upcoming games.</h3>
+  <h4>There are no upcoming games.</h4>
 <% end %>
 
 <%= will_paginate @upcoming_user_games, :param_name => 'upcoming_games_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>

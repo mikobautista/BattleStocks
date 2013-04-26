@@ -7,14 +7,14 @@
   </div> 
 
   <div class="control-group">
-    <%= f.label :start_date, :class => 'control-label'%>
+    <%= f.label :start_date, :class => 'control-label', required: false %>
     <div class="controls">
       <%= f.text_field :start_date, 'data-behaviour' => 'datepicker'%>
     </div>
   </div> 
 
   <div class="control-group">
-    <%= f.label :end_date, :class => 'control-label' %>
+    <%= f.label :end_date, :class => 'control-label', required: false %>
     <div class="controls">
       <%= f.text_field :end_date, 'data-behaviour' => 'datepicker'%>
     </div>
@@ -27,8 +27,6 @@
     </div>
   </div>
 
-  <div class="form-actions">
     <%= f.submit nil,:class => 'btn btn-primary' %>
     <%= link_to "Cancel", root_url, :class => 'btn' %>
-  </div>
 <% end %>
