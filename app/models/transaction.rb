@@ -13,7 +13,7 @@ class Transaction < ActiveRecord::Base
   # Validations
   # -----------------------------
   validates_presence_of :date
-  validates_presence_of :is_buy
+  # validates_presence_of :is_buy
   validates_presence_of :purchased_stock_id
   validates_presence_of :qty
   
