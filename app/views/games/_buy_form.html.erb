@@ -1,8 +1,8 @@
-<strong>Buying</strong></br>
+<strong>Buying</strong></br></br>
 <%= simple_form_for @transaction do |f| %>
 	<div class="controls">
 		<%= f.input :stock_code, :label => "Stock Code" %>
-		<%= f.input :qty, as: :string,:label => "Quantity" %>
+		<%= f.input :qty, as: :string, :label => "Quantity", required: false %>
 		<%= f.hidden_field :is_buy, :value => true %>
 		<%= f.hidden_field :game_id, :value => @game.id %>
 	</div>
