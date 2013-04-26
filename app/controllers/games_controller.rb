@@ -34,8 +34,10 @@ class GamesController < ApplicationController
     @user_game = UserGame.new
 
     # current_user's data in this game
-    @current_user_game = UserGame.find_by_user_id_and_game_id(current_user.id, @game.id)
-    @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id)
+    if ! @users_not_added.include?(current_user)
+      @current_user_game = UserGame.find_by_user_id_and_game_id(current_user.id, @game.id)
+      @purchased_stocks = PurchasedStock.for_user_game(@current_user_game.id)
+    end
 
     # update all users' total_value_in_stocks
     require 'yahoo_stock'

@@ -1,3 +1,4 @@
+<% if ! @users_not_added.include?(current_user) %>
 <div class = "container-box">
   <%- model_class = @game.class -%>
   <h1>Game: <%= @game.name %>
@@ -67,5 +68,8 @@
   </div>
 <% end %>
 </div>
+<% else%>
+yo
+<% end %>
 
 

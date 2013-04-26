@@ -1,5 +1,14 @@
 class Ability
   include CanCan::Ability
+  
+  # def current_user
+  #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  # end
+  # helper_method :current_user
+  
+	def current_user
+		@current_user ||= User.find(session[:user_id]) if session[:user_id]
+	end
 
   def initialize(user)
     user ||= User.new
@@ -7,18 +16,34 @@ class Ability
     if user.is_admin
       can :manage, :all
     else
-      can :create, [User, Game, UserGame]
-      can [:read, :create], PurchasedStock, :usergame => {:user_id => user.id}
-      can [:read, :create], Transaction, :purchased_stock => {:usergame => {:user_id => user.id}}
-      can [:read, :edit, :update], User, :id => user.id
-      can :read, Game
-      can [:edit, :update], Game, :manager_id => user.id, :start_date => Time.now.to_date
+      # can :create, [User, Game, UserGame]
       
-     # can [:edit, :update], Game, :manager_id => user.id
-     #  can :destroy
-     #  
+      can [:read, :create], PurchasedStock do |purchasedstock|
+        purchasedstock.usergame.user_id == user.id
+      end
+      # can [:read, :create], PurchasedStock, :usergame => {:user_id => user.id}
       
-      #can :read, Project, :active => true, :id => user.id
+      can [:read, :create], Transaction do |transaction|
+        transaction.purchased_stock.usergame.user_id == user.id
+      end
+      # can [:read, :create], Transaction, :purchased_stock => {:usergame => {:user_id => user.id}}
+      
+      can :show, User
+      can [:edit, :update], User do |x|  
+        x.id == user.id
+      end
+      # can [:edit, :update], User, :email => user.email
+      
+      can :read, Game do |game|
+        game == Game.for_user(user)
+      end
+      
+      can :edit, Game do |x|
+        x.manager_id == user.id 
+        # && game.start_date > Time.now.to_date
+      end
+      # can [:edit, :update], Game, :manager_id => user.id, :start_date => Time.now.to_date
+      
     end
     
     # Define abilities for the passed in user here. For example:
