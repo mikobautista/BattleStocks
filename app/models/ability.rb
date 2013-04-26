@@ -16,7 +16,7 @@ class Ability
     if user.is_admin
       can :manage, :all
     else
-      # can :create, [User, Game, UserGame]
+      can :create, [User, Game, UserGame]
       
       can [:read, :create], PurchasedStock do |purchasedstock|
         purchasedstock.usergame.user_id == user.id
@@ -38,7 +38,7 @@ class Ability
         game == Game.for_user(user)
       end
       
-      can :edit, Game do |x|
+      can :update, Game do |x|
         x.manager_id == user.id 
         # && game.start_date > Time.now.to_date
       end

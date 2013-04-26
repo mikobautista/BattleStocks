@@ -148,8 +148,11 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
   before_filter :require_login
 
+  before_filter :if_game_manager, :only => [:edit, :update]
+  
   private
 
   def require_login
@@ -157,5 +160,12 @@ class GamesController < ApplicationController
       flash[:error] = "You must be logged in to access this section"
       redirect_to log_in_url # halts request cycle
     end
+  end
+  
+  def if_game_manager
+    unless Game.find(params[:id]).manager_id == current_user.id
+      flash[:error] = "Nice Try, Prof. H. -- Qapla'!"
+      redirect_to root_url # halts request cycle
+    end 
   end
 end
