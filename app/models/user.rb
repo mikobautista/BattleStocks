@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   # password must be present and at least 4 characters long, with a confirmation
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
+  validates_length_of :password, :minimum => 4, :if => :password_present?
   
   validates_presence_of :username
   validates_uniqueness_of :username, :email
@@ -33,6 +34,9 @@ class User < ActiveRecord::Base
   scope :active, where('is_active = ?', true)
   scope :in_game, lambda { |x| joins(:user_games).where("game_id = ?", x) }
   
+  def password_present?
+    !password.nil?
+  end
   
   # Authentication Functions
   # -----------------------------
