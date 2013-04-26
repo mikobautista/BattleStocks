@@ -7,9 +7,9 @@
         <div class = "pull-right">
           <% if (ugame.game.start_date.month == ugame.game.end_date.month) && (ugame.game.start_date.year == ugame.game.end_date.year) %>
             <% if (ugame.game.end_date.day - Time.now.day - 1) == 0 %>
-              <i><font color="orange"><strong>Ends today.</strong></font></i>
+              <i><font color="#C00000">Ends today.</font></i>
             <% elsif (ugame.game.end_date.day - Time.now.day - 1) == 1 %>
-              <i>Ends tomorrow.</i>
+              <i><font color="FF9900">Ends tomorrow.</font></i>
             <% else %>
               <i>Ends in <%= ugame.game.end_date.day - Time.now.day - 1 %> days.</i>
             <% end %>
