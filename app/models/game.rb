@@ -64,19 +64,13 @@ class Game < ActiveRecord::Base
 
         # update winner_id
         game.winner_id = UserGame.for_game(game.id).by_portfolio_value.first.user_id
+        game.save!
 
         # update points all user_game's points and user's total_points
-        count = UserGame.for_game(game.id).size - 1
-        for user_game in UserGame.for_game(game.id).by_portfolio_value
-          user_game.points = count
-          user = User.find_by_id(user_game.user_id)
-          user.total_points += count
-          count -= 1
-          user_game.save!
-          user.save!
-        end
-
-        game.save!
+        user_game.points = UserGame.for_game(game.id).size - user_game.get_rank
+        user_game.user.total_points += user_game.points
+        user_game.user.save!
+        user_game.save!
       end
 
     end
