@@ -7,21 +7,42 @@ class UserGame < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
 
+  # Validations
+  # -----------------------------
+  validates_presence_of :game_id
+  validates_presence_of :user_id
+  validates_presence_of :balance
+  #validates_presence_of :is_active
+  validates_presence_of :points
+  validates_presence_of :total_value_in_stocks
+
+  validates_numericality_of :balance, :greater_than_or_equal_to => 0
+  validates_numericality_of :total_value_in_stocks, :greater_than_or_equal_to => 0 
+  validates_numericality_of :points, :greater_than_or_equal_to => 0
+  validates :is_active, :inclusion => {:in => [true, false]}
+
   #Scopes
   # -----------------------------
-  scope :by_balance, order('balance DESC')
-  scope :for_game, lambda { |x| where("game_id = ?", x) }
-  scope :for_user, lambda { |x| where("user_id = ?", x) }
+  scope :by_portfolio_value, order('balance + total_value_in_stocks DESC')
+  scope :for_game, lambda { |game_id| where("game_id = ?", game_id) }
+  scope :for_user, lambda { |user_id| where("user_id = ?", user_id) }
   scope :current, joins(:game).where('start_date <= ?', Time.now).where('end_date > ?', Time.now).where('is_terminated = ?', false)
   scope :upcoming, joins(:game).where('start_date > ?', Time.now).where('is_terminated = ?', false)
   scope :past, joins(:game).where('end_date <= ?', Time.now)
   scope :ending_soonest, joins(:game).order('end_date, start_date')
   scope :starting_soonest, joins(:game).order('start_date, end_date')
   scope :most_recent, joins(:game).order('end_date DESC, start_date DESC')
-  scope :by_portfolio_value, order('balance + total_value_in_stocks DESC')
+  scope :alphabetical, joins(:user).order('username')
 
   # Methods
   # -----------------------------
+  
+  # def get_rank
+    # hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
+    # return hash[self] + 1
+  # end
+  
+  # ------ NEW PORTION BELOW, REPLACING ABOVE METHOD ------ #
   def get_rank
     hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
     if hash[self] == 0
@@ -31,13 +52,14 @@ class UserGame < ActiveRecord::Base
       while x > 0 && hash.key(x).get_portfolio == hash.key(x-1).get_portfolio
           x -= 1
       end
-      return (x+1)
+      return x + 1
     end
   end
   
   def get_portfolio
     return self.total_value_in_stocks + self.balance
   end
+  # ------ ENDS HERE ------- #
 
   def get_ROI
     require 'yahoo_stock'

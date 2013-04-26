@@ -2,21 +2,20 @@
 	<table class="table table-condensed table-striped">
           <thead>
             <tr>
-              <th>Stock Code</th>
-              <th>Current Value</th>
+              <th><p>Stock Code</p></th>
+              <th><p align="right">Market Price</p></th>
             </tr>
           </thead>
           <tbody>
-          <% @owned_stock.each do |stock| %>
+          <% @owned_stock_array.uniq.each do |stock| %>
             <tr>
-              <% if (stock.total_qty != 0) %>
-                <td><%= link_to stock.stock_code.upcase, src="/search?query=#{stock.stock_code}" %></td>
-                <td><%= number_to_currency((stock.get_price).to_f/100) %></td>
-              <% end %>
+                <td><%= link_to stock[0], src="/search?query=#{stock[0]}" %></td>
+                <td><p align="right"><%= number_to_currency(stock[1].to_f/100) %></p></td>
             </tr>
           <% end %>
         </tbody>
       </table>
 <% else %>
-  <h3>You do not own stock.</h3>
+  <h4>You do not own stocks.</h4>
 <% end %>
+<%= will_paginate @owned_stock, :param_name => 'owned_stock_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>

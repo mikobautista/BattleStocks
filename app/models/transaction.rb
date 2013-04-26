@@ -12,10 +12,30 @@ class Transaction < ActiveRecord::Base
 
   # Validations
   # -----------------------------
-  validates_format_of :qty, :with => /^[1-9]\d*/, :message => "should only be positive integers only without decimals"
-
+  validates_presence_of :date
+  # validates_presence_of :is_buy
+  validates_presence_of :purchased_stock_id
+  validates_presence_of :qty
+  
+  validates_numericality_of :qty, :greater_than => 0
+  validates_date :date
+  validates :is_buy, :inclusion => {:in => [true, false]}
+  
   # Methods
   # -----------------------------
+
+  def flush_purchased_stock_and_user_game
+    @purchase = self.purchased_stock
+    @user_game = self.purchased_stock.user_game
+    money_involved = self.qty * self.value_per_stock
+    @purchase.total_qty = 0
+    @purchase.money_earned += money_involved
+    @purchase.value_in_stocks = 0
+    @user_game.balance += money_involved
+    @user_game.total_value_in_stocks = 0
+    @purchase.save!
+    @user_game.save!
+  end
 
   def get_price_and_update_purchased_stock_and_user_game
     require 'yahoo_stock'
@@ -35,6 +55,7 @@ class Transaction < ActiveRecord::Base
       @purchase.value_in_stocks += money_involved
       @user_game.balance -= money_involved
       @user_game.total_value_in_stocks += money_involved
+      self.save!
       @purchase.save!
       @user_game.save!
       return true
@@ -45,6 +66,7 @@ class Transaction < ActiveRecord::Base
       @purchase.value_in_stocks -= money_involved
       @user_game.balance += money_involved
       @user_game.total_value_in_stocks -= money_involved
+      self.save!
       @purchase.save!
       @user_game.save!
       return true

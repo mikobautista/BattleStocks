@@ -28,8 +28,10 @@ BattleStocks::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
   get "games" => "games#show", :as => "my_games"
   get "purchased_stocks" => "purchased_stocks#index", :as => "my_stocks"
+
   resources :users
   resources :sessions
+  resources :password_resets
 
   # set the root
   root :to => "home#index"

@@ -25,6 +25,7 @@ class GameTest < ActiveSupport::TestCase
   should_not allow_value("asdfasdf").for(:end_date)
 
   # Budget
+  should validate_numericality_of :budget
   should allow_value(1000000).for(:budget)
   should_not allow_value(0).for(:budget)
   should_not allow_value("asdfasdf").for(:budget)
@@ -64,6 +65,8 @@ class GameTest < ActiveSupport::TestCase
     should "shows that dollars_to_cents method works" do
       assert_equal 1000000, @game1.budget
     end
+    
+    # ALL THE GAME SCOPES are being tested in the user_games model sooo liiikkee....
     
     # THIS STILL NEEDS FIXING UP
     # # test the method 'convert_to_est' works

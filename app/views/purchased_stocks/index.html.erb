@@ -9,11 +9,10 @@
                 <tr>
                   <th><p>Game</p></th>
                   <th><p>Stock Code</p></th>
-                  <th><p>Total Quantity</p></th>
+                  <th><p align="right">Total Quantity</p></th>
                   <th><p align="right">Cost Basis</p></th>
-                  <th><p align="right">Value In Stocks</p></th>
-                  <th><p align="right">Money Earned</p></th>
-                  <th></th>
+                  <th><p align="right">Total Value In Stocks</p></th>
+                  <th><p align="right">Capital Gains</p></th>
                 </tr>
               </thead>
               <tbody>
@@ -21,12 +20,10 @@
                 <tr>
                   <td><%= link_to stock.user_game.game.name, game_path(stock.user_game.game) %></td>
                   <td><%= link_to stock.stock_code, src="/search?query=#{stock.stock_code}" %></td>
-                  <td><%= stock.total_qty %></td>
+                  <td><p align="right"><%= stock.total_qty %></p></td>
                   <td><p align="right"><%= number_to_currency(stock.money_spent.to_f/100)%></p></td>
                   <td><p align="right"><%= number_to_currency(stock.value_in_stocks.to_f/100)%></p></td>
                   <td><p align="right"><%= number_to_currency(stock.money_earned.to_f/100)%></p></td>
-                  <td><%= link_to "View", purchased_stock_path(stock), :class => 'btn btn-mini' %>
-                  </td>
                 </tr>
               <% end %>
             </tbody>

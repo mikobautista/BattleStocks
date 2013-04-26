@@ -64,3 +64,32 @@ div {
     list-style: square;
   }
 }
+
+ dl.stocks { float:left; 
+  width:100%;
+  padding-left: 19px;
+  padding-right: 0px;
+  padding-top: 19px;
+  padding-bottom: 19px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0px 6px 11px #D0D0D0;
+  border: 1px solid #dcdcdc;}
+ dt.stocks,
+ dd.stocks { float:left; width: 150px; margin:0; padding:0;}
+ dt.stocks { padding-right:0.5em;}
+
+ dl.games { float:left; 
+  width:100%;
+  padding-left: 19px;
+  padding-right: 0px;
+  padding-top: 19px;
+  padding-bottom: 19px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0px 6px 11px #D0D0D0;
+  border: 1px solid #dcdcdc;
+  }
+ dt.games,
+ dd.games { float:left; width: 200px; margin:0; padding:0;}
+ dt.games { padding-right:1em; font-weight:normal;}

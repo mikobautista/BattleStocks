@@ -7,8 +7,11 @@ class HomeController < ApplicationController
   		@upcoming_user_games = UserGame.upcoming.for_user(current_user).starting_soonest
   		@past_user_games = UserGame.past.for_user(current_user).most_recent
 
-  		@owned_stock = PurchasedStock.for_user(current_user).find(:all, :select => "DISTINCT stock_code, total_qty", :group => "stock_code")
-      
+  		@owned_stock = PurchasedStock.for_user(current_user).nonzero.paginate(:page => params[:owned_stock_page]).per_page(6)
+      @owned_stock_array = []
+      for stock in @owned_stock
+        @owned_stock_array += [[stock.stock_code, stock.get_price]]
+      end
   	end
   end
 
@@ -17,6 +20,8 @@ class HomeController < ApplicationController
     @query = params[:query]
     if @query != ""
       @stock_value = PurchasedStock.search(@query)
+      @stock_info = MetaInspector.new("http://www.reuters.com/finance/stocks/overview?symbol=#{@query.upcase}")
+      @stock_description = MetaInspector.new("http://www.reuters.com/finance/stocks/companyProfile?symbol=#{@query.upcase}")
     end
   end
 end

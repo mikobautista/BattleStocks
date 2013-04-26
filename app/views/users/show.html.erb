@@ -7,18 +7,20 @@
     <dd><%= @user.username %></dd>
     <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
     <dd><%= @user.email %></dd>
-    <dt><strong>Status:</strong></dt>
-    <dd>
-      <% if @user.is_admin %>
-        <strong>You have admin status.</strong>
-      <% end %>
-    </dd>
+    <% if @user.is_admin %>
+      <dt><strong>Status:</strong></dt>
+      <dd>
+        <strong>Admin</strong>
+      </dd>
+    <% end %>
     <dt><strong><%= model_class.human_attribute_name(:total_points) %>:</strong></dt>
     <dd><%= @user.total_points %></dd>
     </br>
-    <div class="form-actions">
+    <% if current_user.id == @user.id %>
+      <div class="form-actions">
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_user_path(@user), :class => 'btn btn-primary' %>
+    <% end %>
     </div>
   </dl>
 </div>

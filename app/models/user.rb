@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   # Callbacks
   # -----------------------------
   before_save :encrypt_password
+  before_create { generate_token(:auth_token) }
 
   # Relationships
   # -----------------------------
@@ -20,12 +21,12 @@ class User < ActiveRecord::Base
   
   validates_presence_of :username
   validates_uniqueness_of :username, :email
-  validates_format_of :username, :with => /^[-\w\._@]+$/i, :message => "should only contain letters, numbers, or .-_@"
-  validates_presence_of :password, :on => :create
+  validates_format_of :username, :with => /^[-\w\._@]+$/i, :message => "Username should only contain letters, numbers, or .-_@"
 
   # email must be unique and in proper format
   validates_presence_of :email
-  validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validates_format_of :email, :with => /^[\w]([^@\s,;]+)@(([a-z0-9.-]+\.)+(com|edu|org|net|gov|mil|biz|info))$/i
+  #validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   
   # Scopes
   # -----------------------------
@@ -51,5 +52,21 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+<<<<<<< HEAD
   
+=======
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+>>>>>>> 8b0bf0112c3e7559272a3f607c64e258039c21af
 end

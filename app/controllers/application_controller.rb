@@ -19,9 +19,13 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Nice Try, Prof. H. Qapla"
+    flash[:error] = "Nice Try, Prof. H. -- Qapla'!"
     # "You are not authorized to access this page. Further, your IP address has been recorded and dispatched to the FBI, as you have just violated the Online Protection and Enforcement of Digital Trade Act"
     redirect_to root_url
   end
 
+	rescue_from ActiveRecord::RecordNotFound do |variable|
+		flash[:notice] = "Nice Try, Prof. H. -- Qapla'!"
+		redirect_to root_url
+	end
 end

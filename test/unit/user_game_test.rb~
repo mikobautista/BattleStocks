@@ -1,0 +1,169 @@
+require 'test_helper'
+
+class UserGameTest < ActiveSupport::TestCase
+  # Relationships
+  # -----------------------------
+  should have_many :purchased_stocks
+  should belong_to :user
+  should belong_to :game
+
+  # Validations
+  # -----------------------------
+  should validate_presence_of :user_id
+  should validate_presence_of :game_id
+  should validate_presence_of :balance
+#  should validate_presence_of :is_active
+  should validate_presence_of :points
+  should validate_presence_of :total_value_in_stocks
+
+  should validate_numericality_of :balance
+  should allow_value(1000000).for(:balance)
+  should allow_value(0).for(:balance)
+  should_not allow_value("asdfasdf").for(:balance)
+  should_not allow_value(-10000).for(:balance)
+
+  should validate_numericality_of :points
+  should allow_value(1000000).for(:points)
+  should allow_value(0).for(:points)
+  should_not allow_value("asdfasdf").for(:points)
+  should_not allow_value(-10000).for(:points)
+  
+  should validate_numericality_of :total_value_in_stocks
+  should allow_value(1000000).for(:total_value_in_stocks)
+  should allow_value(0).for(:total_value_in_stocks)
+  should_not allow_value("asdfasdf").for(:total_value_in_stocks)
+  should_not allow_value(-10000).for(:total_value_in_stocks)
+
+  
+   context "Creating one user_game" do
+     # create the objects I want with factories
+     setup do  
+       @alex = FactoryGirl.create(:user, :email => "test@gmail.com", :username => "testuser1")
+       @rachel = FactoryGirl.create(:user, :email => "test2@gmail.com", :username => "testuser2")
+       @mark = FactoryGirl.create(:user, :email => "test3@gmail.com", :username => "testuser3")
+       @game1 = FactoryGirl.create(:game, :name => "test gameeee", :start_date => Time.now.to_date, 
+       :end_date => 10.days.from_now.to_date, :budget => 10)
+       #@game2 = FactoryGirl.create(:game, :name => "second test gameeee", :start_date => 6.days.ago.to_date, 
+       #:end_date => 2.days.ago.to_date, :budget => 10)
+       @game2 = FactoryGirl.create(:game, :name => "second test gameeee", :start_date => Time.now.to_date, 
+       :end_date => 2.days.from_now.to_date, :budget => 10)
+       @game3 = FactoryGirl.create(:game, :name => "third test gameeee", :start_date => 3.days.from_now.to_date, 
+       :end_date => 5.days.from_now.to_date, :budget => 10)
+       @usergame1 = FactoryGirl.create(:user_game, :user_id => @alex.id, :game_id => @game1.id, :balance => 2000, :is_active => true, :points => 200, :total_value_in_stocks => 3000)
+       @usergame2 = FactoryGirl.create(:user_game, :user_id => @rachel.id, :game_id => @game2.id, :balance => 2000, :is_active => true, :points => 200, :total_value_in_stocks => 3000)
+       @usergame3 = FactoryGirl.create(:user_game, :user_id => @mark.id, :game_id => @game3.id, :balance => 2000, :is_active => true, :points => 200, :total_value_in_stocks => 3000)
+       @goog = FactoryGirl.create(:purchased_stock, :user_game_id => @usergame1.id, 
+        :stock_code => "goog", :total_qty => 40, :money_spent => 5000, :money_earned => 0,
+        :value_in_stocks => 80)
+       @transaction1 = FactoryGirl.create(:transaction, :purchased_stock_id => @goog.id, :date => Time.now.to_date, :qty => 40, :value_per_stock => 45000, :is_buy => true)
+     end
+
+     # and provide a teardown method as well
+     teardown do
+       @alex.destroy
+       @rachel.destroy
+       @mark.destroy
+       @game1.destroy
+       @game2.destroy
+       @game3.destroy
+       @usergame1.destroy
+       @usergame2.destroy
+       @usergame3.destroy
+       @goog.destroy
+       @transaction1.destroy
+     end
+     
+     # now run the tests:
+     # test one of each factory (not really required, but not a bad idea)
+     should "show that all factories are properly created" do
+       assert_equal "test@gmail.com", @alex.email
+       assert_equal "testuser1", @alex.username
+       assert_equal "testuser2", @rachel.username
+       assert_equal "testuser3", @mark.username
+       assert_equal "test gameeee", @game1.name
+       assert_equal "second test gameeee", @game2.name
+       assert_equal "third test gameeee", @game3.name
+       assert_equal @alex.id, @usergame1.user_id
+       assert_equal @rachel.id, @usergame2.user_id
+       assert_equal @mark.id, @usergame3.user_id
+       assert_equal "GOOG", @goog.stock_code
+       assert_equal 40, @transaction1.qty
+     end
+
+  # Test the scopes
+  # -----------------------------
+  # test the scope 'by_portfolio_value'
+
+  # test the scope 'for_game'
+  should "show all user_games for a particular game" do
+       assert_equal @usergame1, UserGame.for_game(@game1).first
+       assert_equal 1, UserGame.for_game(@game1).size
+  end 
+  # test the scope 'for_user'
+  should "show all user_games for a particular user" do
+       assert_equal @usergame1, UserGame.for_user(@alex).first
+       assert_equal 1, UserGame.for_user(@alex).size
+       assert_equal @usergame2, UserGame.for_user(@rachel).first
+       assert_equal 1, UserGame.for_user(@rachel).size
+       assert_equal @usergame3, UserGame.for_user(@mark).first
+       assert_equal 1, UserGame.for_user(@mark).size
+  end 
+
+  # test the scope 'current'
+  #should "should show all the current games for a particular user_game" do
+       #assert_equal @usergame1, UserGame.current(@game1).first
+       #assert_equal 1, UserGame.current(@usergame1).size
+       #assert_not_equal @usergame2, UserGame.current(@game1).first
+       #assert_not_equal @usergame2, UserGame.current(@game2).first
+       #assert_not_equal @usergame3, UserGame.current(@game3).first
+  #end
+  
+  # test the scope 'upcoming'
+  should "show all the upcoming games for a particular user_game" do
+       @game2.start_date = 6.days.ago.to_date
+       @game2.end_date = 2.days.ago.to_date
+       assert @game2.valid?
+       @game2.save!       
+       assert_equal @usergame3, UserGame.upcoming(@game3).first
+       assert_equal 1, UserGame.upcoming(@game3).size
+       assert_not_equal @usergame1, UserGame.upcoming(@game1).first
+       assert_not_equal 1, UserGame.upcoming(@game1).first
+       assert_not_equal @usergame2, UserGame.upcoming(@game2).first
+  end  
+
+  # test the scope 'past'
+  should "show all the past games for a particular user_game" do
+       @game2.start_date = 6.days.ago.to_date
+       @game2.end_date = 2.days.ago.to_date
+       assert @game2.valid?
+       @game2.save!
+       assert_equal @usergame2, UserGame.past(@game2).first
+       assert_equal 1, UserGame.past(@game2).size
+       assert_not_equal @usergame1, UserGame.past(@game1).first
+       assert_not_equal @usergame3, UserGame.past(@game3).first
+  end
+
+  # test the scope 'ending_soonest'
+  #should "show the user_games that have games that are ending the soonest" do 
+       #assert_equal [@game2.id, @game3.id, @game1.id], UserGame.ending_soonest.map{|ug| ug.game_id}
+       #assert_equal @usergame2, UserGame.ending_soonest(@game2).first
+  #end
+
+  # test the scope 'starting_soonest'
+  #should "show the user_games that are starting the soonest" do
+       #assert_equal [@game2.id, @game1.id, @game3.id], UserGame.starting_soonest.map{|ug| ug.game_id}
+  #end
+  
+  # test the scope 'most_recent' 
+  #should "show the most recent user_games for a particular game" do 
+       #assert_equal [@game1.id, @game3.id, @game2.id], UserGame.most_recent.map{|ug| ug.game_id}
+  #end 
+
+  # test the method 'get_rank'
+  #should "show the rank for the games of a particular user_game" do 
+       #assert_equal 1, @usergame1.get_rank
+       #assert_equal 1, @usergame2.get_rank
+       #assert_equal 1, @usergame3.get_rank
+  #end
+ end
+end

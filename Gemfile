@@ -50,6 +50,7 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'nas-yahoo_stock'
 
 gem 'bootstrap-datepicker-rails'
+gem 'metainspector'
 
 gem 'simple_form'
 
@@ -61,4 +62,9 @@ gem "mocha"
 gem 'simplecov'
 gem 'validates_timeliness'
 
+<<<<<<< HEAD
 gem 'cancan'
+=======
+gem 'cancan'
+
+>>>>>>> 8b0bf0112c3e7559272a3f607c64e258039c21af
