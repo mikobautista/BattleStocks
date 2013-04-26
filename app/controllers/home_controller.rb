@@ -9,10 +9,12 @@ class HomeController < ApplicationController
       #for stock quicklook
       @current_user_game_owned = UserGame.current.for_user(current_user)
       @owned_stock_array = []
-      for ugame in @current_user_game_owned
-        @owned_stock = PurchasedStock.for_user_game(ugame).nonzero
-        for stock in @owned_stock
-          @owned_stock_array += [[stock.stock_code, stock.get_price]]
+      if ! @current_user_game_owned.empty?
+        for ugame in @current_user_game_owned
+          @owned_stock = PurchasedStock.for_user_game(ugame).nonzero
+          for stock in @owned_stock
+            @owned_stock_array += [[stock.stock_code, stock.get_price]]
+          end
         end
       end
   	end
