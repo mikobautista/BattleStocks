@@ -1,4 +1,4 @@
-<% if !@owned_stock.empty? %>
+<% if !@owned_stock_array.empty? %>
 	<table class="table table-condensed">
           <thead>
             <tr>
@@ -18,4 +18,3 @@
 <% else %>
   <h4>You do not own stocks.</h4>
 <% end %>
-<%= will_paginate @owned_stock, :param_name => 'owned_stock_page', :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
