@@ -37,12 +37,7 @@ class UserGame < ActiveRecord::Base
   # Methods
   # -----------------------------
   
-  # def get_rank
-    # hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
-    # return hash[self] + 1
-  # end
-  
-  # ------ NEW PORTION BELOW, REPLACING ABOVE METHOD ------ #
+  # Gets the rank of a user playing in a game. Ties are resolved by checking the portfolio value of the person before (and so on if they're equal).
   def get_rank
     hash = Hash[UserGame.for_game(self.game.id).by_portfolio_value.map.with_index.to_a]
     if hash[self] == 0
@@ -56,11 +51,12 @@ class UserGame < ActiveRecord::Base
     end
   end
   
+  # Adds available balance and total value in stocks
   def get_portfolio
     return self.total_value_in_stocks + self.balance
   end
-  # ------ ENDS HERE ------- #
 
+  # Gets the return on investment of a user (value changed in stocks), from purchasing stocks to current
   def get_ROI
     require 'yahoo_stock'
 
