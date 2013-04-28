@@ -72,10 +72,12 @@ class Game < ActiveRecord::Base
         game.save!
 
         # update points all user_game's points and user's total_points
-        user_game.points = UserGame.for_game(game.id).size - user_game.get_rank
-        user_game.user.total_points += user_game.points
-        user_game.user.save!
-        user_game.save!
+        for user_game in UserGame.for_game(game.id)
+          user_game.points = UserGame.for_game(game.id).size - user_game.get_rank
+          user_game.user.total_points += user_game.points
+          user_game.user.save!
+          user_game.save!
+        end
       end
 
     end
