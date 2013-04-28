@@ -24,6 +24,7 @@ class Transaction < ActiveRecord::Base
   # Methods
   # -----------------------------
 
+  # Done at the end of a game, when all stocks are sold and money goes to user_game.balance
   def flush_purchased_stock_and_user_game
     @purchase = self.purchased_stock
     @user_game = self.purchased_stock.user_game
@@ -36,7 +37,8 @@ class Transaction < ActiveRecord::Base
     @purchase.save!
     @user_game.save!
   end
-
+  
+  # updates the summary fields of purchased stock and total stocks
   def get_price_and_update_purchased_stock_and_user_game
     require 'yahoo_stock'
     @purchase = self.purchased_stock

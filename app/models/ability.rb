@@ -1,11 +1,6 @@
 class Ability
   include CanCan::Ability
   
-  # def current_user
-  #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  # end
-  # helper_method :current_user
-  
 	def current_user
 		@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
@@ -13,36 +8,40 @@ class Ability
   def initialize(user)
     user ||= User.new
     
-    if user.is_admin
+    if user.is_admin 
+      # If you're an admin, you have the power to manage everything
       can :manage, :all
     else
+      # All users can create users, games and hence usergames
       can :create, [User, Game, UserGame]
       
-      can [:read, :create], PurchasedStock do |purchasedstock|
+      # A user should be able to index and create purchased stocks, but nobody can read the details (show) since the relevant information is already shown in the index
+      can [:index, :create], PurchasedStock do |purchasedstock|
         purchasedstock.usergame.user_id == user.id
       end
-      # can [:read, :create], PurchasedStock, :usergame => {:user_id => user.id}
       
-      can [:read, :create], Transaction do |transaction|
+      # All users can create transactions in their own games
+      can :create, Transaction do |transaction|
         transaction.purchased_stock.usergame.user_id == user.id
       end
-      # can [:read, :create], Transaction, :purchased_stock => {:usergame => {:user_id => user.id}}
       
+      # All users can look at the details of other users, but only edit their own information
       can :show, User
       can [:edit, :update], User do |x|  
         x.id == user.id
       end
       # can [:edit, :update], User, :email => user.email
       
+      # All users can see their own games
       can :read, Game do |game|
         game == Game.for_user(user)
       end
       
+      # A user can edit and manage their own game, if they are the manager
       can :update, Game do |x|
         x.manager_id == user.id 
         # && game.start_date > Time.now.to_date
       end
-      # can [:edit, :update], Game, :manager_id => user.id, :start_date => Time.now.to_date
       
     end
     

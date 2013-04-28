@@ -8,6 +8,7 @@ class Admin < ActiveRecord::Migration
     admin.is_admin = true
     admin.total_points = 1000000
     admin.is_active = true
+    admin.auth_token = "auth_token"
     admin.save!
   end
 

@@ -37,10 +37,12 @@ class PurchasedStock < ActiveRecord::Base
 
   # Methods
   # -----------------------------
+  # changes stock code to all upper case
   def stock_code_upper
   	self.stock_code.upcase!
   end
 
+  # gets price from yahoo stock API
   def get_price
     require 'yahoo_stock'
     return ((YahooStock::Quote.new(:stock_symbols => [self.stock_code]).results(:to_array).output[0][1].to_f) * 100).to_i

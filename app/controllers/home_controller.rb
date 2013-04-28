@@ -20,7 +20,7 @@ class HomeController < ApplicationController
       end
   	end
   end
-
+  
   def search 
     # allows for the admin to search from their dashboard
     @query = params[:query]

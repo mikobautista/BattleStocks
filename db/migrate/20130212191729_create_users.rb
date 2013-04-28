@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :total_points, :default => 0
       t.boolean :is_admin, :default => false
       t.boolean :is_active, :default => true
+      t.string :auth_token
 
       t.timestamps
     end

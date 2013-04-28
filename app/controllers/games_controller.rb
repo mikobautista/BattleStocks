@@ -148,12 +148,14 @@ class GamesController < ApplicationController
     end
   end
   
+  # Checks that a user is logged in
   before_filter :require_login
 
+  # Manually checks to see that only game managers can edit and update their own games... Cancan gem was faulty
   before_filter :if_game_manager, :only => [:edit, :update]
   
   private
-
+  
   def require_login
     unless logged_in?
       flash[:error] = "You must be logged in to access this section"
@@ -161,6 +163,7 @@ class GamesController < ApplicationController
     end
   end
   
+  # Checks to see that if the user is also the manager of a game
   def if_game_manager
     unless Game.find(params[:id]).manager_id == current_user.id
       flash[:error] = "Nice Try, Prof. H. -- Qapla'!"

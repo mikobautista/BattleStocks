@@ -7,7 +7,7 @@ class CreateUserGames < ActiveRecord::Migration
       t.integer :points, :default => 0
       t.integer :total_value_in_stocks, :default => 0
       t.boolean :is_active, :default => true
-
+      t.string  :auth_token
       t.timestamps
     end
   end
