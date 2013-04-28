@@ -88,7 +88,6 @@ class GamesController < ApplicationController
   # GET /games/1/edit
   def edit
     @game = Game.find(params[:id])
-
   end
 
   # POST /games

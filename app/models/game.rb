@@ -22,7 +22,8 @@ class Game < ActiveRecord::Base
   # Callbacks
   # -----------------------------
   before_create :dollars_to_cents
-  before_create :convert_to_est
+  before_create :convert_to_edt_create
+  before_update :convert_to_edt_update
 
   # Scope
   # -----------------------------
@@ -42,9 +43,14 @@ class Game < ActiveRecord::Base
   end
 
   # convert to est for calendar date inputs (does not take care of daylight savings)
-  def convert_to_est
+  def convert_to_edt_create
     self.start_date += 14400
     self.end_date += 100799
+  end
+
+  def convert_to_edt_update
+    self.start_date += 14400/2
+    self.end_date += ((14400*3) + (14400/2) - 1)
   end
 
   # updates all games whose end date has passed
