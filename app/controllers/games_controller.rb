@@ -165,7 +165,7 @@ class GamesController < ApplicationController
   
   # Checks to see that if the user is also the manager of a game
   def if_game_manager_and_not_admin
-    unless Game.find(params[:id]).manager_id == current_user.id && !current_user.is_admin
+    unless Game.find(params[:id]).manager_id == current_user.id or current_user.is_admin
       flash[:error] = "Nice Try, Prof. H. -- Qapla'!"
       redirect_to root_url # halts request cycle
     end 
