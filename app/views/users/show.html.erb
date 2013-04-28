@@ -1,4 +1,5 @@
 <div class ="span12">
+  <div class = "container-box">
     <%- model_class = @user.class -%>
     <h2>User Information<% if current_user.id == @user.id %>
         <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_user_path(@user), :class => 'btn btn-mini' %>
@@ -19,6 +20,7 @@
       <dd><%= @user.total_points %></dd>
       </br>
     </dl>
+  </div>
 </div>
 
 
