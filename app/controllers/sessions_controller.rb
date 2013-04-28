@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 	def new
 	end
-
+  
+  # creates a session for everytime a user logs in
 	def create
 	  user = User.authenticate(params[:email], params[:password])
 	  if user
