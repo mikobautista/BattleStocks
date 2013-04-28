@@ -152,7 +152,7 @@ class GamesController < ApplicationController
   before_filter :require_login
 
   # Manually checks to see that only game managers can edit and update their own games... Cancan gem was faulty
-  before_filter :if_game_manager, :only => [:edit, :update]
+  before_filter :if_game_manager_and_not_admin, :only => [:edit, :update]
   
   private
   
@@ -164,8 +164,8 @@ class GamesController < ApplicationController
   end
   
   # Checks to see that if the user is also the manager of a game
-  def if_game_manager
-    unless Game.find(params[:id]).manager_id == current_user.id
+  def if_game_manager_and_not_admin
+    unless Game.find(params[:id]).manager_id == current_user.id && !current_user.is_admin
       flash[:error] = "Nice Try, Prof. H. -- Qapla'!"
       redirect_to root_url # halts request cycle
     end 
