@@ -146,4 +146,5 @@ class PurchasedStocksController < ApplicationController
       redirect_to log_in_url # halts request cycle
     end
   end
+  
 end

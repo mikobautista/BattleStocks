@@ -18,7 +18,7 @@ class Ability
     else
       can :create, [User, Game, UserGame]
       
-      can :create, PurchasedStock do |purchasedstock|
+      can [:index, :create], PurchasedStock do |purchasedstock|
         purchasedstock.usergame.user_id == user.id
       end
       # can [:read, :create], PurchasedStock, :usergame => {:user_id => user.id}
